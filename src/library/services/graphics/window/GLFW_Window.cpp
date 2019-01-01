@@ -1,0 +1,49 @@
+//
+// Created by thekatze on 23/12/2018.
+//
+
+#include "GLFW_Window.h"
+#include "../../../log/Logger.h"
+
+void GLFW_Window::initialize(unsigned int width, unsigned int height, const std::string &windowTitle) {
+    if (!glfwInit()) {
+        Logger::critical("GLFW could not be initialized, terminating.", -2);
+    }
+
+    m_window = glfwCreateWindow(width, height, windowTitle.c_str(), nullptr, nullptr);
+
+    if (!m_window) {
+        glfwTerminate();
+        Logger::critical("Window could not be created, terminating", -3);
+    }
+
+    // TODO: Make VSync configurable
+    glfwSwapInterval(1);
+    glfwMakeContextCurrent(m_window);
+
+    glfwGetFramebufferSize(m_window, &m_windowWidth, &m_windowHeight);
+    Logger::info("Framebuffer size: " + std::to_string(m_windowWidth) + " x " + std::to_string(m_windowHeight));
+}
+
+void GLFW_Window::swapBuffers() {
+    glfwSwapBuffers(m_window);
+}
+
+void GLFW_Window::pollEvents() {
+    glfwPollEvents();
+}
+
+bool GLFW_Window::windowShouldClose() {
+    return glfwWindowShouldClose(m_window) != 0;
+}
+
+GLFW_Window::~GLFW_Window() {
+    glfwDestroyWindow(m_window);
+    glfwTerminate();
+}
+
+GLFWwindow *GLFW_Window::getWindow() {
+    return m_window;
+}
+
+

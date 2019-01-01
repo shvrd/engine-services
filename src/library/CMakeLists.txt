@@ -1,0 +1,10 @@
+# define the source files of the library
+SET(LIBRARY_SRC GameContainer.h GameContainer.cpp log/Logger.cpp log/Logger.h threading/ThreadPool.h scenes/SceneStack.cpp scenes/SceneStack.h scenes/Scene.h scenes/EmptyScene.h components/Entity.cpp components/Entity.h components/Component.h util/Timer.cpp util/Timer.h util/TimerUtils.cpp util/TimerUtils.h services/graphics/window/Window.h services/graphics/window/GLFW_Window.cpp services/graphics/window/GLFW_Window.h services/graphics/window/NullWindow.h services/WindowServiceLocator.h services/input/Input.h services/input/NullInput.h services/InputServiceLocator.cpp services/InputServiceLocator.h services/WindowServiceLocator.cpp services/input/GLFWInput.cpp services/input/GLFWInput.h services/graphics/Graphics.h services/graphics/OpenGLGraphics.cpp services/graphics/OpenGLGraphics.h services/GraphicsServiceLocator.cpp services/GraphicsServiceLocator.h services/graphics/NullGraphics.h)
+
+# create a statically linked library
+ADD_LIBRARY(generic_library STATIC ${LIBRARY_SRC})
+
+# define the libs and includes
+TARGET_LINK_LIBRARIES(generic_library ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES})
+TARGET_INCLUDE_DIRECTORIES(generic_library PUBLIC ${GLFW_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
+TARGET_COMPILE_OPTIONS(generic_library PUBLIC "")
