@@ -11,23 +11,20 @@
 #include "services/graphics/OpenGLGraphics.h"
 
 GameContainer::GameContainer()
-    : m_threadPool(ThreadPool::getSystemThreads() - 1)
+    : m_threadPool(1)
     , m_sceneStack()
     , m_gameLoopTimer()
     , m_frameTime(TimerUtils::calculateFrameTimeForFPS(60))
     , m_window()
     , m_input() {
-    // m_initialized = m_threadPool.enqueue([this]() -> bool {
-    //     return
-            this->initializeSystems();
-    // });
+    m_initialized = this->initializeSystems();
 }
 
 GameContainer::~GameContainer() = default;
 
 void GameContainer::start() {
     // Quit if initialization failed
-    if (!this->m_initialized.get()) {
+    if (!this->m_initialized) {
         Logger::error("Failed to initialize systems, exiting");
 
         return;
@@ -47,10 +44,10 @@ bool GameContainer::initializeSystems() {
         WindowServiceLocator::set(std::make_shared<GLFW_Window>());
 
         m_window = WindowServiceLocator::get();
-        m_window->initialize(800, 600, "Enginito");
+        m_window->initialize(1600, 900, "Enginito");
 
         GLFWInput* glfwInput = new GLFWInput();
-        glfwInput->setGLFWWindow(dynamic_cast<GLFW_Window*>(m_window.get())->getWindow());
+        glfwInput->setGLFWWindow(WindowServiceLocator::get().get());
 
         InputServiceLocator::set(std::shared_ptr<GLFWInput>(glfwInput));
 
@@ -76,8 +73,6 @@ void GameContainer::gameLoop() {
         int waitTime = m_frameTime - m_gameLoopTimer.get();
 
         if (waitTime < 0) {
-            Logger::warn("Target frame rate could not be reached");
-
             continue;
         }
 

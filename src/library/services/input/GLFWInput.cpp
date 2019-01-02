@@ -4,6 +4,7 @@
 
 #include "GLFWInput.h"
 #include "../../log/Logger.h"
+#include "../graphics/window/GLFW_Window.h"
 
 void GLFWInput::update() {
     int mouseXOld = m_mouseX;
@@ -43,6 +44,22 @@ int GLFWInput::getDeltaMouseY() {
     return m_deltaMouseY;
 }
 
-void GLFWInput::setGLFWWindow(GLFWwindow *window) {
-    m_window = window;
+void GLFWInput::setGLFWWindow(Window *window) {
+    GLFW_Window* glfwWindow = dynamic_cast<GLFW_Window*>(window);
+
+    if (!glfwWindow) {
+        Logger::error("Window is not a GLFW_Window, GLFWInput only works with a GLFW_Window.");
+
+        return;
+    }
+
+    GLFWwindow* inputWindow = glfwWindow->getWindow();
+
+    if (!inputWindow) {
+        Logger::error("Window system does not seem to be initialized, initialize GLFW_Window first.");
+
+        return;
+    }
+
+    m_window = inputWindow;
 }

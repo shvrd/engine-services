@@ -7,6 +7,7 @@
 
 #include <GLFW/glfw3.h>
 #include "Input.h"
+#include "../graphics/window/Window.h"
 
 class GLFWInput : public Input {
     GLFWwindow* m_window;
@@ -28,7 +29,7 @@ public:
     int getDeltaMouseX() override;
     int getDeltaMouseY() override;
 
-    void setGLFWWindow(GLFWwindow* window);
+    void setGLFWWindow(Window* window);
 };
 
 

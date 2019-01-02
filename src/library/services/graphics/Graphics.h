@@ -10,7 +10,7 @@ public:
     virtual void clear() = 0;
     virtual void setClearColor() = 0;
 
-
+    virtual void initialize() = 0;
 };
 
 #endif //ENGINITO_GRAPHICS_H

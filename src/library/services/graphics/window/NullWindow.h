@@ -17,7 +17,7 @@ public:
     virtual void swapBuffers() override {}
     virtual void pollEvents() override {}
 
-    virtual bool windowShouldClose() override {}
+    virtual bool windowShouldClose() override { return false; }
 };
 
 #endif //GENERIC_LIBRARY_NULLWINDOW_H

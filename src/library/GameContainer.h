@@ -10,7 +10,7 @@
 #include "services/graphics/window/Window.h"
 #include "services/graphics/Graphics.h"
 
-using AtomicBoolean_t = std::future<bool>;
+using AtomicBoolean_t = bool;
 
 class GameContainer {
 public:
