@@ -5,7 +5,7 @@
 #ifndef ENGINITO_INPUT_H
 #define ENGINITO_INPUT_H
 
-enum Key {};
+enum class Key;
 
 class Input {
 public:

@@ -21,11 +21,11 @@ void GLFWInput::update() {
 }
 
 bool GLFWInput::isKeyPressed(Key key) {
-    return false;
+    return glfwGetKey(m_window, static_cast<int>(key)) == GLFW_PRESS;
 }
 
 bool GLFWInput::isKeyReleased(Key key) {
-    return true;
+    return glfwGetKey(m_window, static_cast<int>(key)) == GLFW_RELEASE;
 }
 
 int GLFWInput::getMouseX() {

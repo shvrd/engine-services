@@ -5,6 +5,8 @@
 #include "SceneStack.h"
 #include "EmptyScene.h"
 #include "../log/Logger.h"
+#include "../services/InputServiceLocator.h"
+#include "../services/GraphicsServiceLocator.h"
 
 SceneStack::SceneStack()
     : m_sceneStack() {
@@ -29,6 +31,10 @@ void SceneStack::pop() {
 void SceneStack::push(std::unique_ptr<Scene> scene) {
     // Suspend current scene
     m_sceneStack.top()->onSuspend();
+
+    // Inject services
+    scene->m_input = InputServiceLocator::get();
+    scene->m_graphics = GraphicsServiceLocator::get();
 
     // Enter new scene
     scene->onEnter();
