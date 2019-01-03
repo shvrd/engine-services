@@ -10,6 +10,9 @@ void OpenGLGraphics::clear() {
 }
 
 void OpenGLGraphics::setClearColor() {
-    glViewport(0, 0, 1600, 900);
     glClearColor(0.f, 1.f, 0.f, 0.5f);
+}
+
+void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
+    glViewport(0, 0, windowWidth, windowHeight);
 }

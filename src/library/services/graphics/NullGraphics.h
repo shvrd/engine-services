@@ -11,6 +11,8 @@ class NullGraphics : public Graphics {
 public:
     void clear() override {}
     void setClearColor() override {}
+
+    void initialize(int windowWidth, int windowHeight) override {}
 };
 
 #endif //ENGINITO_NULLGRAPHICS_H
