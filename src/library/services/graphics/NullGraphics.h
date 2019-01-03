@@ -9,6 +9,9 @@
 
 class NullGraphics : public Graphics {
 public:
+    NullGraphics() = default;
+    ~NullGraphics() override = default;
+
     void clear() override {}
     void setClearColor() override {}
 

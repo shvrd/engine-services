@@ -48,3 +48,10 @@ void SceneStack::update() {
 void SceneStack::render() {
     m_sceneStack.top()->render();
 }
+
+void SceneStack::clear() {
+    while (!m_sceneStack.empty()) {
+        m_sceneStack.top()->onLeave();
+        m_sceneStack.pop();
+    }
+}

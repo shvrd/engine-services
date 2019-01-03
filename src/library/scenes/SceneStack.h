@@ -21,6 +21,8 @@ public:
 
     void update();
     void render();
+
+    void clear();
 private:
     SceneStack_t m_sceneStack;
 };

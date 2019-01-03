@@ -8,7 +8,6 @@
 #include "Window.h"
 
 #include <GLFW/glfw3.h>
-#include <GL/gl.h>
 #include <memory>
 
 class GLFW_Window : public Window {

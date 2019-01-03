@@ -3,12 +3,14 @@
 #include "log/Logger.h"
 #include "util/TimerUtils.h"
 
+// OpenGL Graphics needs to be included before GLFW, since glew.h needs to be included before gl.h, which is internally included in GLFW
+#include "services/graphics/OpenGLGraphics.h"
+
 #include "services/WindowServiceLocator.h"
 #include "services/graphics/window/GLFW_Window.h"
 #include "services/input/GLFWInput.h"
 #include "services/InputServiceLocator.h"
 #include "services/GraphicsServiceLocator.h"
-#include "services/graphics/OpenGLGraphics.h"
 
 GameContainer::GameContainer()
     : m_threadPool(1)
@@ -22,7 +24,7 @@ GameContainer::GameContainer()
 
 GameContainer::~GameContainer() = default;
 
-void GameContainer::start() {
+void GameContainer::start(std::unique_ptr<Scene> initialScene) {
     // Quit if initialization failed
     if (!this->m_initialized) {
         Logger::error("Failed to initialize systems, exiting");
@@ -32,6 +34,9 @@ void GameContainer::start() {
 
     Logger::info("Initialization finished in " + std::to_string(m_gameLoopTimer.get() / 1000) + "ms");
     Logger::info("Starting game loop");
+
+    m_sceneStack.push(std::move(initialScene));
+
     this->gameLoop();
 }
 
@@ -49,7 +54,7 @@ bool GameContainer::initializeSystems() {
         m_window = WindowServiceLocator::get();
         m_window->initialize(windowWidth, windowHeight, "Enginito");
 
-        GLFWInput* glfwInput = new GLFWInput();
+        auto glfwInput = new GLFWInput();
         glfwInput->setGLFWWindow(WindowServiceLocator::get().get());
 
         InputServiceLocator::set(std::shared_ptr<GLFWInput>(glfwInput));
@@ -80,8 +85,10 @@ void GameContainer::gameLoop() {
             continue;
         }
 
-        m_gameLoopTimer.wait(waitTime);
+        m_gameLoopTimer.wait(static_cast<unsigned int>(waitTime));
     }
+
+    m_sceneStack.clear();
 }
 
 void GameContainer::update() {

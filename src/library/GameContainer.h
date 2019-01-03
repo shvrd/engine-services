@@ -6,9 +6,9 @@
 #include "threading/ThreadPool.h"
 #include "scenes/SceneStack.h"
 
+#include "services/graphics/Graphics.h"
 #include "services/input/Input.h"
 #include "services/graphics/window/Window.h"
-#include "services/graphics/Graphics.h"
 
 using AtomicBoolean_t = bool;
 
@@ -17,8 +17,9 @@ public:
     GameContainer();
     ~GameContainer();
 
-    void start();
+    void start(std::unique_ptr<Scene> initialScene);
 
+    void enterGameState();
     void setTargetFPS(unsigned int fps);
 
     ThreadPool& getThreadPool();
