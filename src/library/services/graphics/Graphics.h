@@ -8,7 +8,7 @@
 class Graphics {
 public:
     Graphics() = default;
-    virtual ~Graphics() = 0;
+    virtual ~Graphics() = default;
 
     virtual void clear() = 0;
     virtual void setClearColor() = 0;
