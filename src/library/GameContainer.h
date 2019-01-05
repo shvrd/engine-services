@@ -19,7 +19,9 @@ public:
 
     void start(std::unique_ptr<Scene> initialScene);
 
-    void enterGameState();
+    void enterScene(std::unique_ptr<Scene> scene);
+    void leaveScene();
+
     void setTargetFPS(unsigned int fps);
 
     ThreadPool& getThreadPool();

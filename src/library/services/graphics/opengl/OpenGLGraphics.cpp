@@ -3,7 +3,7 @@
 //
 
 #include "OpenGLGraphics.h"
-#include "../../log/Logger.h"
+#include "../../../log/Logger.h"
 
 OpenGLGraphics::OpenGLGraphics() : m_vertexArrayObject(0) {
 

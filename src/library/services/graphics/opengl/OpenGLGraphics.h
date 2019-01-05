@@ -7,7 +7,7 @@
 
 #include <GL/glew.h>
 #include <GL/gl.h>
-#include "Graphics.h"
+#include "../Graphics.h"
 
 class OpenGLGraphics : public Graphics {
     GLuint m_vertexArrayObject;

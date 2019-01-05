@@ -4,7 +4,7 @@
 #include "util/TimerUtils.h"
 
 // OpenGL Graphics needs to be included before GLFW, since glew.h needs to be included before gl.h, which is internally included in GLFW
-#include "services/graphics/OpenGLGraphics.h"
+#include "services/graphics/opengl/OpenGLGraphics.h"
 
 #include "services/WindowServiceLocator.h"
 #include "services/graphics/window/GLFW_Window.h"
@@ -112,4 +112,12 @@ bool GameContainer::isRunning() {
 
 void GameContainer::setTargetFPS(unsigned int fps) {
     m_frameTime = TimerUtils::calculateFrameTimeForFPS(fps);
+}
+
+void GameContainer::enterScene(std::unique_ptr<Scene> scene) {
+    m_sceneStack.push(std::move(scene));
+}
+
+void GameContainer::leaveScene() {
+    m_sceneStack.pop();
 }
