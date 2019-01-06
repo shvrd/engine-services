@@ -9,6 +9,9 @@
 
 class TimerUtils {
 public:
+    TimerUtils() = delete;
+    ~TimerUtils() = delete;
+
     static Duration_t calculateFrameTimeForFPS(unsigned int fps);
 };
 
