@@ -72,3 +72,11 @@ void GLSLShader::linkProgram(GLuint& programID, GLuint& vertexShaderID, GLuint& 
     glDeleteShader(vertexShaderID);
     glDeleteShader(fragmentShaderID);
 }
+
+void GLSLShader::bind() {
+    glUseProgram(m_shaderProgram);
+}
+
+GLSLShader::~GLSLShader() {
+    glDeleteProgram(m_shaderProgram);
+}

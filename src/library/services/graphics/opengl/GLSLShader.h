@@ -15,13 +15,16 @@ class GLSLShader {
 
 public:
     GLSLShader();
-    ~GLSLShader() = default;
+    ~GLSLShader();
 
     GLuint getShaderProgramID() {
         return m_shaderProgram;
     }
 
+    void bind();
+
 private:
+    //TODO: These could be outsourced into some static shader utils
     static void compileShader(GLuint& id, const std::string& source);
     static void linkProgram(GLuint& programID, GLuint& vertexShaderID, GLuint& fragmentShaderID);
 };
