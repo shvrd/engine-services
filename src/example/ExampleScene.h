@@ -32,6 +32,8 @@ ExampleScene::ExampleScene()
 void ExampleScene::onEnter() {
     Logger::info("Entering example scene");
     m_shader = m_graphics->createShader();
+    m_shader->setVertexShader("../../../src/library/assets/shaders/basic.vert");
+    m_shader->setFragmentShader("../../../src/library/assets/shaders/basic.frag");
 }
 
 void ExampleScene::onContinue() {

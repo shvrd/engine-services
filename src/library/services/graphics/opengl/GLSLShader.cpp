@@ -6,6 +6,7 @@
 #include <vector>
 #include "GLSLShader.h"
 #include "../../../log/Logger.h"
+#include "../../../util/FileUtils.h"
 
 GLSLShader::GLSLShader()
     : m_shaderProgram(0)
@@ -15,17 +16,38 @@ GLSLShader::GLSLShader()
 }
 
 void GLSLShader::setVertexShader(const std::string &filePath) {
-    compileShader(m_vertexShaderProgram, filePath);
+    if (m_vertexShaderProgram != 0) {
+        Logger::warn("Shader already created, deleting old shader");
+
+        glDeleteShader(m_vertexShaderProgram);
+    }
+
+    Logger::info("Creating Vertex Shader");
+    m_vertexShaderProgram = glCreateShader(GL_VERTEX_SHADER);
+
+    Logger::info("Compiling Vertex Shader: " + filePath);
+    compileShader(m_vertexShaderProgram, FileUtils::readFile(filePath));
 }
 
 void GLSLShader::setFragmentShader(const std::string &filePath) {
-    compileShader(m_fragmentShaderProgram, filePath);
+    if (m_fragmentShaderProgram != 0) {
+        Logger::warn("Shader already created, deleting old shader");
+
+        glDeleteShader(m_fragmentShaderProgram);
+    }
+
+    Logger::info("Creating Fragment Shader");
+    m_fragmentShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
+
+    Logger::info("Compiling Fragment Shader: " + filePath);
+    compileShader(m_fragmentShaderProgram, FileUtils::readFile(filePath));
 }
 
 void GLSLShader::compileShader(GLuint &id, const std::string& source) {
-    Logger::info("Compiling shader: " + source);
-
     char const* shaderSource = source.c_str();
+
+    glCreateShader(GL_VERTEX_SHADER);
+
     glShaderSource(id, 1, &shaderSource, nullptr);
     glCompileShader(id);
 
@@ -34,7 +56,7 @@ void GLSLShader::compileShader(GLuint &id, const std::string& source) {
 
     // Error handling if shader fails to compile
     if (compileStatus != GL_TRUE) {
-        Logger::warn("Compilation of shader " + source + " unsuccessful.");
+        Logger::warn("Compilation of shader unsuccessful.");
 
         // Get error message length
         int infoLogLength = 0;
