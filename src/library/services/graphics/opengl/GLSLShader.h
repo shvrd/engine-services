@@ -7,7 +7,9 @@
 
 #include <GL/glew.h>
 
-class GLSLShader {
+#include "../Shader.h"
+
+class GLSLShader : public Shader {
     GLuint m_shaderProgram;
 
     GLuint m_vertexShaderProgram;
@@ -15,13 +17,12 @@ class GLSLShader {
 
 public:
     GLSLShader();
-    ~GLSLShader();
+    ~GLSLShader() override;
 
-    GLuint getShaderProgramID() {
-        return m_shaderProgram;
-    }
+    void bind() override ;
 
-    void bind();
+    void setVertexShader(const std::string& filePath) override;
+    void setFragmentShader(const std::string& filePath) override;
 
 private:
     //TODO: These could be outsourced into some static shader utils

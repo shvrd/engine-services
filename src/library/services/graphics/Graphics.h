@@ -5,6 +5,9 @@
 #ifndef ENGINITO_GRAPHICS_H
 #define ENGINITO_GRAPHICS_H
 
+#include <memory>
+#include "Shader.h"
+
 class Graphics {
 public:
     Graphics() = default;
@@ -14,6 +17,9 @@ public:
     virtual void setClearColor() = 0;
 
     virtual void initialize(int windowWidth, int windowHeight) = 0;
+
+    //TODO: Maybe make a standalone shaderfactory?
+    virtual std::unique_ptr<Shader> createShader() = 0;
 };
 
 #endif //ENGINITO_GRAPHICS_H

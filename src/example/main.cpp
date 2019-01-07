@@ -2,7 +2,6 @@
 #include <GameContainer.h>
 #include "ExampleScene.h"
 
-
 int main() {
     GameContainer().start(std::make_unique<ExampleScene>());
 

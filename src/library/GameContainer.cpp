@@ -49,11 +49,13 @@ bool GameContainer::initializeSystems() {
 
     // TODO: Load from configuration
     {
+        Logger::info("Initializing Window");
         WindowServiceLocator::set(std::make_shared<GLFW_Window>());
 
         m_window = WindowServiceLocator::get();
         m_window->initialize(windowWidth, windowHeight, "Enginito");
 
+        Logger::info("Initializing Input");
         auto glfwInput = new GLFWInput();
         glfwInput->setGLFWWindow(WindowServiceLocator::get().get());
 
@@ -61,6 +63,7 @@ bool GameContainer::initializeSystems() {
 
         m_input = InputServiceLocator::get();
 
+        Logger::info("Initializing Graphics");
         GraphicsServiceLocator::set(std::make_shared<OpenGLGraphics>());
 
         m_graphics = GraphicsServiceLocator::get();

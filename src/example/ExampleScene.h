@@ -9,8 +9,9 @@
 #include <log/Logger.h>
 
 class ExampleScene : public Scene {
+    std::unique_ptr<Shader> m_shader;
 public:
-    ExampleScene() = default;
+    ExampleScene();
     ~ExampleScene() override = default;
 
     void onEnter() override;
@@ -23,8 +24,14 @@ public:
     void onLeave() override;
 };
 
+ExampleScene::ExampleScene()
+    : m_shader() {
+
+}
+
 void ExampleScene::onEnter() {
     Logger::info("Entering example scene");
+    m_shader = m_graphics->createShader();
 }
 
 void ExampleScene::onContinue() {

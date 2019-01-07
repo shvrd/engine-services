@@ -19,6 +19,8 @@ public:
     void setClearColor() override;
 
     void initialize(int windowWidth, int windowHeight) override;
+
+    std::unique_ptr<Shader> createShader() override;
 };
 
 

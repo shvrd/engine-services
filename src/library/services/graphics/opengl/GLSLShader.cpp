@@ -14,6 +14,14 @@ GLSLShader::GLSLShader()
 
 }
 
+void GLSLShader::setVertexShader(const std::string &filePath) {
+    compileShader(m_vertexShaderProgram, filePath);
+}
+
+void GLSLShader::setFragmentShader(const std::string &filePath) {
+    compileShader(m_fragmentShaderProgram, filePath);
+}
+
 void GLSLShader::compileShader(GLuint &id, const std::string& source) {
     Logger::info("Compiling shader: " + source);
 

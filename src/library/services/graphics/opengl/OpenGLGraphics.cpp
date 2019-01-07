@@ -4,6 +4,7 @@
 
 #include "OpenGLGraphics.h"
 #include "../../../log/Logger.h"
+#include "GLSLShader.h"
 
 OpenGLGraphics::OpenGLGraphics() : m_vertexArrayObject(0) {
 
@@ -14,7 +15,7 @@ void OpenGLGraphics::clear() {
 }
 
 void OpenGLGraphics::setClearColor() {
-    glClearColor(0.f, 1.f, 0.f, 0.5f);
+    glClearColor(0.1f, 0.1f, 0.4f, 1.f);
 }
 
 void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
@@ -31,4 +32,8 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 
     glGenVertexArrays(1, &m_vertexArrayObject);
     glViewport(0, 0, windowWidth, windowHeight);
+}
+
+std::unique_ptr<Shader> OpenGLGraphics::createShader() {
+    return std::make_unique<GLSLShader>();
 }

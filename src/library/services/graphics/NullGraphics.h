@@ -6,6 +6,7 @@
 #define ENGINITO_NULLGRAPHICS_H
 
 #include "Graphics.h"
+#include "NullShader.h"
 
 class NullGraphics : public Graphics {
 public:
@@ -16,6 +17,8 @@ public:
     void setClearColor() override {}
 
     void initialize(int windowWidth, int windowHeight) override {}
+
+    std::unique_ptr<Shader> createShader() override { return std::make_unique<NullShader>(); }
 };
 
 #endif //ENGINITO_NULLGRAPHICS_H
