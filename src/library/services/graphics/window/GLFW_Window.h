@@ -2,8 +2,8 @@
 // Created by thekatze on 23/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_GLFWWINDOW_H
-#define GENERIC_LIBRARY_GLFWWINDOW_H
+#ifndef ENGINITO_GLFWWINDOW_H
+#define ENGINITO_GLFWWINDOW_H
 
 #include "Window.h"
 
@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif //GENERIC_LIBRARY_GLFWWINDOW_H
+#endif //ENGINITO_GLFWWINDOW_H

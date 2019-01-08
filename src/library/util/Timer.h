@@ -2,8 +2,8 @@
 // Created by thekatze on 16/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_TIMER_H
-#define GENERIC_LIBRARY_TIMER_H
+#ifndef ENGINITO_TIMER_H
+#define ENGINITO_TIMER_H
 
 #include <chrono>
 
@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif //GENERIC_LIBRARY_TIMER_H
+#endif //ENGINITO_TIMER_H

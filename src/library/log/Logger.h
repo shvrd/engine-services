@@ -2,8 +2,8 @@
 // Created by thekatze on 24/11/2018.
 //
 
-#ifndef GENERIC_LIBRARY_LOGGER_H
-#define GENERIC_LIBRARY_LOGGER_H
+#ifndef ENGINITO_LOGGER_H
+#define ENGINITO_LOGGER_H
 
 #include <string>
 #include <mutex>
@@ -20,4 +20,4 @@ public:
 };
 
 
-#endif //GENERIC_LIBRARY_LOGGER_H
+#endif //ENGINITO_LOGGER_H

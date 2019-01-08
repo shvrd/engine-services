@@ -2,8 +2,8 @@
 // Created by thekatze on 11/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_SCENESTACK_H
-#define GENERIC_LIBRARY_SCENESTACK_H
+#ifndef ENGINITO_SCENESTACK_H
+#define ENGINITO_SCENESTACK_H
 
 #include <stack>
 #include <memory>
@@ -28,4 +28,4 @@ private:
 };
 
 
-#endif //GENERIC_LIBRARY_SCENESTACK_H
+#endif //ENGINITO_SCENESTACK_H

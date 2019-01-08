@@ -2,8 +2,8 @@
 // Created by thekatze on 23/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_WINDOW_H
-#define GENERIC_LIBRARY_WINDOW_H
+#ifndef ENGINITO_WINDOW_H
+#define ENGINITO_WINDOW_H
 
 #include <string>
 
@@ -23,4 +23,4 @@ public:
 };
 
 
-#endif //GENERIC_LIBRARY_WINDOW_H
+#endif //ENGINITO_WINDOW_H

@@ -2,8 +2,8 @@
 // Created by thekatze on 11/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_SCENE_H
-#define GENERIC_LIBRARY_SCENE_H
+#ifndef ENGINITO_SCENE_H
+#define ENGINITO_SCENE_H
 
 #include <memory>
 
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif //GENERIC_LIBRARY_SCENE_H
+#endif //ENGINITO_SCENE_H

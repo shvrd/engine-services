@@ -2,8 +2,8 @@
 // Created by thekatze on 15/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_COMPONENT_H
-#define GENERIC_LIBRARY_COMPONENT_H
+#ifndef ENGINITO_COMPONENT_H
+#define ENGINITO_COMPONENT_H
 
 // Forward declare entity due to circular dependency.
 class Entity;
@@ -21,4 +21,4 @@ protected:
     inline Entity* getParent() { return m_parent; }
 };
 
-#endif //GENERIC_LIBRARY_COMPONENT_H
+#endif //ENGINITO_COMPONENT_H

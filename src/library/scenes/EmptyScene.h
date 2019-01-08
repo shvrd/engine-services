@@ -2,8 +2,8 @@
 // Created by thekatze on 11/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_EMPTYSCENE_H
-#define GENERIC_LIBRARY_EMPTYSCENE_H
+#ifndef ENGINITO_EMPTYSCENE_H
+#define ENGINITO_EMPTYSCENE_H
 
 #include "Scene.h"
 #include "../log/Logger.h"
@@ -38,4 +38,4 @@ public:
     }
 };
 
-#endif //GENERIC_LIBRARY_EMPTYSCENE_H
+#endif //ENGINITO_EMPTYSCENE_H

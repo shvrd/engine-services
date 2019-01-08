@@ -2,8 +2,8 @@
 // Created by thekatze on 15/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_ENTITY_H
-#define GENERIC_LIBRARY_ENTITY_H
+#ifndef ENGINITO_ENTITY_H
+#define ENGINITO_ENTITY_H
 
 #include <memory>
 #include <vector>
@@ -61,4 +61,4 @@ void Entity::addComponent(Args&&... args) {
     m_components.back()->m_parent = this;
 }
 
-#endif //GENERIC_LIBRARY_ENTITY_H
+#endif //ENGINITO_ENTITY_H

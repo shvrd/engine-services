@@ -2,8 +2,8 @@
 // Created by thekatze on 24/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_NULLWINDOW_H
-#define GENERIC_LIBRARY_NULLWINDOW_H
+#ifndef ENGINITO_NULLWINDOW_H
+#define ENGINITO_NULLWINDOW_H
 
 #include "Window.h"
 
@@ -20,4 +20,4 @@ public:
     virtual bool windowShouldClose() override { return false; }
 };
 
-#endif //GENERIC_LIBRARY_NULLWINDOW_H
+#endif //ENGINITO_NULLWINDOW_H

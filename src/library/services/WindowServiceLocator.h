@@ -2,8 +2,8 @@
 // Created by thekatze on 24/12/2018.
 //
 
-#ifndef GENERIC_LIBRARY_WINDOWSERVICELOCATOR_H
-#define GENERIC_LIBRARY_WINDOWSERVICELOCATOR_H
+#ifndef ENGINITO_WINDOWSERVICELOCATOR_H
+#define ENGINITO_WINDOWSERVICELOCATOR_H
 
 #include <memory>
 #include "graphics/window/NullWindow.h"
@@ -18,4 +18,4 @@ public:
     static void set(std::shared_ptr<Window> window);
 };
 
-#endif //GENERIC_LIBRARY_WINDOWSERVICELOCATOR_H
+#endif //ENGINITO_WINDOWSERVICELOCATOR_H
