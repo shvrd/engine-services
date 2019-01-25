@@ -19,7 +19,8 @@ public:
     GLSLShader();
     ~GLSLShader() override;
 
-    void bind() override ;
+    void bind() override;
+    void unbind() override;
 
     void setVertexShader(const std::string& filePath) override;
     void setFragmentShader(const std::string& filePath) override;

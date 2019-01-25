@@ -10,6 +10,7 @@ public:
     virtual ~Shader() = default;
 
     virtual void bind() = 0;
+    virtual void unbind() = 0;
 
     virtual void setVertexShader(const std::string& filePath) = 0;
     virtual void setFragmentShader(const std::string& filePath) = 0;

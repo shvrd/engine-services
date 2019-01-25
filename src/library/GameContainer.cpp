@@ -82,6 +82,7 @@ void GameContainer::gameLoop() {
 
         m_window->pollEvents();
 
+        //TODO: Make updates not dependent on framerate
         int waitTime = m_frameTime - m_gameLoopTimer.get();
 
         if (waitTime < 0) {

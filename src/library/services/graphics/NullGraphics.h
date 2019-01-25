@@ -18,6 +18,8 @@ public:
 
     void initialize(int windowWidth, int windowHeight) override {}
 
+    void drawSquare() override {}
+
     std::unique_ptr<Shader> createShader() override { return std::make_unique<NullShader>(); }
 };
 

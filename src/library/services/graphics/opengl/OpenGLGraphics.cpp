@@ -5,6 +5,7 @@
 #include "OpenGLGraphics.h"
 #include "../../../log/Logger.h"
 #include "GLSLShader.h"
+#include "../../../../types/Vertex.h"
 
 OpenGLGraphics::OpenGLGraphics() : m_vertexArrayObject(0) {
 
@@ -36,4 +37,44 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 
 std::unique_ptr<Shader> OpenGLGraphics::createShader() {
     return std::make_unique<GLSLShader>();
+}
+
+void OpenGLGraphics::drawSquare() {
+    const unsigned int VERTEX_AMOUNT = 4;
+    Vertex vertices[VERTEX_AMOUNT];
+
+    // top left, top right, bottom left, bottom right
+    vertices[0] = Vertex{{-.25f,  .25f, 0.f}, {0, 0, 0}, {0, 0}};
+    vertices[1] = Vertex{{ .25f,  .25f, 0.f}, {0, 0, 0}, {0, 0}};
+    vertices[2] = Vertex{{ .25f, -.25f, 0.f}, {0, 0, 0}, {0, 0}};
+    vertices[3] = Vertex{{-.25f, -.25f, 0.f}, {0, 0, 0}, {0, 0}};
+
+    // Generate vertex buffer object
+    GLuint vboID = 0;
+    glGenBuffers(1, &vboID);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vboID);
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    // Vertex Attribute ID 0: Position
+    glVertexAttribPointer(0, sizeof(Vector3), GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
+
+    // Vertex Attribute ID 1: Color
+    glVertexAttribPointer(1, sizeof(Color), GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, color));
+
+    // Vertex Attribute ID 2: UV Map
+    glVertexAttribPointer(2, sizeof(Vector2), GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uv));
+
+    for (int i = 0; i < 2; ++i) {
+        glEnableVertexAttribArray(i);
+    }
+
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTEX_AMOUNT);
+
+    for (int i = 0; i < 2; ++i) {
+        glDisableVertexAttribArray(i);
+    }
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

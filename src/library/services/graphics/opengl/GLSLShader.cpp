@@ -107,6 +107,10 @@ void GLSLShader::bind() {
     glUseProgram(m_shaderProgram);
 }
 
+void GLSLShader::unbind() {
+    glUseProgram(0);
+}
+
 GLSLShader::~GLSLShader() {
     glDeleteProgram(m_shaderProgram);
 }

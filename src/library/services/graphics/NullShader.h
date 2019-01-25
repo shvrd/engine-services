@@ -9,9 +9,10 @@ public:
     NullShader() = default;
     ~NullShader() override = default;
 
-    void bind() override {};
+    void bind() override {}
+    void unbind() override {}
 
-    void setVertexShader(const std::string& filePath) override {};
-    void setFragmentShader(const std::string& filePath) override {};
+    void setVertexShader(const std::string& filePath) override {}
+    void setFragmentShader(const std::string& filePath) override {}
 };
 #endif //ENGINITO_NULLSHADER_H
