@@ -18,8 +18,6 @@ public:
 
     virtual void initialize(int windowWidth, int windowHeight) = 0;
 
-    virtual void drawSquare() = 0;
-
     //TODO: Maybe make a standalone shaderfactory?
     virtual std::unique_ptr<Shader> createShader() = 0;
 };

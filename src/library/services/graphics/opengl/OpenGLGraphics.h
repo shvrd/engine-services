@@ -10,7 +10,7 @@
 #include "../Graphics.h"
 
 class OpenGLGraphics : public Graphics {
-    GLuint m_vertexArrayObject;
+    GLuint m_vertexArrayObject, m_vertexBufferObject;
 public:
     OpenGLGraphics();
     ~OpenGLGraphics() override = default;
@@ -19,8 +19,6 @@ public:
     void setClearColor() override;
 
     void initialize(int windowWidth, int windowHeight) override;
-
-    void drawSquare() override;
 
     std::unique_ptr<Shader> createShader() override;
 };

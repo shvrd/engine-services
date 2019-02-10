@@ -46,7 +46,7 @@ void ExampleScene::update() {
 
 void ExampleScene::render() {
     m_shader->bind();
-    m_graphics->drawSquare();
+
     m_shader->unbind();
 }
 

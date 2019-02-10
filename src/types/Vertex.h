@@ -5,24 +5,7 @@
 #ifndef ENGINITO_VERTEX_H
 #define ENGINITO_VERTEX_H
 
-struct Vector2 {
-    float x, y;
-
-    void set(float _x = 0, float _y = 0) {
-        x = _x;
-        y = _y;
-    }
-};
-
-struct Vector3 {
-    float x, y, z;
-
-    void set(float _x = 0, float _y = 0, float _z = 0) {
-        x = _x;
-        y = _y;
-        z = _z;
-    }
-};
+#include "Vector.h"
 
 struct Color {
     unsigned char r, g, b, a;
