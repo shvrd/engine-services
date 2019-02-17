@@ -39,7 +39,7 @@ void ExampleScene::onEnter() {
     m_shader->setVertexShader("../../../src/library/assets/shaders/basic.vert");
     m_shader->setFragmentShader("../../../src/library/assets/shaders/basic.frag");
 
-    m_sprite = m_graphics->createSprite({.25f, .25f}, {.5f, .5f});
+    m_sprite = m_graphics->createSprite({-.25f, .25f}, {.5f, .5f});
 }
 
 void ExampleScene::onContinue() {
@@ -52,7 +52,7 @@ void ExampleScene::update() {
 
 void ExampleScene::render() {
     m_shader->bind();
-
+    m_sprite->draw();
     m_shader->unbind();
 }
 

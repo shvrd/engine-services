@@ -21,7 +21,7 @@ struct Color {
 
 struct Vertex {
     Vector3 position;
-    Vector3 color;
+    Color color;
 
     Vector2 uv;
 };
