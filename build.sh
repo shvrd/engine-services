@@ -12,4 +12,6 @@ cp test/library_test ../out
 
 popd
 
-doxygen Doxyfile
+cp -r src/library/assets out
+
+# doxygen Doxyfile
