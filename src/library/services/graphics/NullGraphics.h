@@ -7,6 +7,7 @@
 
 #include "Graphics.h"
 #include "NullShader.h"
+#include "NullSprite.h"
 
 class NullGraphics : public Graphics {
 public:
@@ -19,6 +20,7 @@ public:
     void initialize(int windowWidth, int windowHeight) override {}
 
     std::unique_ptr<Shader> createShader() override { return std::make_unique<NullShader>(); }
+    std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override { return std::make_unique<NullSprite>(Vector2{0,0}, Vector2{0,0}); }
 };
 
 #endif //ENGINITO_NULLGRAPHICS_H

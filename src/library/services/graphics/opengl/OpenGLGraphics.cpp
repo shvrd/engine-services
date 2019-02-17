@@ -8,6 +8,7 @@
 #include "../../../log/Logger.h"
 #include "GLSLShader.h"
 #include "../../../../types/Vertex.h"
+#include "OpenGLSprite.h"
 
 OpenGLGraphics::OpenGLGraphics()
     : m_vertexArrayObject(0)
@@ -68,4 +69,8 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 
 std::unique_ptr<Shader> OpenGLGraphics::createShader() {
     return std::make_unique<GLSLShader>();
+}
+
+std::unique_ptr<Sprite> OpenGLGraphics::createSprite(Vector2 location, Vector2 dimensions) {
+    return std::make_unique<OpenGLSprite>(location, dimensions);
 }

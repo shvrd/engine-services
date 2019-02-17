@@ -7,9 +7,12 @@
 
 #include <scenes/Scene.h>
 #include <log/Logger.h>
+#include <services/graphics/Sprite.h>
 
 class ExampleScene : public Scene {
     std::unique_ptr<Shader> m_shader;
+    std::unique_ptr<Sprite> m_sprite;
+
 public:
     ExampleScene();
     ~ExampleScene() override = default;
@@ -25,7 +28,8 @@ public:
 };
 
 ExampleScene::ExampleScene()
-    : m_shader() {
+    : m_shader()
+    , m_sprite() {
 
 }
 
@@ -34,6 +38,8 @@ void ExampleScene::onEnter() {
     m_shader = m_graphics->createShader();
     m_shader->setVertexShader("../../../src/library/assets/shaders/basic.vert");
     m_shader->setFragmentShader("../../../src/library/assets/shaders/basic.frag");
+
+    m_sprite = m_graphics->createSprite({.25f, .25f}, {.5f, .5f});
 }
 
 void ExampleScene::onContinue() {

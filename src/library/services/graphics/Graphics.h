@@ -7,6 +7,7 @@
 
 #include <memory>
 #include "Shader.h"
+#include "Sprite.h"
 
 class Graphics {
 public:
@@ -20,6 +21,7 @@ public:
 
     //TODO: Maybe make a standalone shaderfactory?
     virtual std::unique_ptr<Shader> createShader() = 0;
+    virtual std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) = 0;
 };
 
 #endif //ENGINITO_GRAPHICS_H

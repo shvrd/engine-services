@@ -9,10 +9,13 @@
 
 #include <GL/glew.h>
 
-class OpenGLSprite : Sprite {
+class OpenGLSprite : public Sprite {
     const unsigned int VERTEX_AMOUNT = 4;
     GLuint m_vertexArrayObject, m_vertexBufferObject;
+
 public:
+    OpenGLSprite(Vector2 location, Vector2 dimensions);
+
     ~OpenGLSprite() override = default;
 
     void setTexture(Texture texture) override;
