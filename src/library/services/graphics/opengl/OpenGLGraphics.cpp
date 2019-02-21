@@ -58,6 +58,11 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, nullptr);
 
+    // Enable depth test
+    glEnable(GL_DEPTH_TEST);
+    // Accept fragment if it closer to the camera than the former one
+    glDepthFunc(GL_LESS);
+
     glGenVertexArrays(1, &m_vertexArrayObject);
 
     glBindVertexArray(m_vertexArrayObject);
