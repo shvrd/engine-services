@@ -12,8 +12,8 @@ OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(locati
     // top left, top right, bottom left, bottom right
     vertices[0] = Vertex{{-.25f,  .25f, 0.f}, {255, 0  , 0  , 0}, {0, 1}};
     vertices[1] = Vertex{{ .25f,  .25f, 0.f}, {0  , 255, 0  , 0}, {1, 1}};
-    vertices[2] = Vertex{{ .25f, -.25f, 0.f}, {0  , 0  , 255, 0}, {0, 0}};
-    vertices[3] = Vertex{{-.25f, -.25f, 0.f}, {127, 0  , 127, 0}, {1, 0}};
+    vertices[2] = Vertex{{-.25f, -.25f, 0.f}, {127, 0  , 127, 0}, {1, 0}};
+    vertices[3] = Vertex{{ .25f, -.25f, 0.f}, {0  , 0  , 255, 0}, {0, 0}};
 
     glGenVertexArrays(1, &m_vertexArrayObject);
 
@@ -26,6 +26,11 @@ OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(locati
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    GLint size = 0;
+    glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &size);
+
+    Logger::info("Buffer size: " + std::to_string(size));
 
     // Vertex Attribute ID 0: Position
     glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
@@ -43,7 +48,7 @@ OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(locati
 
 void OpenGLSprite::draw() {
     glBindVertexArray(m_vertexArrayObject);
-    for (int i = 0; i <= 3; ++i)  {
+    for (int i = 0; i <= 2; ++i)  {
         glEnableVertexAttribArray(i);
     }
     glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTEX_AMOUNT);

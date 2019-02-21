@@ -55,7 +55,7 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 
     Logger::info(std::string("OpenGL Version: ") + (char*)(glGetString(GL_VERSION)));
 
-    glEnable( GL_DEBUG_OUTPUT );
+    glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, nullptr);
 
     glGenVertexArrays(1, &m_vertexArrayObject);
