@@ -14,5 +14,8 @@ public:
 
     virtual void setVertexShader(const std::string& filePath) = 0;
     virtual void setFragmentShader(const std::string& filePath) = 0;
+
+    virtual void finalize() = 0;
+    virtual void reload() = 0;
 };
 #endif //ENGINITO_SHADER_H

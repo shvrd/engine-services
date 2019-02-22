@@ -44,9 +44,13 @@ void GLSLShader::setFragmentShader(const std::string &filePath) {
 }
 
 void GLSLShader::compileShader(GLuint &id, const std::string& source) {
-    char const* shaderSource = source.c_str();
+    if (id == 0) {
+        Logger::error("Shader could not be created.");
 
-    glCreateShader(GL_VERTEX_SHADER);
+        return;
+    }
+
+    char const* shaderSource = source.c_str();
 
     glShaderSource(id, 1, &shaderSource, nullptr);
     glCompileShader(id);
@@ -78,6 +82,12 @@ void GLSLShader::compileShader(GLuint &id, const std::string& source) {
 void GLSLShader::linkProgram(GLuint& programID, GLuint& vertexShaderID, GLuint& fragmentShaderID) {
     Logger::info("Linking shader program");
 
+    if (programID == 0) {
+        Logger::error("Program could not be generated");
+
+        return;
+    }
+
     if (vertexShaderID == 0) {
         Logger::error("Vertex shader did not compile, cant link shader program");
 
@@ -90,11 +100,29 @@ void GLSLShader::linkProgram(GLuint& programID, GLuint& vertexShaderID, GLuint& 
         return;
     }
 
-    programID = glCreateProgram();
-
     glAttachShader(programID, vertexShaderID);
     glAttachShader(programID, fragmentShaderID);
+
     glLinkProgram(programID);
+
+    GLint linked = GL_FALSE;
+    glGetProgramiv(programID, GL_LINK_STATUS, &linked);
+
+    if (linked != GL_TRUE) {
+        Logger::error("Linking of shaderprogram unsuccessful");
+
+        // Get error message length
+        int infoLogLength = 0;
+        glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+        if (infoLogLength > 0) {
+            // Read error message
+            std::vector<char> errorMessage(static_cast<unsigned int>(infoLogLength + 1));
+            glGetProgramInfoLog(programID, infoLogLength, nullptr, &errorMessage[0]);
+
+            Logger::warn(std::string(&errorMessage[0]));
+        }
+    }
 
     glDetachShader(programID, vertexShaderID);
     glDetachShader(programID, fragmentShaderID);
@@ -113,4 +141,16 @@ void GLSLShader::unbind() {
 
 GLSLShader::~GLSLShader() {
     glDeleteProgram(m_shaderProgram);
+}
+
+void GLSLShader::finalize() {
+    m_shaderProgram = glCreateProgram();
+
+    Logger::info("Shader Program: " + std::to_string(m_shaderProgram));
+    linkProgram(m_shaderProgram, m_vertexShaderProgram, m_fragmentShaderProgram);
+}
+
+void GLSLShader::reload() {
+    Logger::warn("GLSLShader::reload() is not implemented yet");
+    //TODO: Reload from filepath
 }

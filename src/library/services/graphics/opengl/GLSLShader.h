@@ -25,6 +25,10 @@ public:
     void setVertexShader(const std::string& filePath) override;
     void setFragmentShader(const std::string& filePath) override;
 
+    void finalize() override;
+
+    void reload() override;
+
 private:
     //TODO: These could be outsourced into some static shader utils
     static void compileShader(GLuint& id, const std::string& source);

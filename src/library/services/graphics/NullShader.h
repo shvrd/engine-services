@@ -14,5 +14,8 @@ public:
 
     void setVertexShader(const std::string& filePath) override {}
     void setFragmentShader(const std::string& filePath) override {}
+
+    void finalize() override {}
+    void reload() override {}
 };
 #endif //ENGINITO_NULLSHADER_H

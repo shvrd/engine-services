@@ -43,10 +43,19 @@ OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(locati
 
 void OpenGLSprite::draw() {
     glBindVertexArray(m_vertexArrayObject);
+
+    // Move to shader bind
     for (int i = 0; i <= 2; ++i)  {
         glEnableVertexAttribArray(i);
     }
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTEX_AMOUNT);
+
+    // Move to shader unbind
+    for (int i = 0; i <= 2; ++i)  {
+        glDisableVertexAttribArray(i);
+    }
+
     glBindVertexArray(0);
 }
 

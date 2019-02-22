@@ -39,6 +39,8 @@ void ExampleScene::onEnter() {
     m_shader->setVertexShader("../../../src/library/assets/shaders/basic.vert");
     m_shader->setFragmentShader("../../../src/library/assets/shaders/basic.frag");
 
+    m_shader->finalize();
+
     m_sprite = m_graphics->createSprite({-.25f, .25f}, {.5f, .5f});
 }
 
