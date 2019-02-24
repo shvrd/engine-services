@@ -16,7 +16,7 @@ public:
     ~OpenGLGraphics() override = default;
 
     void clear() override;
-    void setClearColor() override;
+    void setClearColor(Color color) override;
 
     void initialize(int windowWidth, int windowHeight) override;
 

@@ -20,8 +20,8 @@ void OpenGLGraphics::clear() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void OpenGLGraphics::setClearColor() {
-    glClearColor(0.1f, 0.1f, 0.4f, 1.f);
+void OpenGLGraphics::setClearColor(Color color) {
+    glClearColor(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f);
 }
 
 void GLAPIENTRY

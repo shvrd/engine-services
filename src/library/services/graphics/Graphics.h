@@ -6,6 +6,7 @@
 #define ENGINITO_GRAPHICS_H
 
 #include <memory>
+#include "../../types/Color.h"
 #include "Shader.h"
 #include "Sprite.h"
 
@@ -15,7 +16,7 @@ public:
     virtual ~Graphics() = default;
 
     virtual void clear() = 0;
-    virtual void setClearColor() = 0;
+    virtual void setClearColor(Color color) = 0;
 
     virtual void initialize(int windowWidth, int windowHeight) = 0;
 

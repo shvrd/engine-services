@@ -67,7 +67,7 @@ bool GameContainer::initializeSystems() {
         GraphicsServiceLocator::set(std::make_shared<OpenGLGraphics>());
 
         m_graphics = GraphicsServiceLocator::get();
-        m_graphics->setClearColor();
+        m_graphics->setClearColor({0, 0, 0, 1});
         m_graphics->initialize(windowWidth, windowHeight);
     }
 
