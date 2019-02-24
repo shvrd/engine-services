@@ -3,7 +3,7 @@
 //
 
 #include "OpenGLSprite.h"
-#include "../../../../types/Vertex.h"
+#include "../../../types/Vertex.h"
 #include "../../../log/Logger.h"
 
 OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(location, dimensions) {

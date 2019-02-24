@@ -5,8 +5,8 @@
 #ifndef ENGINITO_SPRITE_H
 #define ENGINITO_SPRITE_H
 
-#include "../../../types/Texture.h"
-#include "../../../types/Vector.h"
+#include "../../types/Texture.h"
+#include "../../types/Vector.h"
 
 class Sprite {
 protected:

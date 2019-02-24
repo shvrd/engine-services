@@ -7,7 +7,7 @@
 #include "OpenGLGraphics.h"
 #include "../../../log/Logger.h"
 #include "GLSLShader.h"
-#include "../../../../types/Vertex.h"
+#include "../../../types/Vertex.h"
 #include "OpenGLSprite.h"
 
 OpenGLGraphics::OpenGLGraphics()
