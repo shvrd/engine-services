@@ -9,13 +9,11 @@
 OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(location, dimensions) {
     Vertex vertices[VERTEX_AMOUNT];
 
-    const Color white = {255, 255, 255};
-
     // top left, top right, bottom left, bottom right
-    vertices[0] = Vertex{{location.x,  location.y, 0.f}, white, {0, 1}};
-    vertices[1] = Vertex{{location.x + dimensions.x,  location.y, 0.f}, white, {1, 1}};
-    vertices[2] = Vertex{{location.x, location.y + dimensions.y, 0.f}, white, {1, 0}};
-    vertices[3] = Vertex{{location.x + dimensions.x, location.y + dimensions.y, 0.f}, white, {0, 0}};
+    vertices[0] = Vertex{{location.x,  location.y, 0.f}, Colors::WHITE, {0, 1}};
+    vertices[1] = Vertex{{location.x + dimensions.x,  location.y, 0.f}, Colors::WHITE, {1, 1}};
+    vertices[2] = Vertex{{location.x, location.y + dimensions.y, 0.f}, Colors::WHITE, {1, 0}};
+    vertices[3] = Vertex{{location.x + dimensions.x, location.y + dimensions.y, 0.f}, Colors::WHITE, {0, 0}};
 
     glGenVertexArrays(1, &m_vertexArrayObject);
 
