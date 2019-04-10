@@ -17,5 +17,8 @@ public:
 
     virtual void finalize() = 0;
     virtual void reload() = 0;
+
+protected:
+    bool m_isFinalized;
 };
 #endif //ENGINITO_SHADER_H

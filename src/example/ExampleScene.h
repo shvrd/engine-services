@@ -41,7 +41,7 @@ void ExampleScene::onEnter() {
 
     m_shader->finalize();
 
-    m_sprite = m_graphics->createSprite({-.25f, .25f}, {.5f, .5f});
+    m_sprite = m_graphics->createSprite({-.5f, -.5f}, {1.f, 1.f});
 }
 
 void ExampleScene::onContinue() {

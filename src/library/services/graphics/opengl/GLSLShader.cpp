@@ -132,6 +132,11 @@ void GLSLShader::linkProgram(GLuint& programID, GLuint& vertexShaderID, GLuint& 
 }
 
 void GLSLShader::bind() {
+#ifndef NDEBUG
+    if (!m_isFinalized) {
+        Logger::error("Binding a shader in non-finalized state leads to undefined behavior.");
+    }
+#endif
     glUseProgram(m_shaderProgram);
 }
 
@@ -146,8 +151,9 @@ GLSLShader::~GLSLShader() {
 void GLSLShader::finalize() {
     m_shaderProgram = glCreateProgram();
 
-    Logger::info("Shader Program: " + std::to_string(m_shaderProgram));
     linkProgram(m_shaderProgram, m_vertexShaderProgram, m_fragmentShaderProgram);
+
+    m_isFinalized = true;
 }
 
 void GLSLShader::reload() {
