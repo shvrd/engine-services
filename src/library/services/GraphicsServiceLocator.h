@@ -9,8 +9,6 @@
 #include "graphics/Graphics.h"
 
 class GraphicsServiceLocator {
-
-public:
     static std::shared_ptr<Graphics> m_graphics;
 public:
     static std::shared_ptr<Graphics> get();

@@ -19,6 +19,8 @@ public:
 
     void initialize(int windowWidth, int windowHeight) override {}
 
+    void setViewport(int width, int height) override {}
+
     std::unique_ptr<Shader> createShader() override { return std::make_unique<NullShader>(); }
     std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override { return std::make_unique<NullSprite>(Vector2{0,0}, Vector2{0,0}); }
 };

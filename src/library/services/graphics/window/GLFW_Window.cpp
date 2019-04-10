@@ -4,6 +4,16 @@
 
 #include "GLFW_Window.h"
 #include "../../../log/Logger.h"
+#include "../../GraphicsServiceLocator.h"
+#include "../../WindowServiceLocator.h"
+
+void resizeCallback(GLFWwindow* window, int width, int height) {
+    Logger::info("Resize: " + std::to_string(width) + " x " + std::to_string(height));
+
+    // No access to GLFW_Window here - use the service locator
+    WindowServiceLocator::get()->setDimensions(width, height);
+    GraphicsServiceLocator::get()->setViewport(width, height);
+}
 
 void GLFW_Window::initialize(unsigned int width, unsigned int height, const std::string &windowTitle) {
     if (!glfwInit()) {
@@ -20,6 +30,8 @@ void GLFW_Window::initialize(unsigned int width, unsigned int height, const std:
     // TODO: Make VSync configurable
     glfwSwapInterval(1);
     glfwMakeContextCurrent(m_window);
+
+    glfwSetWindowSizeCallback(m_window, resizeCallback);
 
     glfwGetFramebufferSize(m_window, &m_windowWidth, &m_windowHeight);
     Logger::info("Framebuffer size: " + std::to_string(m_windowWidth) + " x " + std::to_string(m_windowHeight));

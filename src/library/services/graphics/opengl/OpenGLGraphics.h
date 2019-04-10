@@ -20,6 +20,8 @@ public:
 
     void initialize(int windowWidth, int windowHeight) override;
 
+    void setViewport(int width, int height) override;
+
     std::unique_ptr<Shader> createShader() override;
     std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override;
 };

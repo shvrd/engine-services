@@ -12,12 +12,12 @@ public:
     NullWindow() = default;
     ~NullWindow() = default;
 
-    virtual void initialize(unsigned int width, unsigned int height, const std::string& windowTitle) override {}
+    void initialize(unsigned int width, unsigned int height, const std::string& windowTitle) override {}
 
-    virtual void swapBuffers() override {}
-    virtual void pollEvents() override {}
+    void swapBuffers() override {}
+    void pollEvents() override {}
 
-    virtual bool windowShouldClose() override { return false; }
+    bool windowShouldClose() override { return false; }
 };
 
 #endif //ENGINITO_NULLWINDOW_H

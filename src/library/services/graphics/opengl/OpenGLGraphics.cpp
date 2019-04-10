@@ -69,7 +69,7 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glGenBuffers(1, &m_vertexBufferObject);
     glBindVertexArray(0);
 
-    glViewport(0, 0, windowWidth, windowHeight);
+    setViewport(windowWidth, windowHeight);
 }
 
 std::unique_ptr<Shader> OpenGLGraphics::createShader() {
@@ -78,4 +78,8 @@ std::unique_ptr<Shader> OpenGLGraphics::createShader() {
 
 std::unique_ptr<Sprite> OpenGLGraphics::createSprite(Vector2 location, Vector2 dimensions) {
     return std::make_unique<OpenGLSprite>(location, dimensions);
+}
+
+void OpenGLGraphics::setViewport(int width, int height) {
+    glViewport(0, 0, width, height);
 }

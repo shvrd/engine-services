@@ -20,6 +20,11 @@ public:
     virtual void pollEvents() = 0;
 
     virtual bool windowShouldClose() = 0;
+
+    void setDimensions(unsigned int width, unsigned int height) {
+        m_windowWidth = width;
+        m_windowHeight = height;
+    }
 };
 
 

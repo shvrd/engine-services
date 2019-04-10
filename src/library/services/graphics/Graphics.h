@@ -20,6 +20,8 @@ public:
 
     virtual void initialize(int windowWidth, int windowHeight) = 0;
 
+    virtual void setViewport(int width, int height) = 0;
+
     //TODO: Maybe make a standalone shaderfactory?
     virtual std::unique_ptr<Shader> createShader() = 0;
     virtual std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) = 0;
