@@ -9,11 +9,13 @@
 
 class NullSprite : public Sprite {
 public:
-    NullSprite(Vector2 location, Vector2 dimensions) : Sprite(location, dimensions) {}
+    NullSprite(const Vector2& location, const Vector2& dimensions) : Sprite(location, dimensions) {}
     ~NullSprite() override = default;
 
-    void setTexture(Texture texture) override {}
+    void setTexture(const Texture& texture) override {}
     void draw() override {}
+
+    void translate(const Vector2& translation) override {}
 };
 
 #endif //ENGINITO_NULLSPRITE_H

@@ -16,6 +16,7 @@ GameContainer::GameContainer()
     : m_threadPool(1)
     , m_sceneStack()
     , m_gameLoopTimer()
+    // TODO: Dont hardcode target fps
     , m_frameTime(TimerUtils::calculateFrameTimeForFPS(60))
     , m_window()
     , m_input() {

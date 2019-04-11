@@ -12,6 +12,7 @@ public:
     Input() = default;
     virtual ~Input() {}
 
+    // TODO: Make this inaccessible from outside -> friend class GameContainer
     virtual void update() = 0;
 
     virtual bool isKeyPressed(Key key) = 0;

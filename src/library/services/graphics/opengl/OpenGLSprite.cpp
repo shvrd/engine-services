@@ -6,14 +6,7 @@
 #include "../../../types/Vertex.h"
 #include "../../../log/Logger.h"
 
-OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(location, dimensions) {
-    Vertex vertices[VERTEX_AMOUNT];
-
-    // top left, top right, bottom left, bottom right
-    vertices[0] = Vertex{{location.x,  location.y, 0.f}, Colors::WHITE, {0, 1}};
-    vertices[1] = Vertex{{location.x + dimensions.x,  location.y, 0.f}, Colors::WHITE, {1, 1}};
-    vertices[2] = Vertex{{location.x, location.y + dimensions.y, 0.f}, Colors::WHITE, {1, 0}};
-    vertices[3] = Vertex{{location.x + dimensions.x, location.y + dimensions.y, 0.f}, Colors::WHITE, {0, 0}};
+OpenGLSprite::OpenGLSprite(const Vector2& location, const Vector2& dimensions) : Sprite(location, dimensions) {
 
     glGenVertexArrays(1, &m_vertexArrayObject);
 
@@ -24,8 +17,6 @@ OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(locati
 
     // Bind vertex buffer object
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
-
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // Vertex Attribute ID 0: Position
     glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
@@ -39,6 +30,8 @@ OpenGLSprite::OpenGLSprite(Vector2 location, Vector2 dimensions) : Sprite(locati
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glBindVertexArray(0);
+
+    updateBuffer();
 }
 
 void OpenGLSprite::draw() {
@@ -59,7 +52,38 @@ void OpenGLSprite::draw() {
     glBindVertexArray(0);
 }
 
-void OpenGLSprite::setTexture(Texture texture) {
+void OpenGLSprite::setTexture(const Texture& texture) {
 
+}
+
+void OpenGLSprite::updateBuffer() {
+    // Bind vertex buffer object
+    glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
+
+    Vertex vertices[VERTEX_AMOUNT];
+
+    // top left, top right, bottom left, bottom right
+    vertices[0] = Vertex{{m_location.x,  m_location.y, 0.f}, Colors::WHITE, {0, 1}};
+    vertices[1] = Vertex{{m_location.x + m_dimensions.x,  m_location.y, 0.f}, Colors::WHITE, {1, 1}};
+    vertices[2] = Vertex{{m_location.x, m_location.y + m_dimensions.y, 0.f}, Colors::WHITE, {1, 0}};
+    vertices[3] = Vertex{{m_location.x + m_dimensions.x, m_location.y + m_dimensions.y, 0.f}, Colors::WHITE, {0, 0}};
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void OpenGLSprite::setLocation(const Vector2& location) {
+    Sprite::setLocation(location);
+    updateBuffer();
+}
+
+void OpenGLSprite::setDimensions(const Vector2& dimensions) {
+    Sprite::setDimensions(dimensions);
+    updateBuffer();
+}
+
+void OpenGLSprite::translate(const Vector2& translation) {
+    setLocation({m_location.x + translation.x, m_location.y + translation.y});
 }
 

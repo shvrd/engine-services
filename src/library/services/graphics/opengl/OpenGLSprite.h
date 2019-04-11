@@ -14,12 +14,21 @@ class OpenGLSprite : public Sprite {
     GLuint m_vertexArrayObject, m_vertexBufferObject;
 
 public:
-    OpenGLSprite(Vector2 location, Vector2 dimensions);
+    OpenGLSprite(const Vector2& location, const Vector2& dimensions);
 
     ~OpenGLSprite() override = default;
 
-    void setTexture(Texture texture) override;
+    void setTexture(const Texture& texture) override;
     void draw() override;
+
+    void setLocation(const Vector2& location) override;
+
+    void setDimensions(const Vector2& dimensions) override;
+
+    void translate(const Vector2& translation) override;
+
+private:
+    void updateBuffer();
 };
 
 

@@ -8,6 +8,7 @@
 #include <scenes/Scene.h>
 #include <log/Logger.h>
 #include <services/graphics/Sprite.h>
+#include <services/input/GLFWInput.h>
 
 class ExampleScene : public Scene {
     std::unique_ptr<Shader> m_shader;
@@ -49,7 +50,18 @@ void ExampleScene::onContinue() {
 }
 
 void ExampleScene::update() {
-
+    if (m_input->isKeyPressed(Key::W)) {
+        m_sprite->translate({0.f, .01f});
+    }
+    if (m_input->isKeyPressed(Key::S)) {
+        m_sprite->translate({0.f, -.01f});
+    }
+    if (m_input->isKeyPressed(Key::A)) {
+        m_sprite->translate({-.01f, .0f});
+    }
+    if (m_input->isKeyPressed(Key::D)) {
+        m_sprite->translate({.01f, .0f});
+    }
 }
 
 void ExampleScene::render() {
