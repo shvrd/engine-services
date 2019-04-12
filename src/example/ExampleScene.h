@@ -62,6 +62,15 @@ void ExampleScene::update() {
     if (m_input->isKeyPressed(Key::D)) {
         m_sprite->translate({.01f, .0f});
     }
+
+    static bool buttonDown = false;
+
+    if (m_input->isKeyPressed(Key::F10)) {
+        if (!buttonDown)
+            m_shader->reload();
+    }
+
+    buttonDown = m_input->isKeyPressed(Key::F10);
 }
 
 void ExampleScene::render() {

@@ -18,7 +18,7 @@ class Entity {
     bool m_finalized;
 public:
     Entity();
-    ~Entity();
+    ~Entity() = default;
 
     void finalize();
 

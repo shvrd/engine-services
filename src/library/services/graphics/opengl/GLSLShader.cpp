@@ -11,11 +11,15 @@
 GLSLShader::GLSLShader()
     : m_shaderProgram(0)
     , m_vertexShaderProgram(0)
-    , m_fragmentShaderProgram(0) {
+    , m_fragmentShaderProgram(0)
+    , m_vertexShaderPath()
+    , m_fragmentShaderPath() {
 
 }
 
 void GLSLShader::setVertexShader(const std::string &filePath) {
+    m_vertexShaderPath = filePath;
+
     if (m_vertexShaderProgram != 0) {
         Logger::warn("Shader already created, deleting old shader");
 
@@ -30,6 +34,8 @@ void GLSLShader::setVertexShader(const std::string &filePath) {
 }
 
 void GLSLShader::setFragmentShader(const std::string &filePath) {
+    m_fragmentShaderPath = filePath;
+
     if (m_fragmentShaderProgram != 0) {
         Logger::warn("Shader already created, deleting old shader");
 
@@ -128,7 +134,9 @@ void GLSLShader::linkProgram(GLuint& programID, GLuint& vertexShaderID, GLuint& 
     glDetachShader(programID, fragmentShaderID);
 
     glDeleteShader(vertexShaderID);
+    vertexShaderID = 0;
     glDeleteShader(fragmentShaderID);
+    fragmentShaderID = 0;
 }
 
 void GLSLShader::bind() {
@@ -145,7 +153,7 @@ void GLSLShader::unbind() {
 }
 
 GLSLShader::~GLSLShader() {
-    glDeleteProgram(m_shaderProgram);
+    cleanUp();
 }
 
 void GLSLShader::finalize() {
@@ -157,6 +165,17 @@ void GLSLShader::finalize() {
 }
 
 void GLSLShader::reload() {
-    Logger::warn("GLSLShader::reload() is not implemented yet");
-    //TODO: Reload from filepath
+    // Free resources used by old shader
+    this->cleanUp();
+
+    // Create new shader
+    this->setVertexShader(m_vertexShaderPath);
+    this->setFragmentShader(m_fragmentShaderPath);
+
+    this->finalize();
+}
+
+void GLSLShader::cleanUp() {
+    unbind();
+    glDeleteProgram(m_shaderProgram);
 }

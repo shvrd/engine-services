@@ -15,6 +15,9 @@ class GLSLShader : public Shader {
     GLuint m_vertexShaderProgram;
     GLuint m_fragmentShaderProgram;
 
+    std::string m_vertexShaderPath;
+    std::string m_fragmentShaderPath;
+
 public:
     GLSLShader();
     ~GLSLShader() override;
@@ -30,6 +33,8 @@ public:
     void reload() override;
 
 private:
+    void cleanUp();
+
     //TODO: These could be outsourced into some static shader utils
     static void compileShader(GLuint& id, const std::string& source);
     static void linkProgram(GLuint& programID, GLuint& vertexShaderID, GLuint& fragmentShaderID);
