@@ -68,7 +68,7 @@ void OpenGLSprite::updateBuffer() {
     vertices[2] = Vertex{{m_location.x, m_location.y + m_dimensions.y, 0.f}, Colors::WHITE, {1, 0}};
     vertices[3] = Vertex{{m_location.x + m_dimensions.x, m_location.y + m_dimensions.y, 0.f}, Colors::WHITE, {0, 0}};
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

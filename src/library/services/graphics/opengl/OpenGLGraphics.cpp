@@ -63,6 +63,10 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
 
+    // Enable blending for transparency
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     glGenVertexArrays(1, &m_vertexArrayObject);
 
     glBindVertexArray(m_vertexArrayObject);

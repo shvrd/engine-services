@@ -24,6 +24,12 @@ TEST(ColorTest, Subtraction) {
     ASSERT_TRUE(black == Colors::BLACK);
 }
 
+TEST(ColorTest, SubtractionOverflow) {
+    Color black = Colors::WHITE - Colors::RED - Colors::MAROON - Colors::LIME - Colors::BLUE - Colors::SILVER;
+
+    ASSERT_TRUE(black == Colors::BLACK);
+}
+
 TEST(ColorTest, Multiplication) {
     Color blue = Colors::BLUE * Colors::WHITE;
 
