@@ -8,9 +8,12 @@
 #include <limits>
 
 struct Color {
-    unsigned char r, g, b, a;
+    unsigned char r, g, b;
 
-    void set(unsigned char _r = 0, unsigned char _g = 0, unsigned char _b = 0, unsigned char _a = 0) {
+    // use full opacity by default
+    unsigned char a = 255;
+
+    void set(unsigned char _r = 0, unsigned char _g = 0, unsigned char _b = 0, unsigned char _a = 255) {
         r = _r;
         g = _g;
         b = _b;
