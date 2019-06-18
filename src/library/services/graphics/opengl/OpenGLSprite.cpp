@@ -34,7 +34,7 @@ OpenGLSprite::OpenGLSprite(const Vector2& location, const Vector2& dimensions) :
     updateBuffer();
 }
 
-void OpenGLSprite::draw() {
+void OpenGLSprite::draw() const {
     glBindVertexArray(m_vertexArrayObject);
 
     // Move to shader bind

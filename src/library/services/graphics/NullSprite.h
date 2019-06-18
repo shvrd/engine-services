@@ -14,7 +14,7 @@ public:
     ~NullSprite() override = default;
 
     void setTexture(const Texture& texture) override {}
-    void draw() override {}
+    void draw() const override {}
 };
 
 #endif //ENGINITO_NULLSPRITE_H

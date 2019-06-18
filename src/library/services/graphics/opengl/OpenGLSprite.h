@@ -19,7 +19,7 @@ public:
     ~OpenGLSprite() override = default;
 
     void setTexture(const Texture& texture) override;
-    void draw() override;
+    void draw() const override;
 
 private:
     void updateBuffer() override;

@@ -13,6 +13,8 @@ protected:
     Vector2 m_location;
     Vector2 m_dimensions;
 
+    Texture m_texture;
+
     virtual void updateBuffer() = 0;
 public:
     Sprite(const Vector2& location, const Vector2& dimensions)
@@ -33,21 +35,24 @@ public:
         updateBuffer();
     }
 
-    Vector2 getLocation() {
+    Vector2 getLocation() const {
         return m_location;
     }
 
-    Vector2 getDimensions() {
+    Vector2 getDimensions() const {
         return m_dimensions;
     }
 
     void translate(const Vector2 &translation) {
-        m_location.set(m_location.x + translation.x, m_location.y + translation.y);
+        m_location = m_location + translation;
         updateBuffer();
     }
 
-    virtual void setTexture(const Texture& texture) = 0;
-    virtual void draw() = 0;
+    virtual void setTexture(const Texture& texture) {
+        m_texture = texture;
+    }
+
+    virtual void draw() const = 0;
 
 };
 
