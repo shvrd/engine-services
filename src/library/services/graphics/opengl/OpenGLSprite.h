@@ -21,14 +21,8 @@ public:
     void setTexture(const Texture& texture) override;
     void draw() override;
 
-    void setLocation(const Vector2& location) override;
-
-    void setDimensions(const Vector2& dimensions) override;
-
-    void translate(const Vector2& translation) override;
-
 private:
-    void updateBuffer();
+    void updateBuffer() override;
 };
 
 

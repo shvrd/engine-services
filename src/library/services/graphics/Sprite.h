@@ -12,6 +12,8 @@ class Sprite {
 protected:
     Vector2 m_location;
     Vector2 m_dimensions;
+
+    virtual void updateBuffer() = 0;
 public:
     Sprite(const Vector2& location, const Vector2& dimensions)
         : m_location(location)
@@ -23,10 +25,12 @@ public:
 
     virtual void setLocation(const Vector2& location) {
         m_location = location;
+        updateBuffer();
     }
 
     virtual void setDimensions(const Vector2& dimensions) {
         m_dimensions = dimensions;
+        updateBuffer();
     }
 
     Vector2 getLocation() {
@@ -37,7 +41,10 @@ public:
         return m_dimensions;
     }
 
-    virtual void translate(const Vector2 &translation) = 0;
+    void translate(const Vector2 &translation) {
+        m_location.set(m_location.x + translation.x, m_location.y + translation.y);
+        updateBuffer();
+    }
 
     virtual void setTexture(const Texture& texture) = 0;
     virtual void draw() = 0;

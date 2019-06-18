@@ -72,18 +72,3 @@ void OpenGLSprite::updateBuffer() {
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
-
-void OpenGLSprite::setLocation(const Vector2& location) {
-    Sprite::setLocation(location);
-    updateBuffer();
-}
-
-void OpenGLSprite::setDimensions(const Vector2& dimensions) {
-    Sprite::setDimensions(dimensions);
-    updateBuffer();
-}
-
-void OpenGLSprite::translate(const Vector2& translation) {
-    setLocation({m_location.x + translation.x, m_location.y + translation.y});
-}
-
