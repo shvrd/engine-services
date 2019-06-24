@@ -19,6 +19,8 @@ public:
     virtual void swapBuffers() = 0;
     virtual void pollEvents() = 0;
 
+    virtual void setTitle(const std::string& title) = 0;
+
     virtual bool windowShouldClose() = 0;
 
     void setDimensions(unsigned int width, unsigned int height) {

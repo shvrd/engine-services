@@ -21,6 +21,8 @@ public:
 
     bool windowShouldClose() override;
 
+    void setTitle(const std::string& title) override;
+
     ~GLFW_Window() override;
 
     GLFWwindow* getWindow();

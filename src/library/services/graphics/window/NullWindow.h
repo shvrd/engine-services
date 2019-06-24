@@ -17,6 +17,8 @@ public:
     void swapBuffers() override {}
     void pollEvents() override {}
 
+    void setTitle(const std::string& title) override {}
+
     bool windowShouldClose() override { return false; }
 };
 

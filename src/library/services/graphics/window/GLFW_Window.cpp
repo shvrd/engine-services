@@ -58,4 +58,8 @@ GLFWwindow *GLFW_Window::getWindow() {
     return m_window;
 }
 
+void GLFW_Window::setTitle(const std::string &title) {
+    glfwSetWindowTitle(m_window, title.c_str());
+}
+
 
