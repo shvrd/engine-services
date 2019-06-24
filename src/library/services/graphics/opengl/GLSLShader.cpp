@@ -30,7 +30,7 @@ void GLSLShader::setVertexShader(const std::string &filePath) {
     m_vertexShaderProgram = glCreateShader(GL_VERTEX_SHADER);
 
     Logger::info("Compiling Vertex Shader: " + filePath);
-    compileShader(m_vertexShaderProgram, FileUtils::readFile(filePath));
+    compileShader(m_vertexShaderProgram, FileUtils::readTextFile(filePath));
 }
 
 void GLSLShader::setFragmentShader(const std::string &filePath) {
@@ -46,7 +46,7 @@ void GLSLShader::setFragmentShader(const std::string &filePath) {
     m_fragmentShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
 
     Logger::info("Compiling Fragment Shader: " + filePath);
-    compileShader(m_fragmentShaderProgram, FileUtils::readFile(filePath));
+    compileShader(m_fragmentShaderProgram, FileUtils::readTextFile(filePath));
 }
 
 void GLSLShader::compileShader(GLuint &id, const std::string& source) {

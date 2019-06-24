@@ -8,7 +8,7 @@
 #include <sstream>
 #include "../log/Logger.h"
 
-std::string FileUtils::readFile(const std::string &filePath) {
+std::string FileUtils::readTextFile(const std::string &filePath) {
     std::ifstream fileInputStream(filePath, std::ios::in);
 
     if (!fileInputStream.is_open()) {
@@ -21,4 +21,17 @@ std::string FileUtils::readFile(const std::string &filePath) {
     fileContents << fileInputStream.rdbuf();
 
     return fileContents.str();
+}
+
+std::vector<char> FileUtils::readBinaryFile(const std::string &filePath) {
+    std::ifstream fileInputStream(filePath, std::ios::binary);
+
+    if (!fileInputStream.is_open()) {
+        Logger::error("Failed to open file: " + filePath);
+
+        return {};
+    }
+
+
+    return std::vector(std::istreambuf_iterator<char>(fileInputStream), {});
 }

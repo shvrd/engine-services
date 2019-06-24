@@ -54,7 +54,7 @@ bool GameContainer::initializeSystems() {
         WindowServiceLocator::set(std::make_shared<GLFW_Window>());
 
         m_window = WindowServiceLocator::get();
-        m_window->initialize(windowWidth, windowHeight, "Enginito");
+        m_window->initialize(windowWidth, windowHeight, "Made with Unity(TM)");
 
         Logger::info("Initializing Input");
         auto glfwInput = new GLFWInput();
@@ -68,7 +68,7 @@ bool GameContainer::initializeSystems() {
         GraphicsServiceLocator::set(std::make_shared<OpenGLGraphics>());
 
         m_graphics = GraphicsServiceLocator::get();
-        m_graphics->setClearColor({0, 0, 0, 1});
+        m_graphics->setClearColor(Colors::BLACK);
         m_graphics->initialize(windowWidth, windowHeight);
     }
 
