@@ -12,7 +12,7 @@ std::shared_ptr<Graphics> GraphicsServiceLocator::get() {
 }
 
 void GraphicsServiceLocator::set(std::shared_ptr<Graphics> graphics) {
-    if (m_graphics == nullptr) {
+    if (graphics == nullptr) {
         m_graphics = std::make_shared<NullGraphics>();
 
         return;
