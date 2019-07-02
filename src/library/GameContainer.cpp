@@ -11,6 +11,7 @@
 #include "services/input/GLFWInput.h"
 #include "services/InputServiceLocator.h"
 #include "services/GraphicsServiceLocator.h"
+#include "services/DiagnosticsServiceLocator.h"
 
 GameContainer::GameContainer()
     : m_threadPool(1)
@@ -70,6 +71,8 @@ bool GameContainer::initializeSystems() {
         m_graphics = GraphicsServiceLocator::get();
         m_graphics->setClearColor(Colors::BLACK);
         m_graphics->initialize(windowWidth, windowHeight);
+
+        DiagnosticsServiceLocator::set(nullptr);
     }
 
     return initStatus;

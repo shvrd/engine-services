@@ -4,6 +4,8 @@
 
 #include "WindowsDiagnostics.h"
 
+#ifdef BUILD_WINDOWS
+
 #include <windows.h>
 #include <psapi.h>
 #include <processthreadsapi.h>
@@ -25,3 +27,5 @@ float WindowsDiagnostics::getCPUUsage() {
     // https://stackoverflow.com/questions/23143693/retrieving-cpu-load-percent-total-in-windows-with-c
     return 0;
 }
+
+#endif
