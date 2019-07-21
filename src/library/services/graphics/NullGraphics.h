@@ -8,6 +8,7 @@
 #include "Graphics.h"
 #include "NullShader.h"
 #include "NullSprite.h"
+#include "../../resources/Texture.h"
 
 class NullGraphics : public Graphics {
 public:
@@ -20,6 +21,8 @@ public:
     void initialize(int windowWidth, int windowHeight) override {}
 
     void setViewport(int width, int height) override {}
+
+    std::shared_ptr<Texture> loadTexture(const std::string& filePath) override { return std::make_shared<Texture>(); }
 
     std::unique_ptr<Shader> createShader() override { return std::make_unique<NullShader>(); }
     std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override { return std::make_unique<NullSprite>(Vector2{0,0}, Vector2{0,0}); }

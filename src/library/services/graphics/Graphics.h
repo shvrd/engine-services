@@ -6,11 +6,15 @@
 #define ENGINITO_GRAPHICS_H
 
 #include <memory>
+#include "../../resources/ResourceManager.h"
 #include "../../types/Color.h"
 #include "Shader.h"
 #include "Sprite.h"
+#include "../../resources/Texture.h"
 
 class Graphics {
+protected:
+    ResourceManager<Texture> m_textures;
 public:
     Graphics() = default;
     virtual ~Graphics() = default;
@@ -21,6 +25,8 @@ public:
     virtual void initialize(int windowWidth, int windowHeight) = 0;
 
     virtual void setViewport(int width, int height) = 0;
+
+    virtual std::shared_ptr<Texture> loadTexture(const std::string& filePath) = 0;
 
     //TODO: Maybe make a standalone shaderfactory?
     virtual std::unique_ptr<Shader> createShader() = 0;

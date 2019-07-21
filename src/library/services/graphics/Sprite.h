@@ -5,7 +5,7 @@
 #ifndef ENGINITO_SPRITE_H
 #define ENGINITO_SPRITE_H
 
-#include "../../types/Texture.h"
+#include "../../resources/Texture.h"
 #include "../../types/Vector.h"
 
 class Sprite {

@@ -11,12 +11,12 @@
 
 template<class Resource>
 class ResourceManager {
-    std::map<std::string, Resource> m_resourceMap;
+    std::map<std::string, std::shared_ptr<Resource>> m_resourceMap;
 public:
     ResourceManager();
     ~ResourceManager();
 
-    void add(const std::string& filePath, const Resource& resource);
+    void add(const std::string& filePath, std::shared_ptr<Resource> resource);
     std::shared_ptr<Resource> get(const std::string& filePath) const;
 
     unsigned int size() const;
@@ -36,13 +36,19 @@ ResourceManager<Resource>::~ResourceManager() {
 }
 
 template<class Resource>
-void ResourceManager<Resource>::add(const std::string &filePath, const Resource &resource) {
+void ResourceManager<Resource>::add(const std::string &filePath, std::shared_ptr<Resource> resource) {
     m_resourceMap.insert(std::make_pair(filePath, resource));
 }
 
 template<class Resource>
 std::shared_ptr<Resource> ResourceManager<Resource>::get(const std::string &filePath) const {
-    return m_resourceMap.find(filePath);
+    auto iterator = m_resourceMap.find(filePath);
+
+    if (iterator == m_resourceMap.end()) {
+        return nullptr;
+    }
+
+    return iterator->second;
 }
 
 template<class Resource>

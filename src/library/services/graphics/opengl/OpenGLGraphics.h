@@ -22,6 +22,8 @@ public:
 
     void setViewport(int width, int height) override;
 
+    std::shared_ptr<Texture> loadTexture(const std::string& filePath) override;
+
     std::unique_ptr<Shader> createShader() override;
     std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override;
 };

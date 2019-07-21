@@ -76,6 +76,17 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     setViewport(windowWidth, windowHeight);
 }
 
+std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath) {
+    std::shared_ptr<Texture> texture = m_textures.get(filePath);
+
+    // If texture has not been loaded yet
+    if (!texture) {
+
+    }
+
+    return std::shared_ptr<Texture>();
+}
+
 std::unique_ptr<Shader> OpenGLGraphics::createShader() {
     return std::make_unique<GLSLShader>();
 }
