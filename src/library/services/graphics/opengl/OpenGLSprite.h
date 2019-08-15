@@ -18,7 +18,7 @@ public:
 
     ~OpenGLSprite() override = default;
 
-    void setTexture(const Texture& texture) override;
+    void setTexture(const std::shared_ptr<Texture> texture) override;
     void draw() const override;
 
 private:

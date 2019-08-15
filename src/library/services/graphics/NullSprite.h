@@ -13,7 +13,10 @@ public:
     NullSprite(const Vector2& location, const Vector2& dimensions) : Sprite(location, dimensions) {}
     ~NullSprite() override = default;
 
-    void setTexture(const Texture& texture) override {}
+    void setTexture(const std::shared_ptr<Texture> texture) override {
+        Sprite::setTexture(texture);
+    }
+
     void draw() const override {}
 };
 

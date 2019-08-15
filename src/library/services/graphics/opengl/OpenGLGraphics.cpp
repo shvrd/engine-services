@@ -9,6 +9,7 @@
 #include "GLSLShader.h"
 #include "../../../types/Vertex.h"
 #include "OpenGLSprite.h"
+#include "util/ImageLoader.h"
 
 OpenGLGraphics::OpenGLGraphics()
     : m_vertexArrayObject(0)
@@ -77,12 +78,14 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 }
 
 std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath) {
-    std::shared_ptr<Texture> texture = m_textures.get(filePath);
-
-    // If texture has not been loaded yet
-    if (!texture) {
-
+    // If texture has is already cached, return it.
+    if (auto texture = m_textures.get(filePath)) {
+        return texture;
     }
+
+    auto texture = ImageLoader::loadPNG(filePath);
+
+    m_textures.add(filePath, texture);
 
     return std::shared_ptr<Texture>();
 }

@@ -5,6 +5,8 @@
 #ifndef ENGINITO_SPRITE_H
 #define ENGINITO_SPRITE_H
 
+#include <memory>
+
 #include "../../resources/Texture.h"
 #include "../../types/Vector.h"
 
@@ -13,7 +15,7 @@ protected:
     Vector2 m_location;
     Vector2 m_dimensions;
 
-    Texture m_texture;
+    std::shared_ptr<Texture> m_texture;
 
     virtual void updateBuffer() = 0;
 public:
@@ -48,9 +50,11 @@ public:
         updateBuffer();
     }
 
-    virtual void setTexture(const Texture& texture) {
+    virtual void setTexture(const std::shared_ptr<Texture> texture) {
         m_texture = texture;
     }
+
+
 
     virtual void draw() const = 0;
 

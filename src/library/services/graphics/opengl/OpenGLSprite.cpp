@@ -7,7 +7,6 @@
 #include "../../../log/Logger.h"
 
 OpenGLSprite::OpenGLSprite(const Vector2& location, const Vector2& dimensions) : Sprite(location, dimensions) {
-
     glGenVertexArrays(1, &m_vertexArrayObject);
 
     glGenBuffers(1, &m_vertexBufferObject);
@@ -38,22 +37,22 @@ void OpenGLSprite::draw() const {
     glBindVertexArray(m_vertexArrayObject);
 
     // Move to shader bind
-    for (int i = 0; i <= 2; ++i)  {
+    for (GLuint i = 0; i <= 2; ++i)  {
         glEnableVertexAttribArray(i);
     }
 
     glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTEX_AMOUNT);
 
     // Move to shader unbind
-    for (int i = 0; i <= 2; ++i)  {
+    for (GLuint i = 0; i <= 2; ++i)  {
         glDisableVertexAttribArray(i);
     }
 
     glBindVertexArray(0);
 }
 
-void OpenGLSprite::setTexture(const Texture& texture) {
-
+void OpenGLSprite::setTexture(const std::shared_ptr<Texture> texture) {
+    Sprite::setTexture(texture);
 }
 
 void OpenGLSprite::updateBuffer() {
