@@ -11,10 +11,13 @@
 #include "Shader.h"
 #include "Sprite.h"
 #include "../../resources/Texture.h"
+#include "Camera.h"
 
 class Graphics {
 protected:
     ResourceManager<Texture> m_textures;
+
+    std::shared_ptr<Camera> m_camera;
 public:
     Graphics() = default;
     virtual ~Graphics() = default;
@@ -31,6 +34,8 @@ public:
     //TODO: Maybe make a standalone shaderfactory?
     virtual std::unique_ptr<Shader> createShader() = 0;
     virtual std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) = 0;
+
+    std::shared_ptr<Camera> getCamera() { return m_camera; }
 };
 
 #endif //ENGINITO_GRAPHICS_H

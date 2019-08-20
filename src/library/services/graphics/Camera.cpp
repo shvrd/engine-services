@@ -6,6 +6,19 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+Camera::Camera(const Vector2 &screenDimensions)
+    : m_camera()
+    , m_location()
+    , m_screen(screenDimensions)
+    , m_ortho()
+    , m_rotation()
+    , m_scale()
+    , m_dirty() {
+    setScreenDimensions(screenDimensions);
+
+    update();
+}
+
 glm::mat4 Camera::getCameraMatrix() {
     if (m_dirty) {
         update();

@@ -75,6 +75,10 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glBindVertexArray(0);
 
     setViewport(windowWidth, windowHeight);
+
+    Logger::info("Setting up camera");
+
+    m_camera = std::make_shared<Camera>(Vector2(static_cast<float>(windowWidth), static_cast<float>(windowHeight)));
 }
 
 std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath) {

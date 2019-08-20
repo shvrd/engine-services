@@ -24,6 +24,9 @@ class Camera {
 
     void update();
 public:
+    explicit Camera(const Vector2& screenDimensions);
+    ~Camera() = default;
+
     glm::mat4 getCameraMatrix();
 
     void setScreenDimensions(const Vector2& dimensions);
