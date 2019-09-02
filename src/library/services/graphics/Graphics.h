@@ -18,6 +18,8 @@ protected:
     ResourceManager<Texture> m_textures;
 
     std::shared_ptr<Camera> m_camera;
+
+    std::shared_ptr<Shader> m_currentShader;
 public:
     Graphics() = default;
     virtual ~Graphics() = default;
@@ -31,11 +33,23 @@ public:
 
     virtual std::shared_ptr<Texture> loadTexture(const std::string& filePath) = 0;
 
+    virtual void useTexture(const Texture& texture) = 0;
+
     //TODO: Maybe make a standalone shaderfactory?
-    virtual std::unique_ptr<Shader> createShader() = 0;
-    virtual std::unique_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) = 0;
+    virtual std::shared_ptr<Shader> createShader() = 0;
+    virtual std::shared_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) = 0;
 
     std::shared_ptr<Camera> getCamera() { return m_camera; }
+
+    std::shared_ptr<Shader> getCurrentShader() { return m_currentShader; }
+
+    void bindShader(const std::shared_ptr<Shader> shader) {
+        if (m_currentShader)
+            m_currentShader->unbind();
+
+        m_currentShader = shader;
+        shader->bind();
+    }
 };
 
 #endif //ENGINITO_GRAPHICS_H

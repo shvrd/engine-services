@@ -17,5 +17,10 @@ public:
 
     void finalize() override {}
     void reload() override {}
+
+    void addAttribute(const std::string& attributeName) override {}
+
+    void use() override {}
+    void endUse() override {}
 };
 #endif //ENGINITO_NULLSHADER_H

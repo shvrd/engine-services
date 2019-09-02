@@ -94,14 +94,18 @@ std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath
     return std::shared_ptr<Texture>();
 }
 
-std::unique_ptr<Shader> OpenGLGraphics::createShader() {
-    return std::make_unique<GLSLShader>();
+std::shared_ptr<Shader> OpenGLGraphics::createShader() {
+    return std::make_shared<GLSLShader>();
 }
 
-std::unique_ptr<Sprite> OpenGLGraphics::createSprite(Vector2 location, Vector2 dimensions) {
-    return std::make_unique<OpenGLSprite>(location, dimensions);
+std::shared_ptr<Sprite> OpenGLGraphics::createSprite(Vector2 location, Vector2 dimensions) {
+    return std::make_shared<OpenGLSprite>(location, dimensions);
 }
 
 void OpenGLGraphics::setViewport(int width, int height) {
     glViewport(0, 0, width, height);
+}
+
+void OpenGLGraphics::useTexture(const Texture &texture) {
+
 }

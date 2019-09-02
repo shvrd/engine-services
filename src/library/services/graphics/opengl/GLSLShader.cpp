@@ -9,7 +9,7 @@
 #include "../../../util/FileUtils.h"
 
 GLSLShader::GLSLShader()
-    : m_shaderProgram(0)
+    : m_shaderProgram(glCreateProgram())
     , m_vertexShaderProgram(0)
     , m_fragmentShaderProgram(0)
     , m_vertexShaderPath()
@@ -157,8 +157,6 @@ GLSLShader::~GLSLShader() {
 }
 
 void GLSLShader::finalize() {
-    m_shaderProgram = glCreateProgram();
-
     linkProgram(m_shaderProgram, m_vertexShaderProgram, m_fragmentShaderProgram);
 
     m_isFinalized = true;
@@ -178,4 +176,30 @@ void GLSLShader::reload() {
 void GLSLShader::cleanUp() {
     unbind();
     glDeleteProgram(m_shaderProgram);
+}
+
+int GLSLShader::getUniformLocation(const std::string &uniformName) {
+    GLint location = glGetUniformLocation(m_shaderProgram, uniformName.c_str());
+
+    if (location == GL_INVALID_INDEX) {
+        Logger::warn("Uniform " + uniformName + " not found in shader!");
+    }
+
+    return location;
+}
+
+void GLSLShader::addAttribute(const std::string &attributeName) {
+    glBindAttribLocation(m_shaderProgram, m_attributes++, attributeName.c_str());
+}
+
+void GLSLShader::use() {
+    for (GLuint i = 0; i <= 2; ++i)  {
+        glEnableVertexAttribArray(i);
+    }
+}
+
+void GLSLShader::endUse() {
+    for (GLuint i = 0; i <= m_attributes; ++i)  {
+        glDisableVertexAttribArray(i);
+    }
 }

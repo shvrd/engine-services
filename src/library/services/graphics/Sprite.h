@@ -50,7 +50,7 @@ public:
         updateBuffer();
     }
 
-    virtual void setTexture(const std::shared_ptr<Texture> texture) {
+    virtual void setTexture(std::shared_ptr<Texture> texture) {
         m_texture = texture;
     }
 

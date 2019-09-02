@@ -11,8 +11,8 @@
 #include <services/input/GLFWInput.h>
 
 class ExampleScene : public Scene {
-    std::unique_ptr<Shader> m_shader;
-    std::unique_ptr<Sprite> m_sprite;
+    std::shared_ptr<Shader> m_shader;
+    std::shared_ptr<Sprite> m_sprite;
 
 public:
     ExampleScene();
@@ -39,6 +39,10 @@ void ExampleScene::onEnter() {
     m_shader = m_graphics->createShader();
     m_shader->setVertexShader("../../../src/library/assets/shaders/basic.vert");
     m_shader->setFragmentShader("../../../src/library/assets/shaders/basic.frag");
+
+    m_shader->addAttribute("vertexPosition");
+    m_shader->addAttribute("vertexColor");
+    m_shader->addAttribute("vertexUV");
 
     m_shader->finalize();
 
@@ -74,7 +78,7 @@ void ExampleScene::update() {
 }
 
 void ExampleScene::render() {
-    m_shader->bind();
+    m_graphics->bindShader(m_shader);
     m_sprite->draw();
     m_shader->unbind();
 }

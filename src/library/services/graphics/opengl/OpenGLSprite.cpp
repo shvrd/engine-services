@@ -5,6 +5,7 @@
 #include "OpenGLSprite.h"
 #include "../../../types/Vertex.h"
 #include "../../../log/Logger.h"
+#include "../../GraphicsServiceLocator.h"
 
 OpenGLSprite::OpenGLSprite(const Vector2& location, const Vector2& dimensions) : Sprite(location, dimensions) {
     glGenVertexArrays(1, &m_vertexArrayObject);
@@ -36,17 +37,11 @@ OpenGLSprite::OpenGLSprite(const Vector2& location, const Vector2& dimensions) :
 void OpenGLSprite::draw() const {
     glBindVertexArray(m_vertexArrayObject);
 
-    // Move to shader bind
-    for (GLuint i = 0; i <= 2; ++i)  {
-        glEnableVertexAttribArray(i);
-    }
+    GraphicsServiceLocator::get()->getCurrentShader()->use();
 
     glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTEX_AMOUNT);
 
-    // Move to shader unbind
-    for (GLuint i = 0; i <= 2; ++i)  {
-        glDisableVertexAttribArray(i);
-    }
+    GraphicsServiceLocator::get()->getCurrentShader()->endUse();
 
     glBindVertexArray(0);
 }
