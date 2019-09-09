@@ -39,7 +39,6 @@ public:
     void endUse() override;
 
 private:
-    friend class OpenGLSprite;
     void cleanUp();
 
     //TODO: These could be outsourced into some static shader utils
