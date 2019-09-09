@@ -38,14 +38,14 @@ public:
     void use() override;
     void endUse() override;
 
+    int getUniformLocation(const std::string& uniformName) override;
+
 private:
     void cleanUp();
 
     //TODO: These could be outsourced into some static shader utils
     static void compileShader(GLuint& id, const std::string& source);
     static void linkProgram(GLuint& programID, GLuint& vertexShaderID, GLuint& fragmentShaderID);
-
-    int getUniformLocation(const std::string& uniformName);
 };
 
 

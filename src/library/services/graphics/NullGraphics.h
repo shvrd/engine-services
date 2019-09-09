@@ -24,7 +24,7 @@ public:
 
     std::shared_ptr<Texture> loadTexture(const std::string& filePath) override { return std::make_shared<Texture>(); }
 
-    void useTexture(const Texture& texture) override {}
+    void useTexture(std::shared_ptr<Texture> texture) override {}
 
     std::shared_ptr<Shader> createShader() override { return std::make_shared<NullShader>(); }
     std::shared_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override { return std::make_shared<NullSprite>(Vector2{0,0}, Vector2{0,0}); }

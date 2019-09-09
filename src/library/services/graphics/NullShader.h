@@ -22,5 +22,7 @@ public:
 
     void use() override {}
     void endUse() override {}
+
+    int getUniformLocation(const std::string& uniformName) override { return 0; }
 };
 #endif //ENGINITO_NULLSHADER_H

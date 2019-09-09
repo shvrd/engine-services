@@ -179,7 +179,7 @@ void GLSLShader::cleanUp() {
 }
 
 int GLSLShader::getUniformLocation(const std::string &uniformName) {
-    GLint location = glGetUniformLocation(m_shaderProgram, uniformName.c_str());
+    int location = glGetUniformLocation(m_shaderProgram, uniformName.c_str());
 
     if (location == GL_INVALID_INDEX) {
         Logger::warn("Uniform " + uniformName + " not found in shader!");

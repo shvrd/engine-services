@@ -45,6 +45,10 @@ public:
         return m_dimensions;
     }
 
+    std::shared_ptr<Texture> getTexture() const {
+        return m_texture;
+    }
+
     void translate(const Vector2 &translation) {
         m_location = m_location + translation;
         updateBuffer();

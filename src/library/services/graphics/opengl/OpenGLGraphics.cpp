@@ -40,7 +40,7 @@ MessageCallback(GLenum source,
     if (severity == GL_DEBUG_TYPE_ERROR) {
         Logger::error(log.str());
     } else {
-        Logger::info(log.str());
+        // Logger::info(log.str());
     }
 }
 
@@ -82,10 +82,13 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 }
 
 std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath) {
-    // If texture has is already cached, return it.
+    // If texture is already cached, return it.
     if (auto texture = m_textures.get(filePath)) {
+        Logger::info("Loaded texture from cache: " + filePath);
         return texture;
     }
+
+    Logger::info("Loading texture for the first time: " + filePath);
 
     auto texture = ImageLoader::loadPNG(filePath);
 
@@ -106,6 +109,15 @@ void OpenGLGraphics::setViewport(int width, int height) {
     glViewport(0, 0, width, height);
 }
 
-void OpenGLGraphics::useTexture(const Texture &texture) {
+void OpenGLGraphics::useTexture(std::shared_ptr<Texture> texture) {
+    if (!texture || !texture->id) {
+        Logger::error("Given texture has not been properly loaded");
 
+        return;
+    }
+
+    glActiveTexture(GL_TEXTURE0);
+
+    glUniform1i(m_currentShader->getUniformLocation("image"), 0);
+    glBindTexture(GL_TEXTURE_2D, texture->id);
 }

@@ -33,7 +33,7 @@ public:
 
     virtual std::shared_ptr<Texture> loadTexture(const std::string& filePath) = 0;
 
-    virtual void useTexture(const Texture& texture) = 0;
+    virtual void useTexture(std::shared_ptr<Texture> texture) = 0;
 
     //TODO: Maybe make a standalone shaderfactory?
     virtual std::shared_ptr<Shader> createShader() = 0;
@@ -49,6 +49,8 @@ public:
 
         m_currentShader = shader;
         shader->bind();
+
+        // TODO: Bind camera
     }
 };
 

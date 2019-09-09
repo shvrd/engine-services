@@ -26,6 +26,9 @@ public:
     virtual void use() = 0;
     virtual void endUse() = 0;
 
+    // TODO: This might be platform-dependent, check if okay.
+    virtual int getUniformLocation(const std::string& uniformName) = 0;
+
 protected:
     bool m_isFinalized;
     unsigned int m_attributes;
