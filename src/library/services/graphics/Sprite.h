@@ -58,8 +58,6 @@ public:
         m_texture = texture;
     }
 
-
-
     virtual void draw() const = 0;
 
 };

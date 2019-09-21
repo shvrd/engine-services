@@ -94,7 +94,7 @@ std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath
 
     m_textures.add(filePath, texture);
 
-    return std::shared_ptr<Texture>();
+    return texture;
 }
 
 std::shared_ptr<Shader> OpenGLGraphics::createShader() {
