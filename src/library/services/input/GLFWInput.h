@@ -85,7 +85,7 @@ enum class Key : int {
     W = GLFW_KEY_W,
     X = GLFW_KEY_X,
     Y = GLFW_KEY_Y,
-    Z = GLFW_KEY_Y,
+    Z = GLFW_KEY_Z,
 
     LEFT_BRACKET = GLFW_KEY_LEFT_BRACKET,
     BACKSLASH = GLFW_KEY_BACKSLASH,
