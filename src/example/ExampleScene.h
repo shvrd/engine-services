@@ -46,7 +46,7 @@ void ExampleScene::onEnter() {
 
     m_shader->finalize();
 
-    m_sprite = m_graphics->createSprite({-.5f, -.5f}, {1.f, 1.f});
+    m_sprite = m_graphics->createSprite({0.f, 0.f}, {100.f, 100.f});
     m_sprite->setTexture(m_graphics->loadTexture("../../../src/library/assets/textures/dev.png"));
 }
 
@@ -56,23 +56,39 @@ void ExampleScene::onContinue() {
 
 void ExampleScene::update() {
     if (m_input->isKeyPressed(Key::W)) {
-        m_sprite->translate({0.f, .01f});
+        m_sprite->translate({0.f, 2.f});
     }
     if (m_input->isKeyPressed(Key::S)) {
-        m_sprite->translate({0.f, -.01f});
+        m_sprite->translate({0.f, -2.f});
     }
     if (m_input->isKeyPressed(Key::A)) {
-        m_sprite->translate({-.01f, .0f});
+        m_sprite->translate({-2.f, .0f});
     }
     if (m_input->isKeyPressed(Key::D)) {
-        m_sprite->translate({.01f, .0f});
+        m_sprite->translate({2.f, .0f});
+    }
+
+    if (m_input->isKeyPressed(Key::E)) {
+        m_graphics->getCamera()->scale(1.1f);
+    }
+    if (m_input->isKeyPressed(Key::Q)) {
+        m_graphics->getCamera()->scale(.9f);
+    }
+
+    if (m_input->isKeyPressed(Key::Y)) {
+        m_graphics->getCamera()->rotate(1.f);
+    }
+    if (m_input->isKeyPressed(Key::C)) {
+        m_graphics->getCamera()->rotate(-1.f);
     }
 
     static bool buttonDown = false;
 
     if (m_input->isKeyPressed(Key::F10)) {
-        if (!buttonDown)
+        if (!buttonDown) {
             m_shader->reload();
+        }
+
     }
 
     buttonDown = m_input->isKeyPressed(Key::F10);

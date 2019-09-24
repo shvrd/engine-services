@@ -40,7 +40,7 @@ MessageCallback(GLenum source,
     if (severity == GL_DEBUG_TYPE_ERROR) {
         Logger::error(log.str());
     } else {
-        // Logger::info(log.str());
+        Logger::info(log.str());
     }
 }
 
@@ -74,11 +74,11 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glGenBuffers(1, &m_vertexBufferObject);
     glBindVertexArray(0);
 
-    setViewport(windowWidth, windowHeight);
-
     Logger::info("Setting up camera");
 
     m_camera = std::make_shared<Camera>(Vector2(static_cast<float>(windowWidth), static_cast<float>(windowHeight)));
+
+    setViewport(windowWidth, windowHeight);
 }
 
 std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath) {
@@ -107,6 +107,7 @@ std::shared_ptr<Sprite> OpenGLGraphics::createSprite(Vector2 location, Vector2 d
 
 void OpenGLGraphics::setViewport(int width, int height) {
     glViewport(0, 0, width, height);
+    m_camera->setScreenDimensions({static_cast<float>(width), static_cast<float>(height)});
 }
 
 void OpenGLGraphics::useTexture(std::shared_ptr<Texture> texture) {
@@ -120,4 +121,10 @@ void OpenGLGraphics::useTexture(std::shared_ptr<Texture> texture) {
 
     glUniform1i(m_currentShader->getUniformLocation("image"), 0);
     glBindTexture(GL_TEXTURE_2D, texture->id);
+}
+
+void OpenGLGraphics::bindShader(const std::shared_ptr<Shader> shader) {
+    Graphics::bindShader(shader);
+
+    glUniformMatrix4fv(m_currentShader->getUniformLocation("projection"), 1, GL_FALSE, &(m_camera->getCameraMatrix()[0][0]));
 }

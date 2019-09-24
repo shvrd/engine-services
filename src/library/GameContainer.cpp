@@ -44,7 +44,7 @@ void GameContainer::start(std::unique_ptr<Scene> initialScene) {
 
 bool GameContainer::initializeSystems() {
     bool initStatus = true;
-    Logger::info("Initializing systems");
+    Logger::info("Initializing Systems");
 
     const int windowWidth = 1600,
               windowHeight = 900;

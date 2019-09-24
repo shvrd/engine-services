@@ -43,14 +43,12 @@ public:
 
     std::shared_ptr<Shader> getCurrentShader() { return m_currentShader; }
 
-    void bindShader(const std::shared_ptr<Shader> shader) {
+    virtual void bindShader(const std::shared_ptr<Shader> shader) {
         if (m_currentShader)
             m_currentShader->unbind();
 
         m_currentShader = shader;
         shader->bind();
-
-        // TODO: Bind camera
     }
 };
 
