@@ -16,6 +16,8 @@ Camera::Camera(const Vector2 &screenDimensions)
     , m_dirty(true) {
     setScreenDimensions(screenDimensions);
 
+    translate({-screenDimensions.x / 2, -screenDimensions.y / 2});
+
     update();
 }
 
@@ -30,11 +32,11 @@ glm::mat4 Camera::getCameraMatrix() {
 void Camera::update() {
     m_camera = m_ortho;
 
-    // Rotate
-    m_camera = glm::rotate(m_camera, glm::radians(m_rotation), glm::vec3(0.f, 0.f, 1.f));
-
     // Translate
     m_camera = glm::translate(m_camera, glm::vec3(-m_location.x, -m_location.y, 0.f));
+
+    // Rotate
+    m_camera = glm::rotate(m_camera, glm::radians(m_rotation), glm::vec3(0.f, 0.f, 1.f));
 
     // Scale
     m_camera = glm::scale(m_camera, glm::vec3(m_scale, m_scale, 0.f));
