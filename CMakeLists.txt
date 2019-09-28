@@ -5,6 +5,14 @@ SET(CMAKE_CXX_STANDARD 17)
 
 ADD_COMPILE_DEFINITIONS(BUILD_DEBUG)
 
+IF(NOT CMAKE_BUILD_TYPE)
+    SET(CMAKE_BUILD_TYPE Release)
+ENDIF()
+
+SET(CMAKE_CXX_FLAGS "-Wall -Wextra")
+SET(CMAKE_CXX_FLAGS_DEBUG "-g")
+SET(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
 # define preprocessor variables for different operating systems
 IF(MINGW)
     MESSAGE("Building for Windows using MinGW")

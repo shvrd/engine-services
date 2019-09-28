@@ -9,10 +9,10 @@
 Camera::Camera(const Vector2 &screenDimensions)
     : m_camera()
     , m_location({0.f,0.f})
-    , m_screen(screenDimensions)
-    , m_ortho()
     , m_rotation(0.f)
     , m_scale(1.f)
+    , m_screen(screenDimensions)
+    , m_ortho()
     , m_dirty(true) {
     setScreenDimensions(screenDimensions);
 

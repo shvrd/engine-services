@@ -10,15 +10,14 @@
 #include "../../types/Vector.h"
 
 class Camera {
-    Vector2 m_location;
-
-    glm::mat4 m_ortho;
     glm::mat4 m_camera;
+    Vector2 m_location;
+    float m_rotation;
+    float m_scale;
 
     Vector2 m_screen;
 
-    float m_scale;
-    float m_rotation;
+    glm::mat4 m_ortho;
 
     bool m_dirty;
 
