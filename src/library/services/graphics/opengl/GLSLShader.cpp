@@ -166,6 +166,8 @@ void GLSLShader::reload() {
     // Free resources used by old shader
     this->cleanUp();
 
+    m_shaderProgram = glCreateProgram();
+
     // Create new shader
     this->setVertexShader(m_vertexShaderPath);
     this->setFragmentShader(m_fragmentShaderPath);
@@ -176,6 +178,7 @@ void GLSLShader::reload() {
 void GLSLShader::cleanUp() {
     unbind();
     glDeleteProgram(m_shaderProgram);
+    m_shaderProgram = 0;
 }
 
 int GLSLShader::getUniformLocation(const std::string &uniformName) {
