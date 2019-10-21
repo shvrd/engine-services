@@ -23,6 +23,8 @@ public:
     void render();
 
     void clear();
+
+    bool isEmpty();
 private:
     SceneStack_t m_sceneStack;
 };

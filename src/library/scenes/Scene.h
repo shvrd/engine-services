@@ -16,6 +16,7 @@ protected:
     friend class SceneStack;
     std::shared_ptr<Input> m_input;
     std::shared_ptr<Graphics> m_graphics;
+
 public:
     Scene() = default;
     virtual ~Scene() = default;
