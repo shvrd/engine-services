@@ -59,7 +59,7 @@ bool GameContainer::initializeSystems() {
 
         Logger::info("Initializing Input");
         auto glfwInput = new GLFWInput();
-        glfwInput->setGLFWWindow(WindowServiceLocator::get().get());
+        glfwInput->setGLFWWindow(m_window.get());
 
         InputServiceLocator::set(std::shared_ptr<GLFWInput>(glfwInput));
 
