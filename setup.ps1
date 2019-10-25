@@ -7,3 +7,7 @@ git clone https://github.com/Crascit/DownloadProject.git .\dependencies\Download
 
 md .\build
 md .\out
+
+Copy-Item .\dependencies\freetype.dll .\out
+Copy-Item .\dependencies\glew32.dll .\out
+Copy-Item .\dependencies\glfw3.dll .\out

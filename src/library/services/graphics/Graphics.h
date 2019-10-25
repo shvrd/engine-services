@@ -6,6 +6,7 @@
 #define ENGINITO_GRAPHICS_H
 
 #include <memory>
+#include "font/FreeType.h"
 #include "../../resources/ResourceManager.h"
 #include "../../types/Color.h"
 #include "Shader.h"
@@ -20,6 +21,9 @@ protected:
     std::shared_ptr<Camera> m_camera;
 
     std::shared_ptr<Shader> m_currentShader;
+
+    FreeType m_freeType;
+
 public:
     Graphics() = default;
     virtual ~Graphics() = default;

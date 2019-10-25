@@ -3,16 +3,17 @@
 # fetch dependencies if not already existent
 if [[ ! -d "dependencies" ]]; then
     mkdir dependencies
-
-    pushd dependencies
-
-    wget https://raw.githubusercontent.com/PixarAnimationStudios/OpenSubdiv/master/cmake/FindGLFW.cmake
-    wget https://raw.githubusercontent.com/Groovounet/glm-deprecated/master/util/FindGLM.cmake
-
-    git clone https://github.com/Crascit/DownloadProject.git
-
-    popd
 fi
+
+pushd dependencies
+
+wget https://raw.githubusercontent.com/PixarAnimationStudios/OpenSubdiv/master/cmake/FindGLFW.cmake
+wget https://raw.githubusercontent.com/Groovounet/glm-deprecated/master/util/FindGLM.cmake
+
+git clone https://github.com/Crascit/DownloadProject.git
+
+popd
+
 
 # create build directories
 if [[ ! -d "build" ]]; then
@@ -22,6 +23,3 @@ fi
 if [[ ! -d "out" ]]; then
     mkdir out
 fi
-
-# execute first time build
-sh build.sh

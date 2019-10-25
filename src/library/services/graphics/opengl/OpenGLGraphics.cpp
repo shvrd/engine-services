@@ -74,7 +74,9 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glGenBuffers(1, &m_vertexBufferObject);
     glBindVertexArray(0);
 
-    Logger::info("Setting up camera");
+    m_freeType.initialize();
+
+    Logger::info("Setting up Camera");
 
     m_camera = std::make_shared<Camera>(Vector2(static_cast<float>(windowWidth), static_cast<float>(windowHeight)));
 
@@ -108,6 +110,9 @@ std::shared_ptr<Sprite> OpenGLGraphics::createSprite(Vector2 location, Vector2 d
 void OpenGLGraphics::setViewport(int width, int height) {
     glViewport(0, 0, width, height);
     m_camera->setScreenDimensions({static_cast<float>(width), static_cast<float>(height)});
+
+    // TODO: Validate this behaviour
+    m_camera->setLocation({static_cast<float>(-width) / 2, static_cast<float>(-height) / 2});
 }
 
 void OpenGLGraphics::useTexture(std::shared_ptr<Texture> texture) {

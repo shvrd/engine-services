@@ -14,6 +14,7 @@ class FreeType {
     FT_Library m_library;
     FT_Face m_currentFace;
 
+public:
     void initialize();
 
     void useFont(std::string fontName);
