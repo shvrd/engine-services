@@ -28,3 +28,14 @@ void FreeType::useFont(std::string fontName) {
 void FreeType::setFontSize(unsigned int fontSize) {
     FT_Set_Pixel_Sizes(m_currentFace, 0, fontSize);
 }
+
+std::shared_ptr<Letter> FreeType::getLetter(char letter) {
+    if (FT_Load_Char(m_currentFace, letter, FT_LOAD_RENDER)) {
+        Logger::error("Could not load character " + std::to_string(letter));
+
+        return std::shared_ptr<Letter>();
+    }
+
+    //TODO: Load from/to resourcemanager m_letters;
+    return std::shared_ptr<Letter>();
+}
