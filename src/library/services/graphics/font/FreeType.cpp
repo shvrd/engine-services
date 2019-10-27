@@ -15,7 +15,7 @@ void FreeType::initialize() {
     }
 }
 
-void FreeType::useFont(std::string fontName) {
+void FreeType::useFont(const std::string& fontName) {
     Logger::info("Loading font " + fontName);
 
     if (FT_New_Face(m_library, fontName.c_str(), 0, &m_currentFace)) {
@@ -29,13 +29,39 @@ void FreeType::setFontSize(unsigned int fontSize) {
     FT_Set_Pixel_Sizes(m_currentFace, 0, fontSize);
 }
 
-std::shared_ptr<Letter> FreeType::getLetter(char letter) {
-    if (FT_Load_Char(m_currentFace, letter, FT_LOAD_RENDER)) {
-        Logger::error("Could not load character " + std::to_string(letter));
+std::shared_ptr<Letter> FreeType::getLetter(char character) {
+    // Try loading from cache
+    if (std::shared_ptr<Letter> letter = m_letters.get(std::to_string(character))) {
+        return letter;
+    }
+
+    if (FT_Load_Char(m_currentFace, character, FT_LOAD_RENDER)) {
+        Logger::error("Could not load character " + std::to_string(character));
 
         return std::shared_ptr<Letter>();
     }
 
-    //TODO: Load from/to resourcemanager m_letters;
-    return std::shared_ptr<Letter>();
+    auto& glyph = m_currentFace->glyph;
+
+    Letter letter = {
+            .bitmap = {
+                .buffer = glyph->bitmap.buffer,
+                .width = glyph->bitmap.width,
+                .height = glyph->bitmap.rows
+            },
+            .offset = {
+                .x = glyph->bitmap_left,
+                .y = glyph->bitmap_top
+            },
+            .advance = {
+                .x = glyph->advance.x,
+                .y = glyph->advance.y
+            }
+    };
+
+    std::shared_ptr<Letter> sharedLetter = std::make_shared<Letter>(letter);
+
+    m_letters.add(std::to_string(character), sharedLetter);
+
+    return sharedLetter;
 }

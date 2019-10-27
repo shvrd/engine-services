@@ -7,9 +7,9 @@
 
 struct Letter {
     struct Bitmap {
-        int buffer;
-        int width;
-        int height;
+        unsigned char* buffer;
+        unsigned int width;
+        unsigned int height;
     } bitmap;
 
     struct Offset {
