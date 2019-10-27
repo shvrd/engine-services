@@ -23,7 +23,7 @@ class FreeType {
 public:
     void initialize();
 
-    void useFont(const std::string& fontName);
+    void useFont(const std::string& fontName, unsigned int fontSize = 14);
     void setFontSize(unsigned int fontSize);
 
     std::shared_ptr<Letter> getLetter(char letter);

@@ -15,7 +15,7 @@ void FreeType::initialize() {
     }
 }
 
-void FreeType::useFont(const std::string& fontName) {
+void FreeType::useFont(const std::string& fontName, const unsigned int fontSize) {
     Logger::info("Loading font " + fontName);
 
     if (FT_New_Face(m_library, fontName.c_str(), 0, &m_currentFace)) {
@@ -23,6 +23,8 @@ void FreeType::useFont(const std::string& fontName) {
 
         return;
     }
+
+    setFontSize(fontSize);
 }
 
 void FreeType::setFontSize(unsigned int fontSize) {

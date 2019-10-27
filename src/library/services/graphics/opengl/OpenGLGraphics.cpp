@@ -76,7 +76,6 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 
     m_freeType.initialize();
     m_freeType.useFont("../../../src/library/assets/fonts/OpenSans-Regular.ttf");
-    m_freeType.setFontSize(14);
 
     Logger::info("Setting up Camera");
 
