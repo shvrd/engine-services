@@ -20,6 +20,7 @@ class FreeType {
 
     ResourceManager<Letter> m_letters;
 
+    std::shared_ptr<Letter> loadLetter(unsigned long letter);
 public:
     void initialize();
 

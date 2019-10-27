@@ -18,8 +18,8 @@ struct Letter {
     } offset;
 
     struct Advance {
-        int x;
-        int y;
+        long x;
+        long y;
     } advance;
 };
 
