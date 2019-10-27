@@ -3,6 +3,9 @@
 //
 
 #include "FreeType.h"
+
+#include <limits>
+
 #include "../../../log/Logger.h"
 
 void FreeType::initialize() {
@@ -25,13 +28,14 @@ void FreeType::useFont(const std::string& fontName, const unsigned int fontSize)
     }
 
     setFontSize(fontSize);
+    cacheCommonCharacters();
 }
 
 void FreeType::setFontSize(unsigned int fontSize) {
     FT_Set_Pixel_Sizes(m_currentFace, 0, fontSize);
 }
 
-std::shared_ptr<Letter> FreeType::getLetter(char character) {
+std::shared_ptr<Letter> FreeType::getLetter(unsigned long character) {
     // Try loading from cache
     if (std::shared_ptr<Letter> letter = m_letters.get(std::to_string(character))) {
         return letter;
@@ -66,4 +70,13 @@ std::shared_ptr<Letter> FreeType::getLetter(char character) {
     m_letters.add(std::to_string(character), sharedLetter);
 
     return sharedLetter;
+}
+
+void FreeType::cacheCommonCharacters() {
+    const char MIN = std::numeric_limits<char>::min();
+    const char MAX = std::numeric_limits<char>::max();
+
+    for (char character = MIN; character < MAX; ++character) {
+        getLetter(character);
+    }
 }

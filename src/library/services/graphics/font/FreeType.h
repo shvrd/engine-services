@@ -26,7 +26,10 @@ public:
     void useFont(const std::string& fontName, unsigned int fontSize = 14);
     void setFontSize(unsigned int fontSize);
 
-    std::shared_ptr<Letter> getLetter(char letter);
+    void cacheCommonCharacters();
+
+    std::shared_ptr<Letter> getLetter(unsigned long letter);
+    inline std::shared_ptr<Letter> getLetter(char letter) { return getLetter(static_cast<unsigned long>(letter)); }
 };
 
 #endif //ENGINITO_FREETYPE_H
