@@ -1,5 +1,5 @@
 #include <memory>
-#include <GameContainer.h>
+#include "GameContainer.h"
 #include "ExampleScene.h"
 
 int main() {
@@ -7,3 +7,4 @@ int main() {
 
     return 0;
 }
+

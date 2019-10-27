@@ -9,13 +9,14 @@ IF(NOT CMAKE_BUILD_TYPE)
     SET(CMAKE_BUILD_TYPE Release)
 ENDIF()
 
-SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-variable -Wno-unused-parameter -static")
+SET(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-variable -Wno-unused-parameter")
 SET(CMAKE_CXX_FLAGS_DEBUG "-g")
 SET(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-# define preprocessor variables for different operating systems
+# define preprocessor variables and build flags for different operating systems
 IF(MINGW)
     MESSAGE("Building for Windows using MinGW")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
     ADD_COMPILE_DEFINITIONS(BUILD_WINDOWS)
 ELSEIF(APPLE)
     MESSAGE("Building for MacOS")
