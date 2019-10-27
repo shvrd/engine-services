@@ -13,8 +13,6 @@ void FreeType::initialize() {
 
         return;
     }
-
-    setFontSize(14);
 }
 
 void FreeType::useFont(const std::string& fontName) {
