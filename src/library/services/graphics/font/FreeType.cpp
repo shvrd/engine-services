@@ -13,6 +13,8 @@ void FreeType::initialize() {
 
         return;
     }
+
+    setFontSize(14);
 }
 
 void FreeType::useFont(const std::string& fontName) {
@@ -36,7 +38,7 @@ std::shared_ptr<Letter> FreeType::getLetter(char character) {
     }
 
     if (FT_Load_Char(m_currentFace, character, FT_LOAD_RENDER)) {
-        Logger::error("Could not load character " + std::to_string(character));
+        Logger::error("Could not load character " + std::string(1, character));
 
         return std::shared_ptr<Letter>();
     }
@@ -44,19 +46,19 @@ std::shared_ptr<Letter> FreeType::getLetter(char character) {
     auto& glyph = m_currentFace->glyph;
 
     Letter letter = {
-            .bitmap = {
-                .buffer = glyph->bitmap.buffer,
-                .width = glyph->bitmap.width,
-                .height = glyph->bitmap.rows
-            },
-            .offset = {
-                .x = glyph->bitmap_left,
-                .y = glyph->bitmap_top
-            },
-            .advance = {
-                .x = glyph->advance.x,
-                .y = glyph->advance.y
-            }
+        .bitmap = {
+            .buffer = glyph->bitmap.buffer,
+            .width = glyph->bitmap.width,
+            .height = glyph->bitmap.rows
+        },
+        .offset = {
+            .x = glyph->bitmap_left,
+            .y = glyph->bitmap_top
+        },
+        .advance = {
+            .x = glyph->advance.x,
+            .y = glyph->advance.y
+        }
     };
 
     std::shared_ptr<Letter> sharedLetter = std::make_shared<Letter>(letter);

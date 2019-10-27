@@ -14,7 +14,7 @@
 #include "../../resources/Texture.h"
 #include "Camera.h"
 
-class Graphics {
+class                             Graphics {
 protected:
     ResourceManager<Texture> m_textures;
 
@@ -54,6 +54,8 @@ public:
         m_currentShader = shader;
         shader->bind();
     }
+
+    virtual void drawText(const std::string& text, Vector2 location) = 0;
 };
 
 #endif //ENGINITO_GRAPHICS_H

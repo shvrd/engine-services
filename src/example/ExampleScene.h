@@ -87,6 +87,7 @@ void ExampleScene::update() {
 
     if (m_input->isKeyPressed(Key::F10)) {
         if (!buttonDown) {
+            m_graphics->drawText("This is an example text!", {0, 0});
             m_shader->reload();
         }
 

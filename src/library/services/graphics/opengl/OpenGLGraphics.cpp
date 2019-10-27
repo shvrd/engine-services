@@ -75,6 +75,7 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glBindVertexArray(0);
 
     m_freeType.initialize();
+    m_freeType.useFont("../../../src/library/assets/fonts/OpenSans-Regular.ttf");
 
     Logger::info("Setting up Camera");
 
@@ -132,4 +133,11 @@ void OpenGLGraphics::bindShader(const std::shared_ptr<Shader> shader) {
     Graphics::bindShader(shader);
 
     glUniformMatrix4fv(m_currentShader->getUniformLocation("projection"), 1, GL_FALSE, &(m_camera->getCameraMatrix()[0][0]));
+}
+
+void OpenGLGraphics::drawText(const std::string &text, Vector2 location) {
+    for (auto iterator = text.begin(); iterator < text.end(); ++iterator) {
+        m_freeType.getLetter(*iterator);
+    }
+
 }
