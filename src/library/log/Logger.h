@@ -8,9 +8,11 @@
 #include <string>
 #include <mutex>
 
-class Logger {
+#include "../util/Timer.h"
 
+class Logger {
     static std::mutex m_logLock;
+    static Timer m_timer;
 public:
     static void info(const std::string& message);
     static void warn(const std::string& message);
