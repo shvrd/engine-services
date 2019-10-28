@@ -75,7 +75,9 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glBindVertexArray(0);
 
     m_freeType.initialize();
+    Logger::info("Loading Font");
     m_freeType.useFont("../../../src/library/assets/fonts/OpenSans-Regular.ttf");
+    Logger::info("Done loading Font");
 
     Logger::info("Setting up Camera");
 
@@ -93,7 +95,7 @@ std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath
 
     Logger::info("Loading texture for the first time: " + filePath);
 
-    auto texture = ImageLoader::loadPNG(filePath);
+    auto texture = ImageLoader::loadFromPNG(filePath);
 
     m_textures.add(filePath, texture);
 
@@ -136,6 +138,8 @@ void OpenGLGraphics::bindShader(const std::shared_ptr<Shader> shader) {
 }
 
 void OpenGLGraphics::drawText(const std::string &text, Vector2 location) {
+
+
     for (auto iterator = text.begin(); iterator < text.end(); ++iterator) {
         m_freeType.getLetter(*iterator);
     }

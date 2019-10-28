@@ -10,9 +10,7 @@
 #include <vector>
 #include <GL/glew.h>
 
-std::shared_ptr<Texture> ImageLoader::loadPNG(const std::string &filePath) {
-    std::shared_ptr<Texture> texture = std::make_shared<Texture>();
-
+std::shared_ptr<Texture> ImageLoader::loadFromPNG(const std::string &filePath) {
     std::vector<unsigned char> imageData;
 
     unsigned long width, height;
@@ -23,13 +21,20 @@ std::shared_ptr<Texture> ImageLoader::loadPNG(const std::string &filePath) {
         Logger::warn("decodePNG failed with error code " + std::to_string(errorCode));
     }
 
+    return loadFromCharArray(reinterpret_cast<char*>(imageData.data()), width, height);
+}
+
+std::shared_ptr<Texture>
+ImageLoader::loadFromCharArray(const char *image, const unsigned int width, const unsigned int height) {
+    std::shared_ptr<Texture> texture = std::make_shared<Texture>();
+
     texture->width = width;
     texture->height = height;
 
     glGenTextures(1, &texture->id);
 
     glBindTexture(GL_TEXTURE_2D, texture->id);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei) width, (GLsizei) height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData.data());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei) width, (GLsizei) height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 
     //TODO: Make this stuff configurable
 

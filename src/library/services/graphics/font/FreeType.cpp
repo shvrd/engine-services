@@ -63,6 +63,7 @@ std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
     auto& glyph = m_currentFace->glyph;
 
     Letter letter = {
+            .id = 0,
             .bitmap = {
                     .buffer = glyph->bitmap.buffer,
                     .width = glyph->bitmap.width,
