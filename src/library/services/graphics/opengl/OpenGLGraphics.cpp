@@ -56,8 +56,10 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 
     Logger::info(std::string("OpenGL Version: ") + (char*)(glGetString(GL_VERSION)));
 
+#ifdef BUILD_DEBUG
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, nullptr);
+#endif
 
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
@@ -75,9 +77,14 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glBindVertexArray(0);
 
     m_freeType.initialize();
-    Logger::info("Loading Font");
+
+    auto textShader = createShader();
+
+    textShader->setVertexShader("../../../src/library/assets/shaders/text.vert");
+    textShader->setFragmentShader("../../../src/library/assets/shaders/text.frag");
+
+    m_freeType.setTextShader(textShader);
     m_freeType.useFont("../../../src/library/assets/fonts/OpenSans-Regular.ttf");
-    Logger::info("Done loading Font");
 
     Logger::info("Setting up Camera");
 
@@ -138,10 +145,12 @@ void OpenGLGraphics::bindShader(const std::shared_ptr<Shader> shader) {
 }
 
 void OpenGLGraphics::drawText(const std::string &text, Vector2 location) {
-
+    auto oldShader = m_currentShader;
 
     for (auto iterator = text.begin(); iterator < text.end(); ++iterator) {
         m_freeType.getLetter(*iterator);
+
     }
 
+    bindShader(oldShader);
 }

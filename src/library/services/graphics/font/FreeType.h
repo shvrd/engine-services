@@ -12,6 +12,7 @@
 #include FT_FREETYPE_H
 
 #include "../../../resources/ResourceManager.h"
+#include "../Shader.h"
 #include "Letter.h"
 
 class FreeType {
@@ -20,7 +21,10 @@ class FreeType {
 
     ResourceManager<Letter> m_letters;
 
+    std::shared_ptr<Shader> m_textShader;
+
     std::shared_ptr<Letter> loadLetter(unsigned long letter);
+
 public:
     void initialize();
 
@@ -31,6 +35,8 @@ public:
 
     std::shared_ptr<Letter> getLetter(unsigned long letter);
     inline std::shared_ptr<Letter> getLetter(char letter) { return getLetter(static_cast<unsigned long>(letter)); }
+
+    void setTextShader(std::shared_ptr<Shader> shader);
 };
 
 #endif //ENGINITO_FREETYPE_H

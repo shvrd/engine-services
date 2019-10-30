@@ -85,3 +85,7 @@ std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
 
     return sharedLetter;
 }
+
+void FreeType::setTextShader(const std::shared_ptr<Shader> shader) {
+    m_textShader = shader;
+}

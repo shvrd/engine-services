@@ -29,7 +29,7 @@ public:
     std::shared_ptr<Shader> createShader() override;
     std::shared_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override;
 
-    void bindShader(const std::shared_ptr<Shader> shader) override;
+    void bindShader(std::shared_ptr<Shader> shader) override;
 
     void drawText(const std::string& text, Vector2 location) override;
 };
