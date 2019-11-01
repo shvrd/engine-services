@@ -28,7 +28,7 @@ class FreeType {
 public:
     void initialize();
 
-    void useFont(const std::string& fontName, unsigned int fontSize = 14);
+    void useFont(const std::string& fontName, unsigned int fontSize = 26);
     void setFontSize(unsigned int fontSize);
 
     void preloadCommonCharacters();

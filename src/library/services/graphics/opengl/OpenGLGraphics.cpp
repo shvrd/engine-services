@@ -167,8 +167,6 @@ void OpenGLGraphics::bindShader(const std::shared_ptr<Shader> shader) {
 }
 
 void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
-    auto oldShader = m_currentShader;
-
     auto textShader = m_freeType.getTextShader();
 
     bindShader(textShader);
@@ -186,14 +184,14 @@ void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
         auto letter = m_freeType.getLetter(*iterator);
 
         if (!letter->textureId) {
-            std::shared_ptr<Texture> tex = ImageLoader::loadFromCharArray(reinterpret_cast<char*>(letter->bitmap.buffer), letter->bitmap.width, letter->bitmap.height);
+            std::shared_ptr<Texture> tex = ImageLoader::loadFromCharArray(letter->bitmap.buffer, letter->bitmap.width, letter->bitmap.height);
             letter->textureId = tex->id;
             m_freeType.cache(letter);
         }
 
         useTexture(std::make_shared<Texture>(Texture{.id = letter->textureId, .width = 0, .height = 0}));
 
-        Vector2f letterPos = {cursor.x + letter->offset.x, cursor.y + letter->offset.y};
+        Vector2f letterPos = {cursor.x + letter->offset.x, -cursor.y - letter->offset.y};
 
         Vertex vertices[4];
 
@@ -215,6 +213,4 @@ void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glBindVertexArray(0);
-
-    bindShader(oldShader);
 }

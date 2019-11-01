@@ -13,8 +13,9 @@
 #include "Sprite.h"
 #include "../../resources/Texture.h"
 #include "Camera.h"
+#include "NullShader.h"
 
-class                             Graphics {
+class Graphics {
 protected:
     ResourceManager<Texture> m_textures;
 

@@ -56,23 +56,27 @@ void ExampleScene::onContinue() {
 }
 
 void ExampleScene::update() {
-    float speed = 2.f;
+    float speed = 4.f;
 
     if (m_input->isKeyPressed(Key::LEFT_SHIFT)) {
-        speed = 0.2f;
+        speed *= 4;
+    }
+
+    if (m_input->isKeyPressed(Key::LEFT_CONTROL)) {
+        speed /= 2;
     }
 
     if (m_input->isKeyPressed(Key::W)) {
-        m_sprite->translate({0.f, speed});
+        m_graphics->getCamera()->translate({0.f, -speed});
     }
     if (m_input->isKeyPressed(Key::S)) {
-        m_sprite->translate({0.f, -speed});
+        m_graphics->getCamera()->translate({0.f, speed});
     }
     if (m_input->isKeyPressed(Key::A)) {
-        m_sprite->translate({-speed, .0f});
+        m_graphics->getCamera()->translate({speed, .0f});
     }
     if (m_input->isKeyPressed(Key::D)) {
-        m_sprite->translate({speed, .0f});
+        m_graphics->getCamera()->translate({-speed, .0f});
     }
 
     if (m_input->isKeyPressed(Key::E)) {
@@ -93,9 +97,7 @@ void ExampleScene::update() {
 
     if (m_input->isKeyPressed(Key::F10)) {
         if (!buttonDown) {
-            Logger::info("Printing text!");
-            Logger::info("Done!");
-            // m_shader->reload();
+            m_shader->reload();
         }
 
     }

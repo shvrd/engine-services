@@ -21,11 +21,11 @@ std::shared_ptr<Texture> ImageLoader::loadFromPNG(const std::string &filePath) {
         Logger::warn("decodePNG failed with error code " + std::to_string(errorCode));
     }
 
-    return loadFromCharArray(reinterpret_cast<char*>(imageData.data()), width, height);
+    return loadFromCharArray(imageData.data(), width, height);
 }
 
 std::shared_ptr<Texture>
-ImageLoader::loadFromCharArray(const char *image, const unsigned int width, const unsigned int height) {
+ImageLoader::loadFromCharArray(const unsigned char *image, const unsigned int width, const unsigned int height) {
     std::shared_ptr<Texture> texture = std::make_shared<Texture>();
 
     texture->width = width;
@@ -38,8 +38,10 @@ ImageLoader::loadFromCharArray(const char *image, const unsigned int width, cons
 
     //TODO: Make this stuff configurable
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);

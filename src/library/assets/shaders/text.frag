@@ -8,7 +8,5 @@ in vec2 fragmentUV;
 uniform sampler2D image;
 
 void main() {
-    vec4 textureColor = texture(image, fragmentUV);
-
-    color = textureColor * fragmentColor.rgba;
+    color = vec4(fragmentColor.rgb, texture(image, fragmentUV).r * fragmentColor.a);
 }

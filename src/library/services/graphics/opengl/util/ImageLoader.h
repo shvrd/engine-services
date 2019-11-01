@@ -12,7 +12,7 @@
 class ImageLoader {
 public:
     static std::shared_ptr<Texture> loadFromPNG(const std::string& filePath);
-    static std::shared_ptr<Texture> loadFromCharArray(const char* image, unsigned int width, unsigned int height);
+    static std::shared_ptr<Texture> loadFromCharArray(const unsigned char* image, unsigned int width, unsigned int height);
 };
 
 
