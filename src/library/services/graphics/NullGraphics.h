@@ -27,9 +27,9 @@ public:
     void useTexture(std::shared_ptr<Texture> texture) override {}
 
     std::shared_ptr<Shader> createShader() override { return std::make_shared<NullShader>(); }
-    std::shared_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override { return std::make_shared<NullSprite>(Vector2{0,0}, Vector2{0,0}); }
+    std::shared_ptr<Sprite> createSprite(Vector2f location, Vector2f dimensions) override { return std::make_shared<NullSprite>(Vector2f{0,0}, Vector2f{0,0}); }
 
-    void drawText(const std::string& text, Vector2 location) override {}
+    void drawText(const std::string& text, Vector2f location) override {}
 };
 
 #endif //ENGINITO_NULLGRAPHICS_H

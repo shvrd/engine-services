@@ -31,12 +31,15 @@ public:
     void useFont(const std::string& fontName, unsigned int fontSize = 14);
     void setFontSize(unsigned int fontSize);
 
-    void cacheCommonCharacters();
+    void preloadCommonCharacters();
 
     std::shared_ptr<Letter> getLetter(unsigned long letter);
     inline std::shared_ptr<Letter> getLetter(char letter) { return getLetter(static_cast<unsigned long>(letter)); }
 
     void setTextShader(std::shared_ptr<Shader> shader);
+    std::shared_ptr<Shader> getTextShader();
+
+    void cache(std::shared_ptr<Letter> letter);
 };
 
 #endif //ENGINITO_FREETYPE_H

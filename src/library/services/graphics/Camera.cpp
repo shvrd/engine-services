@@ -6,7 +6,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-Camera::Camera(const Vector2 &screenDimensions)
+Camera::Camera(const Vector2f &screenDimensions)
     : m_camera()
     , m_location({0.f,0.f})
     , m_rotation(0.f)
@@ -44,7 +44,7 @@ void Camera::update() {
     m_dirty = false;
 }
 
-void Camera::setScreenDimensions(const Vector2 &dimensions) {
+void Camera::setScreenDimensions(const Vector2f &dimensions) {
     m_screen = dimensions;
 
     m_ortho = glm::ortho(0.f, m_screen.x, 0.f, m_screen.y);
@@ -52,7 +52,7 @@ void Camera::setScreenDimensions(const Vector2 &dimensions) {
     m_dirty = true;
 }
 
-void Camera::translate(const Vector2 &translation) {
+void Camera::translate(const Vector2f &translation) {
     setLocation({m_location.x + translation.x, m_location.y + translation.y});
 }
 
@@ -64,7 +64,7 @@ void Camera::rotate(float amount) {
     setRotation(m_rotation + amount);
 }
 
-void Camera::setLocation(const Vector2 &location) {
+void Camera::setLocation(const Vector2f &location) {
     m_location = location;
     m_dirty = true;
 }
@@ -79,7 +79,7 @@ void Camera::setRotation(const float rotation) {
     m_dirty = true;
 }
 
-const Vector2 &Camera::getLocation() const {
+const Vector2f &Camera::getLocation() const {
     return m_location;
 }
 

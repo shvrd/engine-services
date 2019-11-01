@@ -12,14 +12,14 @@
 
 class Sprite {
 protected:
-    Vector2 m_location;
-    Vector2 m_dimensions;
+    Vector2f m_location;
+    Vector2f m_dimensions;
 
     std::shared_ptr<Texture> m_texture;
 
     virtual void updateBuffer() = 0;
 public:
-    Sprite(const Vector2& location, const Vector2& dimensions)
+    Sprite(const Vector2f& location, const Vector2f& dimensions)
         : m_location(location)
         , m_dimensions(dimensions) {
 
@@ -27,21 +27,21 @@ public:
 
     virtual ~Sprite() = default;
 
-    virtual void setLocation(const Vector2& location) {
+    virtual void setLocation(const Vector2f& location) {
         m_location = location;
         updateBuffer();
     }
 
-    virtual void setDimensions(const Vector2& dimensions) {
+    virtual void setDimensions(const Vector2f& dimensions) {
         m_dimensions = dimensions;
         updateBuffer();
     }
 
-    Vector2 getLocation() const {
+    Vector2f getLocation() const {
         return m_location;
     }
 
-    Vector2 getDimensions() const {
+    Vector2f getDimensions() const {
         return m_dimensions;
     }
 
@@ -49,7 +49,7 @@ public:
         return m_texture;
     }
 
-    void translate(const Vector2 &translation) {
+    void translate(const Vector2f &translation) {
         m_location = m_location + translation;
         updateBuffer();
     }

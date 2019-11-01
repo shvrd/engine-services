@@ -5,29 +5,29 @@
 #ifndef ENGINITO_VECTOR_H
 #define ENGINITO_VECTOR_H
 
-struct Vector2 {
+struct Vector2f {
     float x = 0, y = 0;
 
-    Vector2() : x(0), y(0) {}
-    Vector2(float _x, float _y) : x(_x), y(_y) {}
+    Vector2f() : x(0), y(0) {}
+    Vector2f(float _x, float _y) : x(_x), y(_y) {}
 
-    Vector2 operator+(const Vector2& rhs) const {
+    Vector2f operator+(const Vector2f& rhs) const {
         return {x + rhs.x, y + rhs.y};
     }
 
-    Vector2 operator-(const Vector2 rhs) const {
+    Vector2f operator-(const Vector2f rhs) const {
         return {x - rhs.x, y - rhs.y};
     }
 };
 
-struct Vector3 {
+struct Vector3f {
     float x = 0, y = 0, z = 0;
 
-    Vector3 operator+(const Vector3& rhs) const {
+    Vector3f operator+(const Vector3f& rhs) const {
         return {x + rhs.x, y + rhs.y, z + rhs.z};
     }
 
-    Vector3 operator-(const Vector3& rhs) const {
+    Vector3f operator-(const Vector3f& rhs) const {
         return {x - rhs.x, y - rhs.y, z - rhs.z};
     }
 };

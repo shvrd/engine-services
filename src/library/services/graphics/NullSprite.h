@@ -10,7 +10,7 @@
 class NullSprite : public Sprite {
     void updateBuffer() override {};
 public:
-    NullSprite(const Vector2& location, const Vector2& dimensions) : Sprite(location, dimensions) {}
+    NullSprite(const Vector2f& location, const Vector2f& dimensions) : Sprite(location, dimensions) {}
     ~NullSprite() override = default;
 
     void setTexture(const std::shared_ptr<Texture> texture) override {

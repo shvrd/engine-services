@@ -28,7 +28,7 @@ void FreeType::useFont(const std::string& fontName, const unsigned int fontSize)
     }
 
     setFontSize(fontSize);
-    cacheCommonCharacters();
+    preloadCommonCharacters();
 }
 
 void FreeType::setFontSize(unsigned int fontSize) {
@@ -44,7 +44,7 @@ std::shared_ptr<Letter> FreeType::getLetter(unsigned long character) {
     return loadLetter(character);
 }
 
-void FreeType::cacheCommonCharacters() {
+void FreeType::preloadCommonCharacters() {
     const char MIN = std::numeric_limits<char>::min();
     const char MAX = std::numeric_limits<char>::max();
 
@@ -63,7 +63,8 @@ std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
     auto& glyph = m_currentFace->glyph;
 
     Letter letter = {
-            .id = 0,
+            .id = character,
+            .textureId = 0,
             .bitmap = {
                     .buffer = glyph->bitmap.buffer,
                     .width = glyph->bitmap.width,
@@ -89,3 +90,12 @@ std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
 void FreeType::setTextShader(const std::shared_ptr<Shader> shader) {
     m_textShader = shader;
 }
+
+std::shared_ptr<Shader> FreeType::getTextShader() {
+    return m_textShader;
+}
+
+void FreeType::cache(std::shared_ptr<Letter> letter) {
+    m_letters.add(std::to_string(letter->id), letter);
+}
+

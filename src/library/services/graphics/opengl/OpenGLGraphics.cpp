@@ -83,12 +83,17 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     textShader->setVertexShader("../../../src/library/assets/shaders/text.vert");
     textShader->setFragmentShader("../../../src/library/assets/shaders/text.frag");
 
+    textShader->addAttribute("coord");
+    textShader->addAttribute("texCoord");
+
+    textShader->finalize();
+
     m_freeType.setTextShader(textShader);
     m_freeType.useFont("../../../src/library/assets/fonts/OpenSans-Regular.ttf");
 
     Logger::info("Setting up Camera");
 
-    m_camera = std::make_shared<Camera>(Vector2(static_cast<float>(windowWidth), static_cast<float>(windowHeight)));
+    m_camera = std::make_shared<Camera>(Vector2f(static_cast<float>(windowWidth), static_cast<float>(windowHeight)));
 
     setViewport(windowWidth, windowHeight);
 }
@@ -113,7 +118,7 @@ std::shared_ptr<Shader> OpenGLGraphics::createShader() {
     return std::make_shared<GLSLShader>();
 }
 
-std::shared_ptr<Sprite> OpenGLGraphics::createSprite(Vector2 location, Vector2 dimensions) {
+std::shared_ptr<Sprite> OpenGLGraphics::createSprite(Vector2f location, Vector2f dimensions) {
     return std::make_shared<OpenGLSprite>(location, dimensions);
 }
 
@@ -144,12 +149,20 @@ void OpenGLGraphics::bindShader(const std::shared_ptr<Shader> shader) {
     glUniformMatrix4fv(m_currentShader->getUniformLocation("projection"), 1, GL_FALSE, &(m_camera->getCameraMatrix()[0][0]));
 }
 
-void OpenGLGraphics::drawText(const std::string &text, Vector2 location) {
+void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
     auto oldShader = m_currentShader;
 
-    for (auto iterator = text.begin(); iterator < text.end(); ++iterator) {
-        m_freeType.getLetter(*iterator);
+    bindShader(m_freeType.getTextShader());
+    Vector2f cursor = location;
 
+    for (auto iterator = text.begin(); iterator < text.end(); ++iterator) {
+        auto letter = m_freeType.getLetter(*iterator);
+
+        Vector2f letterPos = {cursor.x + letter->offset.x, cursor.y + letter->offset.y};
+
+
+
+        cursor = {cursor.x + (letter->advance.x >> 6), cursor.y + (letter->advance.y >> 6)};
     }
 
     bindShader(oldShader);

@@ -23,7 +23,6 @@ protected:
     std::shared_ptr<Shader> m_currentShader;
 
     FreeType m_freeType;
-
 public:
     Graphics() = default;
     virtual ~Graphics() = default;
@@ -41,7 +40,7 @@ public:
 
     //TODO: Maybe make a standalone shaderfactory?
     virtual std::shared_ptr<Shader> createShader() = 0;
-    virtual std::shared_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) = 0;
+    virtual std::shared_ptr<Sprite> createSprite(Vector2f location, Vector2f dimensions) = 0;
 
     std::shared_ptr<Camera> getCamera() { return m_camera; }
 
@@ -55,7 +54,7 @@ public:
         shader->bind();
     }
 
-    virtual void drawText(const std::string& text, Vector2 location) = 0;
+    virtual void drawText(const std::string& text, Vector2f location) = 0;
 };
 
 #endif //ENGINITO_GRAPHICS_H

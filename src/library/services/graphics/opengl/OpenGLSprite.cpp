@@ -7,7 +7,7 @@
 #include "../../../log/Logger.h"
 #include "../../GraphicsServiceLocator.h"
 
-OpenGLSprite::OpenGLSprite(const Vector2& location, const Vector2& dimensions) : Sprite(location, dimensions) {
+OpenGLSprite::OpenGLSprite(const Vector2f& location, const Vector2f& dimensions) : Sprite(location, dimensions) {
     glGenVertexArrays(1, &m_vertexArrayObject);
 
     glGenBuffers(1, &m_vertexBufferObject);

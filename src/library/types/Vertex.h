@@ -9,10 +9,10 @@
 #include "Color.h"
 
 struct Vertex {
-    Vector3 position;
+    Vector3f position;
     Color color;
 
-    Vector2 uv;
+    Vector2f uv;
 };
 
 #endif //ENGINITO_VERTEX_H

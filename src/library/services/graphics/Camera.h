@@ -11,11 +11,11 @@
 
 class Camera {
     glm::mat4 m_camera;
-    Vector2 m_location;
+    Vector2f m_location;
     float m_rotation;
     float m_scale;
 
-    Vector2 m_screen;
+    Vector2f m_screen;
 
     glm::mat4 m_ortho;
 
@@ -23,22 +23,22 @@ class Camera {
 
     void update();
 public:
-    explicit Camera(const Vector2& screenDimensions);
+    explicit Camera(const Vector2f& screenDimensions);
     ~Camera() = default;
 
     glm::mat4 getCameraMatrix();
 
-    void setScreenDimensions(const Vector2& dimensions);
+    void setScreenDimensions(const Vector2f& dimensions);
 
-    void translate(const Vector2& translation);
+    void translate(const Vector2f& translation);
     void scale(float factor);
     void rotate(float amount);
 
-    void setLocation(const Vector2& location);
+    void setLocation(const Vector2f& location);
     void setScale(float scale);
     void setRotation(float rotation);
 
-    const Vector2& getLocation() const;
+    const Vector2f& getLocation() const;
     const float& getScale() const;
     const float& getRotation() const;
 };

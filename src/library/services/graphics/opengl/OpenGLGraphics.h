@@ -11,6 +11,7 @@
 
 class OpenGLGraphics : public Graphics {
     GLuint m_vertexArrayObject, m_vertexBufferObject;
+
 public:
     OpenGLGraphics();
     ~OpenGLGraphics() override = default;
@@ -27,11 +28,11 @@ public:
     void useTexture(std::shared_ptr<Texture> texture) override;
 
     std::shared_ptr<Shader> createShader() override;
-    std::shared_ptr<Sprite> createSprite(Vector2 location, Vector2 dimensions) override;
+    std::shared_ptr<Sprite> createSprite(Vector2f location, Vector2f dimensions) override;
 
     void bindShader(std::shared_ptr<Shader> shader) override;
 
-    void drawText(const std::string& text, Vector2 location) override;
+    void drawText(const std::string& text, Vector2f location) override;
 };
 
 

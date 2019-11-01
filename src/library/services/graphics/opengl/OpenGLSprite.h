@@ -14,7 +14,7 @@ class OpenGLSprite : public Sprite {
     GLuint m_vertexArrayObject, m_vertexBufferObject;
 
 public:
-    OpenGLSprite(const Vector2& location, const Vector2& dimensions);
+    OpenGLSprite(const Vector2f& location, const Vector2f& dimensions);
 
     ~OpenGLSprite() override = default;
 

@@ -6,7 +6,8 @@
 #define ENGINITO_LETTER_H
 
 struct Letter {
-    unsigned int id;
+    unsigned long id;
+    unsigned int textureId;
     struct Bitmap {
         unsigned char* buffer;
         unsigned int width;
