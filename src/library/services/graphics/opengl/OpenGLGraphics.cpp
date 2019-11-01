@@ -12,8 +12,8 @@
 #include "util/ImageLoader.h"
 
 OpenGLGraphics::OpenGLGraphics()
-    : m_vertexArrayObject(0)
-    , m_vertexBufferObject(0) {
+    : m_textVertexArrayObject(0)
+    , m_textVertexBufferObject(0) {
 
 }
 
@@ -34,6 +34,10 @@ MessageCallback(GLenum source,
                 const GLchar *message,
                 const void *userParam) {
     std::stringstream log;
+
+    if (type == 33361) {
+        return;
+    }
 
     log << message << " | Type: 0x" << type;
 
@@ -70,10 +74,22 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glGenVertexArrays(1, &m_vertexArrayObject);
+    glGenVertexArrays(1, &m_textVertexArrayObject);
 
-    glBindVertexArray(m_vertexArrayObject);
-    glGenBuffers(1, &m_vertexBufferObject);
+    glBindVertexArray(m_textVertexArrayObject);
+
+    glGenBuffers(1, &m_textVertexBufferObject);
+    glBindBuffer(GL_ARRAY_BUFFER, m_textVertexBufferObject);
+    // Vertex Attribute ID 0: Position
+    glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
+
+    // Vertex Attribute ID 1: Color
+    glVertexAttribPointer((GLuint) 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, color));
+
+    // Vertex Attribute ID 2: UV Map
+    glVertexAttribPointer((GLuint) 2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uv));
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
     m_freeType.initialize();
@@ -83,8 +99,9 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     textShader->setVertexShader("../../../src/library/assets/shaders/text.vert");
     textShader->setFragmentShader("../../../src/library/assets/shaders/text.frag");
 
-    textShader->addAttribute("coord");
-    textShader->addAttribute("texCoord");
+    textShader->addAttribute("vertexPosition");
+    textShader->addAttribute("vertexColor");
+    textShader->addAttribute("vertexUV");
 
     textShader->finalize();
 
@@ -152,18 +169,52 @@ void OpenGLGraphics::bindShader(const std::shared_ptr<Shader> shader) {
 void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
     auto oldShader = m_currentShader;
 
-    bindShader(m_freeType.getTextShader());
+    auto textShader = m_freeType.getTextShader();
+
+    bindShader(textShader);
     Vector2f cursor = location;
+
+    // Bind vertex array object
+    glBindVertexArray(m_textVertexArrayObject);
+
+    // Bind vertex buffer object
+    glBindBuffer(GL_ARRAY_BUFFER, m_textVertexBufferObject);
+
+    textShader->use();
 
     for (auto iterator = text.begin(); iterator < text.end(); ++iterator) {
         auto letter = m_freeType.getLetter(*iterator);
 
+        if (!letter->textureId) {
+            std::shared_ptr<Texture> tex = ImageLoader::loadFromCharArray(reinterpret_cast<char*>(letter->bitmap.buffer), letter->bitmap.width, letter->bitmap.height);
+            letter->textureId = tex->id;
+            m_freeType.cache(letter);
+        }
+
+        useTexture(std::make_shared<Texture>(Texture{.id = letter->textureId, .width = 0, .height = 0}));
+
         Vector2f letterPos = {cursor.x + letter->offset.x, cursor.y + letter->offset.y};
 
+        Vertex vertices[4];
 
+        // top left, top right, bottom left, bottom right
+        vertices[0] = Vertex{{letterPos.x,  letterPos.y, 0.f}, Colors::WHITE, {0, 0}};
+        vertices[1] = Vertex{{letterPos.x + letter->bitmap.width,  letterPos.y, 0.f}, Colors::WHITE, {1, 0}};
+        vertices[2] = Vertex{{letterPos.x, letterPos.y + letter->bitmap.height, 0.f}, Colors::WHITE, {0, 1}};
+        vertices[3] = Vertex{{letterPos.x + letter->bitmap.width, letterPos.y + letter->bitmap.height, 0.f}, Colors::WHITE, {1, 1}};
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
         cursor = {cursor.x + (letter->advance.x >> 6), cursor.y + (letter->advance.y >> 6)};
     }
+
+    textShader->endUse();
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(0);
 
     bindShader(oldShader);
 }

@@ -10,7 +10,7 @@
 #include "../Graphics.h"
 
 class OpenGLGraphics : public Graphics {
-    GLuint m_vertexArrayObject, m_vertexBufferObject;
+    GLuint m_textVertexArrayObject, m_textVertexBufferObject;
 
 public:
     OpenGLGraphics();

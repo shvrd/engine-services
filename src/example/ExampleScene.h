@@ -93,8 +93,9 @@ void ExampleScene::update() {
 
     if (m_input->isKeyPressed(Key::F10)) {
         if (!buttonDown) {
-            m_graphics->drawText("This is an example text! If you read this you can see.", {0, 0});
-            m_shader->reload();
+            Logger::info("Printing text!");
+            Logger::info("Done!");
+            // m_shader->reload();
         }
 
     }
@@ -107,6 +108,8 @@ void ExampleScene::render() {
     m_graphics->useTexture(m_sprite->getTexture());
     m_sprite->draw();
     m_shader->unbind();
+
+    m_graphics->drawText("This is an example text! If you read this you can see.", {0, 0});
 }
 
 void ExampleScene::onSuspend() {

@@ -1,12 +1,14 @@
 #version 330 core
 
-in vec2 texCoord;
+out vec4 color;
+
+in vec4 fragmentColor;
+in vec2 fragmentUV;
 
 uniform sampler2D image;
-uniform vec4 color;
 
-out vec4 outColor;
+void main() {
+    vec4 textureColor = texture(image, fragmentUV);
 
-void main(void) {
-    outColor = vec4(1, 1, 1, texture2D(image, texCoord).r) * color;
+    color = textureColor * fragmentColor.rgba;
 }
