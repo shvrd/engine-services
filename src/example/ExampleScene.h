@@ -111,7 +111,7 @@ void ExampleScene::render() {
     m_sprite->draw();
     m_shader->unbind();
 
-    m_graphics->drawText("This is an example text! If you read this you can see.", {0, 0});
+    m_graphics->drawText("sphinx of black quartz, judge my vow", {0, 0});
 }
 
 void ExampleScene::onSuspend() {

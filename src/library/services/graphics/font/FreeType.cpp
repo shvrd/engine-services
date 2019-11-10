@@ -4,7 +4,10 @@
 
 #include "FreeType.h"
 
+#include FT_BITMAP_H
+
 #include <limits>
+#include <sstream>
 
 #include "../../../log/Logger.h"
 
@@ -16,6 +19,15 @@ void FreeType::initialize() {
 
         return;
     }
+
+    FT_Int major, minor, patch;
+
+    FT_Library_Version(m_library, &major, &minor, &patch);
+
+    std::stringstream versionString;
+    versionString << "Using FreeType version " << major << "." << minor << "." << patch;
+
+    Logger::info(versionString.str());
 }
 
 void FreeType::useFont(const std::string& fontName, const unsigned int fontSize) {
@@ -45,12 +57,13 @@ std::shared_ptr<Letter> FreeType::getLetter(unsigned long character) {
 }
 
 void FreeType::preloadCommonCharacters() {
-    const char MIN = std::numeric_limits<char>::min();
-    const char MAX = std::numeric_limits<char>::max();
-
-    for (char character = MIN; character < MAX; ++character) {
-        loadLetter(static_cast<unsigned long>(character));
-    }
+    // TODO: Preloading the characters makes the mess even worse
+//    unsigned long MIN = 0;
+//    unsigned long MAX = std::numeric_limits<char>::max();
+//
+//    for (unsigned long character = MIN; character < MAX; ++character) {
+//        loadLetter(character);
+//    }
 }
 
 std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
@@ -60,7 +73,11 @@ std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
         return std::shared_ptr<Letter>();
     }
 
-    auto& glyph = m_currentFace->glyph;
+    // Logger::info(std::to_string(character));
+
+    // TODO: The bitmap buffer actually seems to point to some random memory, since it changes every run
+    // TODO: BUT THE ACTUAL CHARACTER IS SOMEWHERE IN THAT RANDOM MEMORY, MIRRORED AND FLIPPED UPSIDE DOWN
+    FT_GlyphSlot& glyph = m_currentFace->glyph;
 
     Letter letter = {
             .id = character,
@@ -82,7 +99,7 @@ std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
 
     std::shared_ptr<Letter> sharedLetter = std::make_shared<Letter>(letter);
 
-    m_letters.add(std::to_string(character), sharedLetter);
+    cache(sharedLetter);
 
     return sharedLetter;
 }
