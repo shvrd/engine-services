@@ -184,7 +184,7 @@ void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
         auto letter = m_freeType.getLetter(*iterator);
 
         if (!letter->textureId) {
-            std::shared_ptr<Texture> tex = ImageLoader::loadFromCharArray(letter->bitmap.buffer, letter->bitmap.width, letter->bitmap.height);
+            std::shared_ptr<Texture> tex = ImageLoader::loadFromGrayscaleCharArray(letter->bitmap.buffer, letter->bitmap.width, letter->bitmap.height);
             letter->textureId = tex->id;
             m_freeType.cache(letter);
         }
@@ -196,10 +196,10 @@ void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
         Vertex vertices[4];
 
         // top left, top right, bottom left, bottom right
-        vertices[0] = Vertex{{letterPos.x,  letterPos.y, 0.f}, Colors::WHITE, {0, 0}};
-        vertices[1] = Vertex{{letterPos.x + letter->bitmap.width,  letterPos.y, 0.f}, Colors::WHITE, {1, 0}};
-        vertices[2] = Vertex{{letterPos.x, letterPos.y + letter->bitmap.height, 0.f}, Colors::WHITE, {0, 1}};
-        vertices[3] = Vertex{{letterPos.x + letter->bitmap.width, letterPos.y + letter->bitmap.height, 0.f}, Colors::WHITE, {1, 1}};
+        vertices[0] = Vertex{{letterPos.x,  -letterPos.y, 0.f}, Colors::WHITE, {0, 0}};
+        vertices[1] = Vertex{{letterPos.x + letter->bitmap.width,  -letterPos.y, 0.f}, Colors::WHITE, {1, 0}};
+        vertices[2] = Vertex{{letterPos.x, -letterPos.y - letter->bitmap.height, 0.f}, Colors::WHITE, {0, 1}};
+        vertices[3] = Vertex{{letterPos.x + letter->bitmap.width, -letterPos.y - letter->bitmap.height, 0.f}, Colors::WHITE, {1, 1}};
 
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 

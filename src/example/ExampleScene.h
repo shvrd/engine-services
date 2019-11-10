@@ -111,7 +111,8 @@ void ExampleScene::render() {
     m_sprite->draw();
     m_shader->unbind();
 
-    m_graphics->drawText("sphinx of black quartz, judge my vow", {0, 0});
+    m_graphics->drawText("sphinx of black quartz, judge my vow", {0, -100});
+    m_graphics->drawText("SPHINX OF BLACK QUARTZ, JUDGE MY VOW", {0, -200});
 }
 
 void ExampleScene::onSuspend() {

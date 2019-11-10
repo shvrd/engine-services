@@ -40,7 +40,9 @@ void FreeType::useFont(const std::string& fontName, const unsigned int fontSize)
     }
 
     setFontSize(fontSize);
-    preloadCommonCharacters();
+
+    // TODO: This has some weird side effect, some textures wont load correctly if letters are cached
+    // preloadCommonCharacters();
 }
 
 void FreeType::setFontSize(unsigned int fontSize) {
@@ -57,13 +59,13 @@ std::shared_ptr<Letter> FreeType::getLetter(unsigned long character) {
 }
 
 void FreeType::preloadCommonCharacters() {
-    // TODO: Preloading the characters makes the mess even worse
-//    unsigned long MIN = 0;
-//    unsigned long MAX = std::numeric_limits<char>::max();
-//
-//    for (unsigned long character = MIN; character < MAX; ++character) {
-//        loadLetter(character);
-//    }
+    // TODO: This has some weird side effect, some textures wont load correctly if letters are cached
+    unsigned long MIN = 0;
+    unsigned long MAX = 64;
+
+    for (unsigned long character = MIN; character < MAX; ++character) {
+        loadLetter(character);
+    }
 }
 
 std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
@@ -73,10 +75,6 @@ std::shared_ptr<Letter> FreeType::loadLetter(unsigned long character) {
         return std::shared_ptr<Letter>();
     }
 
-    // Logger::info(std::to_string(character));
-
-    // TODO: The bitmap buffer actually seems to point to some random memory, since it changes every run
-    // TODO: BUT THE ACTUAL CHARACTER IS SOMEWHERE IN THAT RANDOM MEMORY, MIRRORED AND FLIPPED UPSIDE DOWN
     FT_GlyphSlot& glyph = m_currentFace->glyph;
 
     Letter letter = {
