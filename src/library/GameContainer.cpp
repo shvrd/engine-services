@@ -76,6 +76,7 @@ bool GameContainer::initializeSystems() {
 
         DiagnosticsServiceLocator::set(nullptr);
 
+        Logger::info("Initializing Audio");
         AudioServiceLocator::set(std::make_shared<OpenALAudio>());
         m_audio = AudioServiceLocator::get();
 

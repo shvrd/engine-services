@@ -11,9 +11,12 @@
 #include <AL/alc.h>
 
 class OpenALAudio : public Audio {
-    ALCdevice* m_audioDevice;
+    ALCdevice* m_device;
+    ALCcontext* m_context;
+    ALuint m_buffer;
 public:
     void initialize() override;
+    std::shared_ptr<Sound> loadSound(const std::string& filePath) override;
 };
 
 
