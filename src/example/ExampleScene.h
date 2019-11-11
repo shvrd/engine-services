@@ -99,7 +99,6 @@ void ExampleScene::update() {
         if (!buttonDown) {
             m_shader->reload();
         }
-
     }
 
     buttonDown = m_input->isKeyPressed(Key::F10);

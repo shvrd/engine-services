@@ -9,6 +9,7 @@
 #include <memory>
 #include <string>
 
+// TODO: Make key class templated, too
 template<class Resource>
 class ResourceManager {
     std::map<std::string, std::shared_ptr<Resource>> m_resourceMap;

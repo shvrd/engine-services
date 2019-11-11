@@ -12,6 +12,8 @@
 #include "services/InputServiceLocator.h"
 #include "services/GraphicsServiceLocator.h"
 #include "services/DiagnosticsServiceLocator.h"
+#include "services/AudioServiceLocator.h"
+#include "services/audio/openal/OpenALAudio.h"
 
 GameContainer::GameContainer()
     : m_threadPool(1)
@@ -73,6 +75,11 @@ bool GameContainer::initializeSystems() {
         m_graphics->initialize(windowWidth, windowHeight);
 
         DiagnosticsServiceLocator::set(nullptr);
+
+        AudioServiceLocator::set(std::make_shared<OpenALAudio>());
+        m_audio = AudioServiceLocator::get();
+
+        m_audio->initialize();
     }
 
     return initStatus;

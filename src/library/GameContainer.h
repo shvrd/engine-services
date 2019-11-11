@@ -9,6 +9,7 @@
 #include "services/graphics/Graphics.h"
 #include "services/input/Input.h"
 #include "services/graphics/window/Window.h"
+#include "services/audio/Audio.h"
 
 using AtomicBoolean_t = bool;
 
@@ -48,6 +49,7 @@ private:
     std::shared_ptr<Window> m_window;
     std::shared_ptr<Input> m_input;
     std::shared_ptr<Graphics> m_graphics;
+    std::shared_ptr<Audio> m_audio;
 };
 
 

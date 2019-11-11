@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# fetch dependencies if not already existent
-if [[ ! -d "dependencies" ]]; then
-    mkdir dependencies
-fi
-
+# fetch dependencies
 pushd dependencies
 
 wget https://raw.githubusercontent.com/PixarAnimationStudios/OpenSubdiv/master/cmake/FindGLFW.cmake
