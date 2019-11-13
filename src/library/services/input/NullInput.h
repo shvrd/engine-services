@@ -22,6 +22,8 @@ public:
 
     int getDeltaMouseX() override { return 0; }
     int getDeltaMouseY() override { return 0; }
+
+    bool isMousePressed(MouseButton mouseButton) override { return false; }
 };
 
 

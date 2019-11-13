@@ -6,11 +6,12 @@
 #define ENGINITO_INPUT_H
 
 enum class Key;
+enum class MouseButton;
 
 class Input {
 public:
     Input() = default;
-    virtual ~Input() {}
+    virtual ~Input() = default;
 
     // TODO: Make this inaccessible from outside -> friend class GameContainer
     virtual void update() = 0;
@@ -23,6 +24,8 @@ public:
 
     virtual int getDeltaMouseX() = 0;
     virtual int getDeltaMouseY() = 0;
+
+    virtual bool isMousePressed(MouseButton mouseButton) = 0;
 };
 
 #endif //ENGINITO_INPUT_H

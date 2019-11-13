@@ -63,3 +63,7 @@ void GLFWInput::setGLFWWindow(Window *window) {
 
     m_window = inputWindow;
 }
+
+bool GLFWInput::isMousePressed(MouseButton mouseButton) {
+    return glfwGetMouseButton(m_window, static_cast<int>(mouseButton)) == GLFW_PRESS;
+}

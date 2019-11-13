@@ -66,6 +66,11 @@ void ExampleScene::update() {
         speed /= 2;
     }
 
+    if (m_input->isMousePressed(MouseButton::LEFT)) {
+        m_graphics->getCamera()->translate({(float) -m_input->getDeltaMouseX(), 0.f});
+        m_graphics->getCamera()->translate({0.f, (float) m_input->getDeltaMouseY()});
+    }
+
     if (m_input->isKeyPressed(Key::W)) {
         m_graphics->getCamera()->translate({0.f, -speed});
     }

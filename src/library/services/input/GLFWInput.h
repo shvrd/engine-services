@@ -33,6 +33,8 @@ public:
 
     int getDeltaMouseY() override;
 
+    bool isMousePressed(MouseButton mouseButton) override;
+
     void setGLFWWindow(Window *window);
 };
 
@@ -165,6 +167,13 @@ enum class Key : int {
     RIGHT_SUPER = GLFW_KEY_RIGHT_SUPER,
     MENU = GLFW_KEY_MENU
 };
+
+enum class MouseButton {
+    LEFT = GLFW_MOUSE_BUTTON_LEFT,
+    RIGHT = GLFW_MOUSE_BUTTON_RIGHT,
+    MIDDLE = GLFW_MOUSE_BUTTON_MIDDLE
+};
+
 #endif //INPUT_KEYS_SET
 
 #endif //ENGINITO_GLFWINPUT_H
