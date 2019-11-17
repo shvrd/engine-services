@@ -1,5 +1,5 @@
 # set example files
-SET(EXAMPLE_SRC main.cpp ExampleScene.h)
+SET(EXAMPLE_SRC main.cpp ExampleScene.h C_Renderable.h C_Transform.h)
 
 # add to executable
 ADD_EXECUTABLE(library_example ${EXAMPLE_SRC})

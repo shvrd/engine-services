@@ -14,21 +14,23 @@ class Sprite {
 protected:
     Vector2f m_location;
     Vector2f m_dimensions;
+    Vector2f m_offset;
 
     std::shared_ptr<Texture> m_texture;
 
     virtual void updateBuffer() = 0;
 public:
-    Sprite(const Vector2f& location, const Vector2f& dimensions)
-        : m_location(location)
-        , m_dimensions(dimensions) {
+    Sprite(const Vector2f& offset, const Vector2f& dimensions)
+        : m_location({})
+        , m_dimensions(dimensions)
+        , m_offset(offset){
 
     }
 
     virtual ~Sprite() = default;
 
     virtual void setLocation(const Vector2f& location) {
-        m_location = location;
+        m_location = location + m_offset;
         updateBuffer();
     }
 

@@ -13,3 +13,15 @@ Entity::Entity()
     , m_finalized(false) {
 
 }
+
+void Entity::update() {
+    for (auto& component : m_components) {
+        component->update();
+    }
+}
+
+void Entity::render() {
+    for (auto& component : m_components) {
+        component->render();
+    }
+}

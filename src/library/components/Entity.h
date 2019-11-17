@@ -12,13 +12,16 @@
 #include "../log/Logger.h"
 
 class Entity {
-    // TODO(Performance): Optimize cache usage
+    // TODO: Maybe optimize cache usage
     std::vector<std::unique_ptr<Component>> m_components;
 
     bool m_finalized;
 public:
     Entity();
     ~Entity() = default;
+
+    void update();
+    void render();
 
     void finalize();
 
@@ -38,9 +41,9 @@ ComponentType* Entity::getComponent() {
         return nullptr;
     }
 
-    for (unsigned int i = 0; i < m_components.size(); ++i) {
+    for (auto& component : m_components) {
         // Attempt to cast component to given type
-        ComponentType* castedComponent = dynamic_cast<ComponentType*>(m_components[i].get());
+        ComponentType* castedComponent = dynamic_cast<ComponentType*>(component.get());
 
         if (castedComponent != nullptr)
             return castedComponent;
