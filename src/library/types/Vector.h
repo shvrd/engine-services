@@ -15,6 +15,10 @@ struct Vector2f {
         return {x + rhs.x, y + rhs.y};
     }
 
+    Vector2f operator+=(const Vector2f& rhs) {
+        return *this = *this + rhs;
+    }
+
     Vector2f operator-(const Vector2f rhs) const {
         return {x - rhs.x, y - rhs.y};
     }
@@ -25,6 +29,10 @@ struct Vector3f {
 
     Vector3f operator+(const Vector3f& rhs) const {
         return {x + rhs.x, y + rhs.y, z + rhs.z};
+    }
+
+    Vector3f operator+=(const Vector3f& rhs) {
+        return *this = *this + rhs;
     }
 
     Vector3f operator-(const Vector3f& rhs) const {

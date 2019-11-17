@@ -17,9 +17,9 @@ class C_Renderable : public Component {
     std::shared_ptr<Shader> m_shader;
     std::shared_ptr<Sprite> m_sprite;
 public:
-    C_Renderable(const std::shared_ptr<Shader>& shader, const std::shared_ptr<Sprite>& sprite)
-        : m_shader(shader)
-        , m_sprite(sprite) {}
+    C_Renderable(std::shared_ptr<Shader> shader, std::shared_ptr<Sprite> sprite)
+        : m_shader(std::move(shader))
+        , m_sprite(std::move(sprite)) {}
 
     void update() override;
     void render() override;

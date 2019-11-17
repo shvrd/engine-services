@@ -52,7 +52,7 @@ public:
     }
 
     void translate(const Vector2f &translation) {
-        m_location = m_location + translation;
+        m_location += translation;
         updateBuffer();
     }
 
