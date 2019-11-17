@@ -5,6 +5,8 @@
 #include "GLFWInput.h"
 #include "../../log/Logger.h"
 #include "../graphics/window/GLFW_Window.h"
+#include "../../types/Vector.h"
+#include "../InputServiceLocator.h"
 
 void GLFWInput::update() {
     int mouseXOld = m_mouseX;
@@ -18,6 +20,9 @@ void GLFWInput::update() {
 
     m_deltaMouseX = m_mouseX - mouseXOld;
     m_deltaMouseY = m_mouseY - mouseYOld;
+
+    m_hasPolled = false;
+    m_frameScroll = {};
 }
 
 bool GLFWInput::isKeyPressed(Key key) {
@@ -62,8 +67,31 @@ void GLFWInput::setGLFWWindow(Window *window) {
     }
 
     m_window = inputWindow;
+
+    // Set scroll callback
+    glfwSetScrollCallback(m_window, scrollCallback);
 }
 
 bool GLFWInput::isMousePressed(MouseButton mouseButton) {
     return glfwGetMouseButton(m_window, static_cast<int>(mouseButton)) == GLFW_PRESS;
+}
+
+const Vector2f GLFWInput::getMouseScroll() {
+    if (!m_hasPolled && m_hasScrolled) {
+        m_frameScroll = m_scroll;
+        m_hasPolled = true;
+        m_hasScrolled = false;
+    }
+
+    return m_frameScroll;
+}
+
+void GLFWInput::scrollCallback(GLFWwindow *window, double x, double y) {
+    // I hate every single character of this line
+    InputServiceLocator::get()->setMouseScroll({static_cast<float>(x), static_cast<float>(y)});
+}
+
+void GLFWInput::setMouseScroll(Vector2f mouseScroll) {
+    m_scroll = mouseScroll;
+    m_hasScrolled = true;
 }

@@ -71,6 +71,13 @@ void ExampleScene::update() {
         m_graphics->getCamera()->translate({0.f, (float) m_input->getDeltaMouseY()});
     }
 
+    if (m_input->getMouseScroll().y > 0) {
+        m_graphics->getCamera()->scale(1.2f);
+    } else if (m_input->getMouseScroll().y < 0) {
+        m_graphics->getCamera()->scale(0.8f);
+    }
+
+
     if (m_input->isKeyPressed(Key::W)) {
         m_graphics->getCamera()->translate({0.f, -speed});
     }

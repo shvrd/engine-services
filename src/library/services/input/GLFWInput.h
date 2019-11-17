@@ -14,6 +14,11 @@ class GLFWInput : public Input {
 
     int m_mouseX, m_mouseY;
     int m_deltaMouseX, m_deltaMouseY;
+    Vector2f m_scroll, m_frameScroll;
+
+    static void scrollCallback(GLFWwindow* window, double x, double y);
+
+    bool m_hasPolled, m_hasScrolled;
 public:
     GLFWInput() = default;
 
@@ -34,6 +39,10 @@ public:
     int getDeltaMouseY() override;
 
     bool isMousePressed(MouseButton mouseButton) override;
+
+    const Vector2f getMouseScroll() override;
+
+    void setMouseScroll(Vector2f mouseScroll) override;
 
     void setGLFWWindow(Window *window);
 };

@@ -8,6 +8,7 @@
 #include "Input.h"
 
 class NullInput : public Input {
+    Vector2f m_nullVector = {};
 public:
     NullInput() = default;
     ~NullInput() override = default;
@@ -24,6 +25,9 @@ public:
     int getDeltaMouseY() override { return 0; }
 
     bool isMousePressed(MouseButton mouseButton) override { return false; }
+
+    const Vector2f getMouseScroll() override { return m_nullVector; }
+    void setMouseScroll(Vector2f mouseScroll) override {}
 };
 
 

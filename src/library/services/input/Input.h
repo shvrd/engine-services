@@ -5,6 +5,8 @@
 #ifndef ENGINITO_INPUT_H
 #define ENGINITO_INPUT_H
 
+#include "../../types/Vector.h"
+
 enum class Key;
 enum class MouseButton;
 
@@ -26,6 +28,9 @@ public:
     virtual int getDeltaMouseY() = 0;
 
     virtual bool isMousePressed(MouseButton mouseButton) = 0;
+
+    virtual const Vector2f getMouseScroll() = 0;
+    virtual void setMouseScroll(Vector2f mouseScroll) = 0;
 };
 
 #endif //ENGINITO_INPUT_H
