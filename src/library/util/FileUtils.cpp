@@ -32,6 +32,5 @@ std::vector<char> FileUtils::readBinaryFile(const std::string &filePath) {
         return {};
     }
 
-
     return std::vector(std::istreambuf_iterator<char>(fileInputStream), {});
 }

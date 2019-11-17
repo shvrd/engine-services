@@ -14,8 +14,8 @@ class Component {
     Entity* m_parent;
 
 public:
-    virtual void update() = 0;
-    virtual void render() = 0;
+    virtual void update() {};
+    virtual void render() {};
 
 protected:
     inline Entity* getParent() { return m_parent; }

@@ -30,6 +30,8 @@ public:
     std::shared_ptr<Sprite> createSprite(Vector2f location, Vector2f dimensions) override { return std::make_shared<NullSprite>(Vector2f{0,0}, Vector2f{0,0}); }
 
     void drawText(const std::string& text, Vector2f location) override {}
+
+    void drawToRect(Vector2f location, Vector2f dimensions) override {}
 };
 
 #endif //ENGINITO_NULLGRAPHICS_H

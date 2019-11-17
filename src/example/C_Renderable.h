@@ -21,13 +21,8 @@ public:
         : m_shader(std::move(shader))
         , m_sprite(std::move(sprite)) {}
 
-    void update() override;
     void render() override;
 };
-
-void C_Renderable::update() {
-
-}
 
 void C_Renderable::render() {
     GraphicsServiceLocator::get()->bindShader(m_shader);

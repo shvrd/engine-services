@@ -74,23 +74,46 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glGenVertexArrays(1, &m_textVertexArrayObject);
+    // TODO: Make a function to generate a template vao and vbo
+    {
+        glGenVertexArrays(1, &m_textVertexArrayObject);
 
-    glBindVertexArray(m_textVertexArrayObject);
+        glBindVertexArray(m_textVertexArrayObject);
 
-    glGenBuffers(1, &m_textVertexBufferObject);
-    glBindBuffer(GL_ARRAY_BUFFER, m_textVertexBufferObject);
-    // Vertex Attribute ID 0: Position
-    glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
+        glGenBuffers(1, &m_textVertexBufferObject);
+        glBindBuffer(GL_ARRAY_BUFFER, m_textVertexBufferObject);
+        // Vertex Attribute ID 0: Position
+        glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
 
-    // Vertex Attribute ID 1: Color
-    glVertexAttribPointer((GLuint) 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, color));
+        // Vertex Attribute ID 1: Color
+        glVertexAttribPointer((GLuint) 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, color));
 
-    // Vertex Attribute ID 2: UV Map
-    glVertexAttribPointer((GLuint) 2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uv));
+        // Vertex Attribute ID 2: UV Map
+        glVertexAttribPointer((GLuint) 2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uv));
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArray(0);
+    }
+
+    {
+        glGenVertexArrays(1, &m_rectVertexArrayObject);
+
+        glBindVertexArray(m_rectVertexArrayObject);
+
+        glGenBuffers(1, &m_rectVertexBufferObject);
+        glBindBuffer(GL_ARRAY_BUFFER, m_rectVertexBufferObject);
+        // Vertex Attribute ID 0: Position
+        glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
+
+        // Vertex Attribute ID 1: Color
+        glVertexAttribPointer((GLuint) 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, color));
+
+        // Vertex Attribute ID 2: UV Map
+        glVertexAttribPointer((GLuint) 2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uv));
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArray(0);
+    }
 
     m_freeType.initialize();
 
@@ -209,6 +232,34 @@ void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
     }
 
     textShader->endUse();
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(0);
+}
+
+void OpenGLGraphics::drawToRect(Vector2f location, Vector2f dimensions) {
+    Vertex vertices[4];
+
+    // Bind vertex array object
+    glBindVertexArray(m_rectVertexArrayObject);
+
+    // Bind vertex buffer object
+    glBindBuffer(GL_ARRAY_BUFFER, m_rectVertexBufferObject);
+
+    m_currentShader->use();
+
+    // top left, top right, bottom left, bottom right
+    vertices[0] = Vertex{{location.x,  location.y, 0.f}, Colors::WHITE, {0, 1}};
+    vertices[1] = Vertex{{location.x + dimensions.x,  location.y, 0.f}, Colors::WHITE, {1, 1}};
+    vertices[2] = Vertex{{location.x, location.y + dimensions.y, 0.f}, Colors::WHITE, {0, 0}};
+    vertices[3] = Vertex{{location.x + dimensions.x, location.y + dimensions.y, 0.f}, Colors::WHITE, {1, 0}};
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    m_currentShader->endUse();
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 

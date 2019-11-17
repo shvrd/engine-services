@@ -15,16 +15,6 @@ public:
 
     C_Transform(Vector2f location)
         : m_location(location) {}
-    void update() override;
-    void render() override;
 };
-
-void C_Transform::update() {
-
-}
-
-void C_Transform::render() {
-
-}
 
 #endif //ENGINITO_C_TRANSFORM_H

@@ -13,6 +13,8 @@
 #include "C_Renderable.h"
 #include "C_Transform.h"
 #include "C_PlayerController.h"
+#include "C_TileMap.h"
+#include "C_TileMapRenderable.h"
 
 class ExampleScene : public Scene {
     std::vector<std::unique_ptr<Entity>> m_entities;
@@ -36,6 +38,8 @@ void ExampleScene::onEnter() {
     std::unique_ptr<Entity> player = std::make_unique<Entity>();
     std::unique_ptr<Entity> player2 = std::make_unique<Entity>();
 
+    std::unique_ptr<Entity> tileMap = std::make_unique<Entity>();
+
     auto shader = m_graphics->createShader();
     shader->addAttribute("vertexPosition");
     shader->addAttribute("vertexColor");
@@ -51,13 +55,28 @@ void ExampleScene::onEnter() {
 
     player->addComponent<C_Renderable>(shader, sprite);
     player->addComponent<C_Transform>(Vector2f{0, 0});
-    player->addComponent<C_PlayerController>(m_input);
+    // player->addComponent<C_PlayerController>(m_input);
 
     player2->addComponent<C_Renderable>(shader, sprite);
     player2->addComponent<C_Transform>(Vector2f{100, 100});
 
+    // Tilemap stuff
+    tileMap->addComponent<C_TileMap>(80, 40);
+
+    C_TileMap* tileMapComponent = tileMap->getComponent<C_TileMap>();
+
+    for (unsigned int x = 0; x < tileMapComponent->getWidth(); ++x) {
+        for (unsigned int y = 0; y < tileMapComponent->getHeight(); ++y) {
+            tileMapComponent->setTileAt(x, y, {1, nullptr, false});
+        }
+    }
+
+    tileMap->addComponent<C_TileMapRenderable>(shader);
+
     m_entities.push_back(std::move(player));
     m_entities.push_back(std::move(player2));
+
+    m_entities.push_back(std::move(tileMap));
 }
 
 void ExampleScene::onContinue() {
@@ -67,6 +86,36 @@ void ExampleScene::onContinue() {
 void ExampleScene::update() {
     for (auto& entity : m_entities) {
         entity->update();
+    }
+
+    float speed = 4.f;
+
+    if (m_input->isKeyPressed(Key::LEFT_SHIFT)) {
+        speed *= 4;
+    }
+
+    if (m_input->isKeyPressed(Key::LEFT_CONTROL)) {
+        speed /= 2;
+    }
+
+    if (m_input->isKeyPressed(Key::W)) {
+        m_graphics->getCamera()->translate({0.f, -speed});
+    }
+    if (m_input->isKeyPressed(Key::S)) {
+        m_graphics->getCamera()->translate({0.f, speed});
+    }
+    if (m_input->isKeyPressed(Key::A)) {
+        m_graphics->getCamera()->translate({speed, .0f});
+    }
+    if (m_input->isKeyPressed(Key::D)) {
+        m_graphics->getCamera()->translate({-speed, .0f});
+    }
+
+    if (m_input->isKeyPressed(Key::E)) {
+        m_graphics->getCamera()->scale(1.1f);
+    }
+    if (m_input->isKeyPressed(Key::Q)) {
+        m_graphics->getCamera()->scale(.9f);
     }
 }
 

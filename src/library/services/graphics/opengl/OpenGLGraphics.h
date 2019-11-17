@@ -11,6 +11,7 @@
 
 class OpenGLGraphics : public Graphics {
     GLuint m_textVertexArrayObject, m_textVertexBufferObject;
+    GLuint m_rectVertexArrayObject, m_rectVertexBufferObject;
 
 public:
     OpenGLGraphics();
@@ -33,6 +34,8 @@ public:
     void bindShader(std::shared_ptr<Shader> shader) override;
 
     void drawText(const std::string& text, Vector2f location) override;
+
+    void drawToRect(Vector2f location, Vector2f dimensions) override;
 };
 
 
