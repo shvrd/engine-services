@@ -10,10 +10,13 @@
 #include "../../../types/Vertex.h"
 #include "OpenGLSprite.h"
 #include "util/ImageLoader.h"
+#include "util/VAOCreator.h"
 
 OpenGLGraphics::OpenGLGraphics()
     : m_textVertexArrayObject(0)
-    , m_textVertexBufferObject(0) {
+    , m_textVertexBufferObject(0)
+    , m_rectVertexArrayObject(0)
+    , m_rectVertexBufferObject(0) {
 
 }
 
@@ -74,46 +77,8 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // TODO: Make a function to generate a template vao and vbo
-    {
-        glGenVertexArrays(1, &m_textVertexArrayObject);
-
-        glBindVertexArray(m_textVertexArrayObject);
-
-        glGenBuffers(1, &m_textVertexBufferObject);
-        glBindBuffer(GL_ARRAY_BUFFER, m_textVertexBufferObject);
-        // Vertex Attribute ID 0: Position
-        glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
-
-        // Vertex Attribute ID 1: Color
-        glVertexAttribPointer((GLuint) 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, color));
-
-        // Vertex Attribute ID 2: UV Map
-        glVertexAttribPointer((GLuint) 2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uv));
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
-    }
-
-    {
-        glGenVertexArrays(1, &m_rectVertexArrayObject);
-
-        glBindVertexArray(m_rectVertexArrayObject);
-
-        glGenBuffers(1, &m_rectVertexBufferObject);
-        glBindBuffer(GL_ARRAY_BUFFER, m_rectVertexBufferObject);
-        // Vertex Attribute ID 0: Position
-        glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
-
-        // Vertex Attribute ID 1: Color
-        glVertexAttribPointer((GLuint) 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, color));
-
-        // Vertex Attribute ID 2: UV Map
-        glVertexAttribPointer((GLuint) 2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uv));
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
-    }
+    VAOCreator::createVertexVAOandVBO(m_textVertexArrayObject, m_textVertexBufferObject);
+    VAOCreator::createVertexVAOandVBO(m_rectVertexArrayObject, m_rectVertexBufferObject);
 
     m_freeType.initialize();
 
@@ -262,6 +227,20 @@ void OpenGLGraphics::drawToRect(Vector2f location, Vector2f dimensions) {
     m_currentShader->endUse();
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(0);
+}
+
+void OpenGLGraphics::drawSprite(const std::shared_ptr<Sprite>& sprite) {
+    glBindVertexArray(sprite->getGraphicsIdentifier());
+
+    useTexture(sprite->getTexture());
+
+    m_currentShader->use();
+
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+    m_currentShader->endUse();
 
     glBindVertexArray(0);
 }

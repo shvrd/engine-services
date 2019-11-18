@@ -32,6 +32,8 @@ public:
     void drawText(const std::string& text, Vector2f location) override {}
 
     void drawToRect(Vector2f location, Vector2f dimensions) override {}
+
+    void drawSprite(const std::shared_ptr<Sprite>& sprite) override {}
 };
 
 #endif //ENGINITO_NULLGRAPHICS_H

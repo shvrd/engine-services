@@ -12,6 +12,8 @@
 
 class Sprite {
 protected:
+    unsigned int m_graphicsId;
+
     Vector2f m_location;
     Vector2f m_dimensions;
     Vector2f m_offset;
@@ -60,8 +62,13 @@ public:
         m_texture = texture;
     }
 
-    virtual void draw() const = 0;
+    unsigned int getGraphicsIdentifier() {
+        return m_graphicsId;
+    }
 
+    void setGraphicsIdentifier(unsigned int graphicsId) {
+        m_graphicsId = graphicsId;
+    }
 };
 
 #endif //ENGINITO_SPRITE_H

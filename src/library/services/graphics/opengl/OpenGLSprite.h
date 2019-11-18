@@ -11,7 +11,7 @@
 
 class OpenGLSprite : public Sprite {
     const unsigned int VERTEX_AMOUNT = 4;
-    GLuint m_vertexArrayObject, m_vertexBufferObject;
+    GLuint m_vertexBufferObject;
 
 public:
     OpenGLSprite(const Vector2f& location, const Vector2f& dimensions);
@@ -19,8 +19,6 @@ public:
     ~OpenGLSprite() override = default;
 
     void setTexture(const std::shared_ptr<Texture> texture) override;
-    void draw() const override;
-
 private:
     void updateBuffer() override;
 };

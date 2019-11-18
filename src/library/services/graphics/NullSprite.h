@@ -16,8 +16,6 @@ public:
     void setTexture(const std::shared_ptr<Texture> texture) override {
         Sprite::setTexture(texture);
     }
-
-    void draw() const override {}
 };
 
 #endif //ENGINITO_NULLSPRITE_H

@@ -25,8 +25,8 @@ public:
 };
 
 void C_Renderable::render() {
-    GraphicsServiceLocator::get()->bindShader(m_shader);
-    GraphicsServiceLocator::get()->useTexture(m_sprite->getTexture());
+    std::shared_ptr<Graphics> graphics = GraphicsServiceLocator::get();
+    graphics->bindShader(m_shader);
 
     C_Transform* transform = getParent()->getComponent<C_Transform>();
 
@@ -34,7 +34,7 @@ void C_Renderable::render() {
         m_sprite->setLocation(transform->m_location);
     }
 
-    m_sprite->draw();
+    graphics->drawSprite(m_sprite);
     m_shader->unbind();
 }
 

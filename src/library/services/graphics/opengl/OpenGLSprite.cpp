@@ -8,12 +8,12 @@
 #include "../../GraphicsServiceLocator.h"
 
 OpenGLSprite::OpenGLSprite(const Vector2f& location, const Vector2f& dimensions) : Sprite(location, dimensions) {
-    glGenVertexArrays(1, &m_vertexArrayObject);
+    glGenVertexArrays(1, &m_graphicsId);
 
     glGenBuffers(1, &m_vertexBufferObject);
 
     // Bind vertex array object
-    glBindVertexArray(m_vertexArrayObject);
+    glBindVertexArray(m_graphicsId);
 
     // Bind vertex buffer object
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
@@ -32,18 +32,6 @@ OpenGLSprite::OpenGLSprite(const Vector2f& location, const Vector2f& dimensions)
     glBindVertexArray(0);
 
     updateBuffer();
-}
-
-void OpenGLSprite::draw() const {
-    glBindVertexArray(m_vertexArrayObject);
-
-    GraphicsServiceLocator::get()->getCurrentShader()->use();
-
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTEX_AMOUNT);
-
-    GraphicsServiceLocator::get()->getCurrentShader()->endUse();
-
-    glBindVertexArray(0);
 }
 
 void OpenGLSprite::setTexture(const std::shared_ptr<Texture> texture) {

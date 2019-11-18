@@ -58,6 +58,8 @@ public:
     virtual void drawText(const std::string& text, Vector2f location) = 0;
 
     virtual void drawToRect(Vector2f location, Vector2f dimensions) = 0;
+
+    virtual void drawSprite(const std::shared_ptr<Sprite>& sprite) = 0;
 };
 
 #endif //ENGINITO_GRAPHICS_H
