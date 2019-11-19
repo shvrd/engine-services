@@ -2,8 +2,8 @@
 // Created by thekatze on 11/12/2018.
 //
 
-#ifndef ENGINITO_SCENE_H
-#define ENGINITO_SCENE_H
+#ifndef SHVRD_SCENE_H
+#define SHVRD_SCENE_H
 
 #include <memory>
 
@@ -32,4 +32,4 @@ public:
 };
 
 
-#endif //ENGINITO_SCENE_H
+#endif //SHVRD_SCENE_H

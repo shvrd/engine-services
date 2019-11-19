@@ -2,8 +2,8 @@
 // Created by thekatze on 25/01/2019.
 //
 
-#ifndef ENGINITO_VERTEX_H
-#define ENGINITO_VERTEX_H
+#ifndef SHVRD_VERTEX_H
+#define SHVRD_VERTEX_H
 
 #include "Vector.h"
 #include "Color.h"
@@ -13,6 +13,10 @@ struct Vertex {
     Color color;
 
     Vector2f uv;
+
+    bool operator==(const Vertex& rhs) {
+        return (position == rhs.position && color == rhs.color && uv == rhs.uv);
+    }
 };
 
-#endif //ENGINITO_VERTEX_H
+#endif //SHVRD_VERTEX_H

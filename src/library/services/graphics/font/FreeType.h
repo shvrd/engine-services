@@ -2,8 +2,8 @@
 // Created by thekatze on 23/10/2019.
 //
 
-#ifndef ENGINITO_FREETYPE_H
-#define ENGINITO_FREETYPE_H
+#ifndef SHVRD_FREETYPE_H
+#define SHVRD_FREETYPE_H
 
 #include <memory>
 #include <string>
@@ -42,4 +42,4 @@ public:
     void cache(std::shared_ptr<Letter> letter);
 };
 
-#endif //ENGINITO_FREETYPE_H
+#endif //SHVRD_FREETYPE_H

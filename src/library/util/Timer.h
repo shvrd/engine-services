@@ -2,8 +2,8 @@
 // Created by thekatze on 16/12/2018.
 //
 
-#ifndef ENGINITO_TIMER_H
-#define ENGINITO_TIMER_H
+#ifndef SHVRD_TIMER_H
+#define SHVRD_TIMER_H
 
 #include <chrono>
 
@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif //ENGINITO_TIMER_H
+#endif //SHVRD_TIMER_H

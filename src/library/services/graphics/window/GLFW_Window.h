@@ -2,8 +2,8 @@
 // Created by thekatze on 23/12/2018.
 //
 
-#ifndef ENGINITO_GLFWWINDOW_H
-#define ENGINITO_GLFWWINDOW_H
+#ifndef SHVRD_GLFWWINDOW_H
+#define SHVRD_GLFWWINDOW_H
 
 #include "Window.h"
 
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif //ENGINITO_GLFWWINDOW_H
+#endif //SHVRD_GLFWWINDOW_H

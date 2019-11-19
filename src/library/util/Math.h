@@ -2,8 +2,8 @@
 // Created by thekatze on 22/10/2019.
 //
 
-#ifndef ENGINITO_MATH_H
-#define ENGINITO_MATH_H
+#ifndef SHVRD_MATH_H
+#define SHVRD_MATH_H
 
 
 namespace Math {
@@ -11,4 +11,4 @@ namespace Math {
 };
 
 
-#endif //ENGINITO_MATH_H
+#endif //SHVRD_MATH_H

@@ -6,30 +6,10 @@
 #include "../../../types/Vertex.h"
 #include "../../../log/Logger.h"
 #include "../../GraphicsServiceLocator.h"
+#include "util/VAOCreator.h"
 
 OpenGLSprite::OpenGLSprite(const Vector2f& location, const Vector2f& dimensions) : Sprite(location, dimensions) {
-    glGenVertexArrays(1, &m_graphicsId);
-
-    glGenBuffers(1, &m_vertexBufferObject);
-
-    // Bind vertex array object
-    glBindVertexArray(m_graphicsId);
-
-    // Bind vertex buffer object
-    glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
-
-    // Vertex Attribute ID 0: Position
-    glVertexAttribPointer((GLuint) 0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, position));
-
-    // Vertex Attribute ID 1: Color
-    glVertexAttribPointer((GLuint) 1, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*) offsetof(Vertex, color));
-
-    // Vertex Attribute ID 2: UV Map
-    glVertexAttribPointer((GLuint) 2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, uv));
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glBindVertexArray(0);
+    VAOCreator::createVertexVAOandVBO(m_graphicsId, m_vertexBufferObject);
 
     updateBuffer();
 }

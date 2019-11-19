@@ -2,8 +2,8 @@
 // Created by thekatze on 11/11/2019.
 //
 
-#ifndef ENGINITO_NULLAUDIO_H
-#define ENGINITO_NULLAUDIO_H
+#ifndef SHVRD_NULLAUDIO_H
+#define SHVRD_NULLAUDIO_H
 
 #include "Audio.h"
 
@@ -13,4 +13,4 @@ public:
     std::shared_ptr<Sound> loadSound(const std::string& filePath) override { return std::make_shared<Sound>(); }
 };
 
-#endif //ENGINITO_NULLAUDIO_H
+#endif //SHVRD_NULLAUDIO_H

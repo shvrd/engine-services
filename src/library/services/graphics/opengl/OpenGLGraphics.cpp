@@ -106,11 +106,10 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath) {
     // If texture is already cached, return it.
     if (auto texture = m_textures.get(filePath)) {
-        Logger::info("Loaded texture from cache: " + filePath);
         return texture;
     }
 
-    Logger::info("Loading texture for the first time: " + filePath);
+    Logger::info("Caching texture: " + filePath);
 
     auto texture = ImageLoader::loadFromPNG(filePath);
 

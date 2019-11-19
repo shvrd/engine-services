@@ -2,8 +2,8 @@
 // Created by thekatze on 17/11/2019.
 //
 
-#ifndef ENGINITO_C_RENDERABLE_H
-#define ENGINITO_C_RENDERABLE_H
+#ifndef SHVRD_C_RENDERABLE_H
+#define SHVRD_C_RENDERABLE_H
 
 #include <memory>
 
@@ -38,4 +38,4 @@ void C_Renderable::render() {
     m_shader->unbind();
 }
 
-#endif //ENGINITO_C_RENDERABLE_H
+#endif //SHVRD_C_RENDERABLE_H

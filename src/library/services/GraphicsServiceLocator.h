@@ -2,8 +2,8 @@
 // Created by thekatze on 25/12/2018.
 //
 
-#ifndef ENGINITO_GRAPHICSSERVICELOCATOR_H
-#define ENGINITO_GRAPHICSSERVICELOCATOR_H
+#ifndef SHVRD_GRAPHICSSERVICELOCATOR_H
+#define SHVRD_GRAPHICSSERVICELOCATOR_H
 
 #include <memory>
 #include "graphics/Graphics.h"
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //ENGINITO_GRAPHICSSERVICELOCATOR_H
+#endif //SHVRD_GRAPHICSSERVICELOCATOR_H

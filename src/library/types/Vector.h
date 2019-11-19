@@ -2,8 +2,8 @@
 // Created by thekatze on 10/02/2019.
 //
 
-#ifndef ENGINITO_VECTOR_H
-#define ENGINITO_VECTOR_H
+#ifndef SHVRD_VECTOR_H
+#define SHVRD_VECTOR_H
 
 struct Vector2f {
     float x = 0, y = 0;
@@ -19,8 +19,12 @@ struct Vector2f {
         return *this = *this + rhs;
     }
 
-    Vector2f operator-(const Vector2f rhs) const {
+    Vector2f operator-(const Vector2f& rhs) const {
         return {x - rhs.x, y - rhs.y};
+    }
+
+    bool operator==(const Vector2f& rhs) const {
+        return (x == rhs.x && y == rhs.y);
     }
 };
 
@@ -38,6 +42,10 @@ struct Vector3f {
     Vector3f operator-(const Vector3f& rhs) const {
         return {x - rhs.x, y - rhs.y, z - rhs.z};
     }
+
+    bool operator==(const Vector3f& rhs) const {
+        return (x == rhs.x && y == rhs.y && z == rhs.z);
+    }
 };
 
-#endif //ENGINITO_VECTOR_H
+#endif //SHVRD_VECTOR_H

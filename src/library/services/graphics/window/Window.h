@@ -2,8 +2,8 @@
 // Created by thekatze on 23/12/2018.
 //
 
-#ifndef ENGINITO_WINDOW_H
-#define ENGINITO_WINDOW_H
+#ifndef SHVRD_WINDOW_H
+#define SHVRD_WINDOW_H
 
 #include <string>
 
@@ -30,4 +30,4 @@ public:
 };
 
 
-#endif //ENGINITO_WINDOW_H
+#endif //SHVRD_WINDOW_H

@@ -2,8 +2,8 @@
 // Created by thekatze on 17/02/19.
 //
 
-#ifndef ENGINITO_NULLSPRITE_H
-#define ENGINITO_NULLSPRITE_H
+#ifndef SHVRD_NULLSPRITE_H
+#define SHVRD_NULLSPRITE_H
 
 #include "Sprite.h"
 
@@ -18,4 +18,4 @@ public:
     }
 };
 
-#endif //ENGINITO_NULLSPRITE_H
+#endif //SHVRD_NULLSPRITE_H

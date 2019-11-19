@@ -2,8 +2,8 @@
 // Created by thekatze on 05/01/2019.
 //
 
-#ifndef ENGINITO_GLSLSHADER_H
-#define ENGINITO_GLSLSHADER_H
+#ifndef SHVRD_GLSLSHADER_H
+#define SHVRD_GLSLSHADER_H
 
 #include <GL/glew.h>
 
@@ -49,4 +49,4 @@ private:
 };
 
 
-#endif //ENGINITO_GLSLSHADER_H
+#endif //SHVRD_GLSLSHADER_H

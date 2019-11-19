@@ -2,8 +2,8 @@
 // Created by thekatze on 26/10/2019.
 //
 
-#ifndef ENGINITO_LETTER_H
-#define ENGINITO_LETTER_H
+#ifndef SHVRD_LETTER_H
+#define SHVRD_LETTER_H
 
 struct Letter {
     unsigned long id;
@@ -25,4 +25,4 @@ struct Letter {
     } advance;
 };
 
-#endif //ENGINITO_LETTER_H
+#endif //SHVRD_LETTER_H

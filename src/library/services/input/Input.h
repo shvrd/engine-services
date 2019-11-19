@@ -2,8 +2,8 @@
 // Created by thekatze on 24/12/2018.
 //
 
-#ifndef ENGINITO_INPUT_H
-#define ENGINITO_INPUT_H
+#ifndef SHVRD_INPUT_H
+#define SHVRD_INPUT_H
 
 #include "../../types/Vector.h"
 
@@ -33,4 +33,4 @@ public:
     virtual void setMouseScroll(Vector2f mouseScroll) = 0;
 };
 
-#endif //ENGINITO_INPUT_H
+#endif //SHVRD_INPUT_H

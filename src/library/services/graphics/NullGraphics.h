@@ -2,8 +2,8 @@
 // Created by thekatze on 25/12/2018.
 //
 
-#ifndef ENGINITO_NULLGRAPHICS_H
-#define ENGINITO_NULLGRAPHICS_H
+#ifndef SHVRD_NULLGRAPHICS_H
+#define SHVRD_NULLGRAPHICS_H
 
 #include "Graphics.h"
 #include "NullShader.h"
@@ -36,4 +36,4 @@ public:
     void drawSprite(const std::shared_ptr<Sprite>& sprite) override {}
 };
 
-#endif //ENGINITO_NULLGRAPHICS_H
+#endif //SHVRD_NULLGRAPHICS_H

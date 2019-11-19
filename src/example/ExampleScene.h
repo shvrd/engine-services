@@ -2,8 +2,8 @@
 // Created by thekatze on 03/01/2019.
 //
 
-#ifndef ENGINITO_EXAMPLESCENE_H
-#define ENGINITO_EXAMPLESCENE_H
+#ifndef SHVRD_EXAMPLESCENE_H
+#define SHVRD_EXAMPLESCENE_H
 
 #include <scenes/Scene.h>
 #include <log/Logger.h>
@@ -133,7 +133,7 @@ void ExampleScene::onLeave() {
 
 }
 
-#endif //ENGINITO_EXAMPLESCENE_H
+#endif //SHVRD_EXAMPLESCENE_H
 
 /*
     Logger::info("Entering example scene");

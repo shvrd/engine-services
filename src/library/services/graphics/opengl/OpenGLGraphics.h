@@ -2,8 +2,8 @@
 // Created by thekatze on 25/12/2018.
 //
 
-#ifndef ENGINITO_OPENGLGRAPHICS_H
-#define ENGINITO_OPENGLGRAPHICS_H
+#ifndef SHVRD_OPENGLGRAPHICS_H
+#define SHVRD_OPENGLGRAPHICS_H
 
 #include <GL/glew.h>
 #include <GL/gl.h>
@@ -41,4 +41,4 @@ public:
 };
 
 
-#endif //ENGINITO_OPENGLGRAPHICS_H
+#endif //SHVRD_OPENGLGRAPHICS_H

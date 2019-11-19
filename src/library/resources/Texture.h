@@ -2,12 +2,12 @@
 // Created by thekatze on 10/02/2019.
 //
 
-#ifndef ENGINITO_TEXTURE_H
-#define ENGINITO_TEXTURE_H
+#ifndef SHVRD_TEXTURE_H
+#define SHVRD_TEXTURE_H
 
 struct Texture {
     unsigned int id;
     unsigned int width, height;
 };
 
-#endif //ENGINITO_TEXTURE_H
+#endif //SHVRD_TEXTURE_H

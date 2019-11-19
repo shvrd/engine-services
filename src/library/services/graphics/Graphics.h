@@ -2,8 +2,8 @@
 // Created by thekatze on 25/12/2018.
 //
 
-#ifndef ENGINITO_GRAPHICS_H
-#define ENGINITO_GRAPHICS_H
+#ifndef SHVRD_GRAPHICS_H
+#define SHVRD_GRAPHICS_H
 
 #include <memory>
 #include "font/FreeType.h"
@@ -62,4 +62,4 @@ public:
     virtual void drawSprite(const std::shared_ptr<Sprite>& sprite) = 0;
 };
 
-#endif //ENGINITO_GRAPHICS_H
+#endif //SHVRD_GRAPHICS_H

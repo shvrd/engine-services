@@ -2,8 +2,8 @@
 // Created by thekatze on 24/12/2018.
 //
 
-#ifndef ENGINITO_NULLWINDOW_H
-#define ENGINITO_NULLWINDOW_H
+#ifndef SHVRD_NULLWINDOW_H
+#define SHVRD_NULLWINDOW_H
 
 #include "Window.h"
 
@@ -22,4 +22,4 @@ public:
     bool windowShouldClose() override { return false; }
 };
 
-#endif //ENGINITO_NULLWINDOW_H
+#endif //SHVRD_NULLWINDOW_H

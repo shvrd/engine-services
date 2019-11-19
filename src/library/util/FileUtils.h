@@ -2,8 +2,8 @@
 // Created by thekatze on 06/01/2019.
 //
 
-#ifndef ENGINITO_FILEUTILS_H
-#define ENGINITO_FILEUTILS_H
+#ifndef SHVRD_FILEUTILS_H
+#define SHVRD_FILEUTILS_H
 
 
 #include <string>
@@ -19,4 +19,4 @@ public:
 
 };
 
-#endif //ENGINITO_FILEUTILS_H
+#endif //SHVRD_FILEUTILS_H

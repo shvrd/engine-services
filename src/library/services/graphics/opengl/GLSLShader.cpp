@@ -26,7 +26,6 @@ void GLSLShader::setVertexShader(const std::string &filePath) {
         glDeleteShader(m_vertexShaderProgram);
     }
 
-    Logger::info("Creating Vertex Shader");
     m_vertexShaderProgram = glCreateShader(GL_VERTEX_SHADER);
 
     Logger::info("Compiling Vertex Shader: " + filePath);
@@ -42,7 +41,6 @@ void GLSLShader::setFragmentShader(const std::string &filePath) {
         glDeleteShader(m_fragmentShaderProgram);
     }
 
-    Logger::info("Creating Fragment Shader");
     m_fragmentShaderProgram = glCreateShader(GL_FRAGMENT_SHADER);
 
     Logger::info("Compiling Fragment Shader: " + filePath);

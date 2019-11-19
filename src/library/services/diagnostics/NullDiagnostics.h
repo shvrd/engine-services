@@ -2,8 +2,8 @@
 // Created by thekatze on 24/06/2019.
 //
 
-#ifndef ENGINITO_NULLDIAGNOSTICS_H
-#define ENGINITO_NULLDIAGNOSTICS_H
+#ifndef SHVRD_NULLDIAGNOSTICS_H
+#define SHVRD_NULLDIAGNOSTICS_H
 
 #include "Diagnostics.h"
 
@@ -14,4 +14,4 @@ public:
     float getCPUUsage() override { return 0.0f; }
 };
 
-#endif //ENGINITO_NULLDIAGNOSTICS_H
+#endif //SHVRD_NULLDIAGNOSTICS_H

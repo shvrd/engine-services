@@ -2,8 +2,8 @@
 // Created by thekatze on 17/11/2019.
 //
 
-#ifndef ENGINITO_TILE_H
-#define ENGINITO_TILE_H
+#ifndef SHVRD_TILE_H
+#define SHVRD_TILE_H
 
 class Entity;
 
@@ -13,4 +13,4 @@ struct Tile {
     bool m_hasCollision;
 };
 
-#endif //ENGINITO_TILE_H
+#endif //SHVRD_TILE_H

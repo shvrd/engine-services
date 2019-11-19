@@ -2,8 +2,8 @@
 // Created by thekatze on 17/11/2019.
 //
 
-#ifndef ENGINITO_C_TRANSFORM_H
-#define ENGINITO_C_TRANSFORM_H
+#ifndef SHVRD_C_TRANSFORM_H
+#define SHVRD_C_TRANSFORM_H
 
 #include <components/Component.h>
 #include <types/Vector.h>
@@ -17,4 +17,4 @@ public:
         : m_location(location) {}
 };
 
-#endif //ENGINITO_C_TRANSFORM_H
+#endif //SHVRD_C_TRANSFORM_H

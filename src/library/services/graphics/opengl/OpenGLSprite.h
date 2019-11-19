@@ -2,8 +2,8 @@
 // Created by thekatze on 10/02/2019.
 //
 
-#ifndef ENGINITO_OPENGLSPRITE_H
-#define ENGINITO_OPENGLSPRITE_H
+#ifndef SHVRD_OPENGLSPRITE_H
+#define SHVRD_OPENGLSPRITE_H
 
 #include "../Sprite.h"
 
@@ -24,4 +24,4 @@ private:
 };
 
 
-#endif //ENGINITO_OPENGLSPRITE_H
+#endif //SHVRD_OPENGLSPRITE_H

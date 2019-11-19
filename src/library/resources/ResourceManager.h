@@ -2,8 +2,8 @@
 // Created by thekatze on 20/07/2019.
 //
 
-#ifndef ENGINITO_RESOURCEMANAGER_H
-#define ENGINITO_RESOURCEMANAGER_H
+#ifndef SHVRD_RESOURCEMANAGER_H
+#define SHVRD_RESOURCEMANAGER_H
 
 #include <map>
 #include <memory>
@@ -63,4 +63,4 @@ void ResourceManager<Resource>::clear() {
 }
 
 
-#endif //ENGINITO_RESOURCEMANAGER_H
+#endif //SHVRD_RESOURCEMANAGER_H

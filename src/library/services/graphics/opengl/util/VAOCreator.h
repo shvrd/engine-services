@@ -2,8 +2,8 @@
 // Created by thekatze on 18/11/2019.
 //
 
-#ifndef ENGINITO_VAOCREATOR_H
-#define ENGINITO_VAOCREATOR_H
+#ifndef SHVRD_VAOCREATOR_H
+#define SHVRD_VAOCREATOR_H
 
 
 #include <GL/glew.h>
@@ -14,4 +14,4 @@ public:
 };
 
 
-#endif //ENGINITO_VAOCREATOR_H
+#endif //SHVRD_VAOCREATOR_H

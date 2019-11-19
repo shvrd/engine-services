@@ -2,8 +2,8 @@
 // Created by thekatze on 07/01/2019.
 //
 
-#ifndef ENGINITO_SHADER_H
-#define ENGINITO_SHADER_H
+#ifndef SHVRD_SHADER_H
+#define SHVRD_SHADER_H
 class Shader {
 public:
     Shader()
@@ -33,4 +33,4 @@ protected:
     bool m_isFinalized;
     unsigned int m_attributes;
 };
-#endif //ENGINITO_SHADER_H
+#endif //SHVRD_SHADER_H

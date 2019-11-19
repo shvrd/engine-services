@@ -2,8 +2,8 @@
 // Created by thekatze on 21/07/2019.
 //
 
-#ifndef ENGINITO_IMAGELOADER_H
-#define ENGINITO_IMAGELOADER_H
+#ifndef SHVRD_IMAGELOADER_H
+#define SHVRD_IMAGELOADER_H
 
 #include <memory>
 #include <string>
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //ENGINITO_IMAGELOADER_H
+#endif //SHVRD_IMAGELOADER_H

@@ -2,8 +2,8 @@
 // Created by thekatze on 11/11/2019.
 //
 
-#ifndef ENGINITO_AUDIO_H
-#define ENGINITO_AUDIO_H
+#ifndef SHVRD_AUDIO_H
+#define SHVRD_AUDIO_H
 
 #include <memory>
 
@@ -19,4 +19,4 @@ public:
 
 };
 
-#endif //ENGINITO_AUDIO_H
+#endif //SHVRD_AUDIO_H

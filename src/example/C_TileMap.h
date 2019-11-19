@@ -2,8 +2,8 @@
 // Created by thekatze on 17/11/2019.
 //
 
-#ifndef ENGINITO_C_TILEMAP_H
-#define ENGINITO_C_TILEMAP_H
+#ifndef SHVRD_C_TILEMAP_H
+#define SHVRD_C_TILEMAP_H
 
 #include <memory>
 
@@ -48,4 +48,4 @@ public:
     */
 };
 
-#endif //ENGINITO_C_TILEMAP_H
+#endif //SHVRD_C_TILEMAP_H

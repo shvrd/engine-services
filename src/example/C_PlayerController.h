@@ -2,8 +2,8 @@
 // Created by thekatze on 17/11/2019.
 //
 
-#ifndef ENGINITO_C_PLAYERCONTROLLER_H
-#define ENGINITO_C_PLAYERCONTROLLER_H
+#ifndef SHVRD_C_PLAYERCONTROLLER_H
+#define SHVRD_C_PLAYERCONTROLLER_H
 
 #include <memory>
 
@@ -45,4 +45,4 @@ void C_PlayerController::render() {
 
 }
 
-#endif //ENGINITO_C_PLAYERCONTROLLER_H
+#endif //SHVRD_C_PLAYERCONTROLLER_H

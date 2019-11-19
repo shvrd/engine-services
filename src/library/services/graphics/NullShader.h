@@ -2,8 +2,8 @@
 // Created by thekatze on 07/01/2019.
 //
 
-#ifndef ENGINITO_NULLSHADER_H
-#define ENGINITO_NULLSHADER_H
+#ifndef SHVRD_NULLSHADER_H
+#define SHVRD_NULLSHADER_H
 class NullShader : public Shader {
 public:
     NullShader() = default;
@@ -25,4 +25,4 @@ public:
 
     int getUniformLocation(const std::string& uniformName) override { return 0; }
 };
-#endif //ENGINITO_NULLSHADER_H
+#endif //SHVRD_NULLSHADER_H

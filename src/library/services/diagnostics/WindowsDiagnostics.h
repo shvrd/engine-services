@@ -2,8 +2,8 @@
 // Created by thekatze on 24/06/2019.
 //
 
-#ifndef ENGINITO_WINDOWSDIAGNOSTICS_H
-#define ENGINITO_WINDOWSDIAGNOSTICS_H
+#ifndef SHVRD_WINDOWSDIAGNOSTICS_H
+#define SHVRD_WINDOWSDIAGNOSTICS_H
 
 #include "Diagnostics.h"
 
@@ -15,4 +15,4 @@ public:
 };
 
 
-#endif //ENGINITO_WINDOWSDIAGNOSTICS_H
+#endif //SHVRD_WINDOWSDIAGNOSTICS_H

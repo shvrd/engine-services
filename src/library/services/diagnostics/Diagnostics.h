@@ -2,8 +2,8 @@
 // Created by thekatze on 24/06/2019.
 //
 
-#ifndef ENGINITO_DIAGNOSTICS_H
-#define ENGINITO_DIAGNOSTICS_H
+#ifndef SHVRD_DIAGNOSTICS_H
+#define SHVRD_DIAGNOSTICS_H
 
 class Diagnostics {
 public:
@@ -12,4 +12,4 @@ public:
     virtual float getCPUUsage() = 0;
 };
 
-#endif //ENGINITO_DIAGNOSTICS_H
+#endif //SHVRD_DIAGNOSTICS_H

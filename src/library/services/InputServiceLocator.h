@@ -2,8 +2,8 @@
 // Created by thekatze on 24/12/2018.
 //
 
-#ifndef ENGINITO_INPUTSERVICELOCATOR_H
-#define ENGINITO_INPUTSERVICELOCATOR_H
+#ifndef SHVRD_INPUTSERVICELOCATOR_H
+#define SHVRD_INPUTSERVICELOCATOR_H
 
 #include <memory>
 #include "input/Input.h"
@@ -18,4 +18,4 @@ public:
     static void set(std::shared_ptr<Input> input);
 };
 
-#endif //ENGINITO_INPUTSERVICELOCATOR_H
+#endif //SHVRD_INPUTSERVICELOCATOR_H

@@ -2,8 +2,8 @@
 // Created by thekatze on 24/12/2018.
 //
 
-#ifndef ENGINITO_NULLINPUT_H
-#define ENGINITO_NULLINPUT_H
+#ifndef SHVRD_NULLINPUT_H
+#define SHVRD_NULLINPUT_H
 
 #include "Input.h"
 
@@ -31,4 +31,4 @@ public:
 };
 
 
-#endif //ENGINITO_NULLINPUT_H
+#endif //SHVRD_NULLINPUT_H

@@ -2,8 +2,8 @@
 // Created by thekatze on 24/11/2018.
 //
 
-#ifndef ENGINITO_LOGGER_H
-#define ENGINITO_LOGGER_H
+#ifndef SHVRD_LOGGER_H
+#define SHVRD_LOGGER_H
 
 #include <string>
 #include <mutex>
@@ -22,4 +22,4 @@ public:
 };
 
 
-#endif //ENGINITO_LOGGER_H
+#endif //SHVRD_LOGGER_H

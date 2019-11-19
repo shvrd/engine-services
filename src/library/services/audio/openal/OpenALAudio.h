@@ -2,8 +2,8 @@
 // Created by thekatze on 11/11/2019.
 //
 
-#ifndef ENGINITO_OPENALAUDIO_H
-#define ENGINITO_OPENALAUDIO_H
+#ifndef SHVRD_OPENALAUDIO_H
+#define SHVRD_OPENALAUDIO_H
 
 #include "../Audio.h"
 
@@ -20,4 +20,4 @@ public:
 };
 
 
-#endif //ENGINITO_OPENALAUDIO_H
+#endif //SHVRD_OPENALAUDIO_H

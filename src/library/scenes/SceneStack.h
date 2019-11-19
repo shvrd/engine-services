@@ -2,8 +2,8 @@
 // Created by thekatze on 11/12/2018.
 //
 
-#ifndef ENGINITO_SCENESTACK_H
-#define ENGINITO_SCENESTACK_H
+#ifndef SHVRD_SCENESTACK_H
+#define SHVRD_SCENESTACK_H
 
 #include <stack>
 #include <memory>
@@ -30,4 +30,4 @@ private:
 };
 
 
-#endif //ENGINITO_SCENESTACK_H
+#endif //SHVRD_SCENESTACK_H

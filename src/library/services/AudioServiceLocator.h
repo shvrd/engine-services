@@ -2,8 +2,8 @@
 // Created by thekatze on 11/11/2019.
 //
 
-#ifndef ENGINITO_AUDIOSERVICELOCATOR_H
-#define ENGINITO_AUDIOSERVICELOCATOR_H
+#ifndef SHVRD_AUDIOSERVICELOCATOR_H
+#define SHVRD_AUDIOSERVICELOCATOR_H
 
 #include <memory>
 #include "audio/Audio.h"
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //ENGINITO_AUDIOSERVICELOCATOR_H
+#endif //SHVRD_AUDIOSERVICELOCATOR_H

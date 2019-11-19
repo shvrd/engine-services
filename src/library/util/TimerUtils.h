@@ -2,8 +2,8 @@
 // Created by thekatze on 22/12/2018.
 //
 
-#ifndef ENGINITO_TIMERUTILS_H
-#define ENGINITO_TIMERUTILS_H
+#ifndef SHVRD_TIMERUTILS_H
+#define SHVRD_TIMERUTILS_H
 
 #include "Timer.h"
 
@@ -16,4 +16,4 @@ public:
 };
 
 
-#endif //ENGINITO_TIMERUTILS_H
+#endif //SHVRD_TIMERUTILS_H

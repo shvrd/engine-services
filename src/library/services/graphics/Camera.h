@@ -2,8 +2,8 @@
 // Created by thekatze on 17/04/2019.
 //
 
-#ifndef ENGINITO_CAMERA_H
-#define ENGINITO_CAMERA_H
+#ifndef SHVRD_CAMERA_H
+#define SHVRD_CAMERA_H
 
 #include <glm/glm.hpp>
 
@@ -45,4 +45,4 @@ public:
 
 
 
-#endif //ENGINITO_CAMERA_H
+#endif //SHVRD_CAMERA_H

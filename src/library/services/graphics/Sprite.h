@@ -2,8 +2,8 @@
 // Created by thekatze on 10/02/2019.
 //
 
-#ifndef ENGINITO_SPRITE_H
-#define ENGINITO_SPRITE_H
+#ifndef SHVRD_SPRITE_H
+#define SHVRD_SPRITE_H
 
 #include <memory>
 
@@ -23,9 +23,10 @@ protected:
     virtual void updateBuffer() = 0;
 public:
     Sprite(const Vector2f& offset, const Vector2f& dimensions)
-        : m_location({})
+        : m_graphicsId(0)
+        , m_location()
         , m_dimensions(dimensions)
-        , m_offset(offset){
+        , m_offset(offset) {
 
     }
 
@@ -59,7 +60,7 @@ public:
     }
 
     virtual void setTexture(std::shared_ptr<Texture> texture) {
-        m_texture = texture;
+        m_texture = std::move(texture);
     }
 
     unsigned int getGraphicsIdentifier() {
@@ -71,4 +72,4 @@ public:
     }
 };
 
-#endif //ENGINITO_SPRITE_H
+#endif //SHVRD_SPRITE_H

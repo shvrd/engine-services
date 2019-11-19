@@ -2,8 +2,8 @@
 // Created by thekatze on 24/12/2018.
 //
 
-#ifndef ENGINITO_GLFWINPUT_H
-#define ENGINITO_GLFWINPUT_H
+#ifndef SHVRD_GLFWINPUT_H
+#define SHVRD_GLFWINPUT_H
 
 #include <GLFW/glfw3.h>
 #include "Input.h"
@@ -185,4 +185,4 @@ enum class MouseButton {
 
 #endif //INPUT_KEYS_SET
 
-#endif //ENGINITO_GLFWINPUT_H
+#endif //SHVRD_GLFWINPUT_H

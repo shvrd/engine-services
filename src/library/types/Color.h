@@ -2,8 +2,8 @@
 // Created by thekatze on 24/02/2019.
 //
 
-#ifndef ENGINITO_COLOR_H
-#define ENGINITO_COLOR_H
+#ifndef SHVRD_COLOR_H
+#define SHVRD_COLOR_H
 
 #include <limits>
 
@@ -88,23 +88,32 @@ private:
     }
 };
 
+
+// The HTML 4.01 spec named colors
 namespace Colors {
     const Color WHITE = {255, 255, 255};
-    const Color BLACK = {0, 0, 0};
-
+    const Color SILVER = {192, 192, 192};
     const Color GRAY = {128, 128, 128};
     const Color GREY = GRAY;
-
-    const Color SILVER = {192, 192, 192};
+    const Color BLACK = {0, 0, 0};
 
     const Color RED = {255, 0, 0};
     const Color MAROON = {128, 0, 0};
 
+    const Color YELLOW = {255, 255, 0};
+    const Color OLIVE = {128, 128, 0};
+
     const Color LIME = {0, 255, 0};
     const Color GREEN = {0, 128, 0};
 
+    const Color AQUA = {0, 255, 255};
+    const Color TEAL = {0, 128, 128};
+
     const Color BLUE = {0, 0, 255};
     const Color NAVY = {0, 0, 128};
+
+    const Color FUCHSIA = {255, 0, 255};
+    const Color PURPLE = {128, 0, 128};
 }
 
-#endif //ENGINITO_COLOR_H
+#endif //SHVRD_COLOR_H
