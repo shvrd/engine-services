@@ -16,13 +16,21 @@
 #include "services/audio/openal/OpenALAudio.h"
 
 GameContainer::GameContainer()
-    : m_threadPool(1)
+    : m_threadPool(ThreadPool::getSystemThreads())
+    , m_initialized(false)
     , m_sceneStack()
     , m_gameLoopTimer()
-    // TODO: Dont hardcode target fps
-    , m_frameTime(TimerUtils::calculateFrameTimeForFPS(60))
+    , m_targetFPS(0)
+    , m_targetTPS(120)
+    , m_startTime(0)
+    , m_frameTime(0)
+    , m_currentTick(0)
     , m_window()
-    , m_input() {
+    , m_input()
+    , m_graphics()
+    , m_audio() {
+    // TODO: Dont hardcode target fps/tps
+    setTargetFPS(60);
     m_initialized = this->initializeSystems();
 }
 
@@ -41,6 +49,7 @@ void GameContainer::start(std::unique_ptr<Scene> initialScene) {
 
     m_sceneStack.push(std::move(initialScene));
 
+    m_startTime = Timer::now();
     this->gameLoop();
 }
 
@@ -89,12 +98,10 @@ bool GameContainer::initializeSystems() {
 void GameContainer::gameLoop() {
     while(this->isRunning()) {
         m_gameLoopTimer.start();
+
         this->update();
         this->render();
 
-        m_window->pollEvents();
-
-        //TODO: Make updates not dependent on framerate -> Target TPS (ticks per second)
         int waitTime = m_frameTime - m_gameLoopTimer.get();
 
         if (waitTime < 0) {
@@ -108,8 +115,15 @@ void GameContainer::gameLoop() {
 }
 
 void GameContainer::update() {
-    m_input->update();
-    m_sceneStack.update();
+    unsigned int targetTick = getTargetTick();
+
+    while (m_currentTick <= getTargetTick()) {
+        m_window->pollEvents();
+        m_input->update();
+        m_sceneStack.update();
+
+        ++m_currentTick;
+    }
 }
 
 void GameContainer::render() {
@@ -127,7 +141,12 @@ bool GameContainer::isRunning() {
 }
 
 void GameContainer::setTargetFPS(unsigned int fps) {
+    m_targetFPS = fps;
     m_frameTime = TimerUtils::calculateFrameTimeForFPS(fps);
+}
+
+void GameContainer::setTargetTPS(unsigned int tps) {
+    m_targetTPS = tps;
 }
 
 void GameContainer::enterScene(std::unique_ptr<Scene> scene) {
@@ -136,4 +155,11 @@ void GameContainer::enterScene(std::unique_ptr<Scene> scene) {
 
 void GameContainer::leaveScene() {
     m_sceneStack.pop();
+}
+
+unsigned int GameContainer::getTargetTick() {
+    float timePassed = Timer::now() - m_startTime;
+    float targetTick = (timePassed * m_targetTPS) / 1000000.f;
+
+    return static_cast<unsigned int>(targetTick);
 }

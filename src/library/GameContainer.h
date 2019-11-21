@@ -24,6 +24,7 @@ public:
     void leaveScene();
 
     void setTargetFPS(unsigned int fps);
+    void setTargetTPS(unsigned int tps);
 
     ThreadPool& getThreadPool();
 
@@ -37,13 +38,22 @@ private:
 
     bool isRunning();
 
+    unsigned int getTargetTick();
+
     ThreadPool m_threadPool;
 
     AtomicBoolean_t m_initialized;
     SceneStack m_sceneStack;
 
     Timer m_gameLoopTimer;
+
+    unsigned int m_targetFPS;
+    unsigned int m_targetTPS;
+
+    Duration_t m_startTime;
     Duration_t m_frameTime;
+
+    unsigned int m_currentTick;
 
     // Services
     std::shared_ptr<Window> m_window;

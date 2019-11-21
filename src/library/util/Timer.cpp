@@ -23,3 +23,8 @@ Duration_t Timer::get() {
 void Timer::wait(Duration_t microseconds) {
     std::this_thread::sleep_for(std::chrono::microseconds(microseconds));
 }
+
+Duration_t Timer::now() {
+    using namespace std::chrono;
+    return duration_cast<duration<Duration_t, std::micro>>(system_clock::now().time_since_epoch()).count();
+}
