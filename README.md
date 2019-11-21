@@ -1,9 +1,13 @@
-# my engine - now with fancy programming patterns
+# shvrdengine
 
 after reading the great book ["Game Programming Patterns" by Robert Nystrom](http://gameprogrammingpatterns.com/), i felt i needed to change the way i write
 code - this is my first attempt at doing so.
 
 ## installation
+
+### install dependencies
+
+### 
 
 first clone the repository
 ```

@@ -24,6 +24,8 @@ public:
     Duration_t get();
 
     void wait(Duration_t ms);
+
+    static Duration_t now();
 };
 
 

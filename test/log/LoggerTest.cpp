@@ -10,9 +10,9 @@ TEST(LoggerTest, Info) {
 }
 
 TEST(LoggerTest, Warning) {
-    Logger::info("This is a warning message!");
+    Logger::warn("This is a warning message!");
 }
 
 TEST(LoggerTest, Error) {
-    Logger::info("This is an error message!");
+    Logger::error("This is an error message!");
 }
