@@ -45,17 +45,17 @@ void ExampleScene::onEnter() {
     shader->addAttribute("vertexColor");
     shader->addAttribute("vertexUV");
 
-    shader->setVertexShader("../../../src/library/assets/shaders/sprite.vert");
-    shader->setFragmentShader("../../../src/library/assets/shaders/sprite.frag");
+    shader->setVertexShader("assets/shaders/sprite.vert");
+    shader->setFragmentShader("assets/shaders/sprite.frag");
 
     shader->finalize();
 
     auto sprite = m_graphics->createSprite({-50, -50}, {100, 100});
-    sprite->setTexture(m_graphics->loadTexture("../../../src/library/assets/textures/dev.png"));
+    sprite->setTexture(m_graphics->loadTexture("assets/textures/dev.png"));
 
     player->addComponent<C_Renderable>(shader, sprite);
     player->addComponent<C_Transform>(Vector2f{0, 0});
-    // player->addComponent<C_PlayerController>(m_input);
+    player->addComponent<C_PlayerController>(m_input);
 
     player2->addComponent<C_Renderable>(shader, sprite);
     player2->addComponent<C_Transform>(Vector2f{100, 100});
@@ -139,8 +139,8 @@ void ExampleScene::onLeave() {
     Logger::info("Entering example scene");
 
     m_shader = m_graphics->createShader();
-    m_shader->setVertexShader("../../../src/library/assets/shaders/sprite.vert");
-    m_shader->setFragmentShader("../../../src/library/assets/shaders/sprite.frag");
+    m_shader->setVertexShader("assets/shaders/sprite.vert");
+    m_shader->setFragmentShader("assets/shaders/sprite.frag");
 
     m_shader->addAttribute("vertexPosition");
     m_shader->addAttribute("vertexColor");
@@ -149,7 +149,7 @@ void ExampleScene::onLeave() {
     m_shader->finalize();
 
     m_sprite = m_graphics->createSprite({0.f, 0.f}, {100.f, 100.f});
-    m_sprite->setTexture(m_graphics->loadTexture("../../../src/library/assets/textures/dev.png"));
+    m_sprite->setTexture(m_graphics->loadTexture("assets/textures/dev.png"));
  */
 
 /*

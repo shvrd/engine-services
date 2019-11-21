@@ -84,8 +84,8 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 
     auto textShader = createShader();
 
-    textShader->setVertexShader("../../../src/library/assets/shaders/text.vert");
-    textShader->setFragmentShader("../../../src/library/assets/shaders/text.frag");
+    textShader->setVertexShader("assets/shaders/text.vert");
+    textShader->setFragmentShader("assets/shaders/text.frag");
 
     textShader->addAttribute("vertexPosition");
     textShader->addAttribute("vertexColor");
@@ -94,7 +94,7 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     textShader->finalize();
 
     m_freeType.setTextShader(textShader);
-    m_freeType.useFont("../../../src/library/assets/fonts/OpenSans-Regular.ttf");
+    m_freeType.useFont("assets/fonts/OpenSans-Regular.ttf");
 
     Logger::info("Setting up Camera");
 
