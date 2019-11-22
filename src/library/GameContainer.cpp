@@ -16,12 +16,11 @@
 #include "services/audio/openal/OpenALAudio.h"
 
 GameContainer::GameContainer()
-    : m_threadPool(ThreadPool::getSystemThreads())
-    , m_initialized(false)
+    : m_initialized(false)
     , m_sceneStack()
     , m_gameLoopTimer()
     , m_targetFPS(0)
-    , m_targetTPS(120)
+    , m_targetTPS(60)
     , m_startTime(0)
     , m_frameTime(0)
     , m_currentTick(0)
@@ -117,9 +116,10 @@ void GameContainer::gameLoop() {
 void GameContainer::update() {
     unsigned int targetTick = getTargetTick();
 
-    while (m_currentTick <= getTargetTick()) {
-        m_window->pollEvents();
-        m_input->update();
+    m_window->pollEvents();
+    m_input->update();
+
+    while (m_currentTick <= targetTick) {
         m_sceneStack.update();
 
         ++m_currentTick;
@@ -130,10 +130,6 @@ void GameContainer::render() {
     m_graphics->clear();
     m_sceneStack.render();
     m_window->swapBuffers();
-}
-
-ThreadPool& GameContainer::getThreadPool() {
-    return m_threadPool;
 }
 
 bool GameContainer::isRunning() {

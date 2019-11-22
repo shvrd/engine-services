@@ -12,9 +12,13 @@ class C_Transform : public Component {
 public:
     // TODO: rotation, scale
     Vector2f m_location;
+    float m_rotation;
+    float m_scale;
 
-    C_Transform(Vector2f location)
-        : m_location(location) {}
+    explicit C_Transform(Vector2f location = {}, float rotation = 0.f, float scale = 1.f)
+        : m_location(location)
+        , m_rotation(rotation)
+        , m_scale(scale) {}
 };
 
 #endif //SHVRD_C_TRANSFORM_H

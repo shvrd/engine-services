@@ -26,7 +26,7 @@ freely, subject to the following restrictions:
 /**
 
  This is a modified version of Jakob Progschs ThreadPool (https://github.com/progschj/ThreadPool).
- It adds a helper function to receive the maximum amount of threads on the system.
+ It makes it a singleton and adds a helper function to receive the maximum amount of threads on the system.
 
  */
 
@@ -45,14 +45,25 @@ freely, subject to the following restrictions:
 
 class ThreadPool {
 public:
-    ThreadPool(size_t);
     template<class F, class... Args>
     auto enqueue(F&& f, Args&&... args) 
         -> std::future<typename std::result_of<F(Args...)>::type>;
 
+    static ThreadPool& getInstance() {
+        static ThreadPool instance(getSystemThreads());
+
+        return instance;
+    }
+
+    // Disallow copying
+    ThreadPool(ThreadPool const&) = delete;
+    void operator=(ThreadPool const&) = delete;
+
     static unsigned int getSystemThreads();
     ~ThreadPool();
 private:
+    explicit ThreadPool(size_t);
+
     // need to keep track of threads so we can join them
     std::vector< std::thread > workers;
     // the task queue

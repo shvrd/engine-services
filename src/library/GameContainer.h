@@ -3,7 +3,7 @@
 
 #include <future>
 #include "util/Timer.h"
-#include "threading/ThreadPool.h"
+#include "services/ThreadPool.h"
 #include "scenes/SceneStack.h"
 
 #include "services/graphics/Graphics.h"
@@ -25,9 +25,6 @@ public:
 
     void setTargetFPS(unsigned int fps);
     void setTargetTPS(unsigned int tps);
-
-    ThreadPool& getThreadPool();
-
 private:
     bool initializeSystems();
 
@@ -39,8 +36,6 @@ private:
     bool isRunning();
 
     unsigned int getTargetTick();
-
-    ThreadPool m_threadPool;
 
     AtomicBoolean_t m_initialized;
     SceneStack m_sceneStack;
