@@ -122,8 +122,8 @@ std::shared_ptr<Shader> OpenGLGraphics::createShader() {
     return std::make_shared<GLSLShader>();
 }
 
-std::shared_ptr<Sprite> OpenGLGraphics::createSprite(Vector2f location, Vector2f dimensions) {
-    return std::make_shared<OpenGLSprite>(location, dimensions);
+std::shared_ptr<Sprite> OpenGLGraphics::createSprite(Vector2f offset, Vector2f dimensions) {
+    return std::make_shared<OpenGLSprite>(offset, dimensions);
 }
 
 void OpenGLGraphics::setViewport(int width, int height) {

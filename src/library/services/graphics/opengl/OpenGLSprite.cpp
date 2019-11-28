@@ -8,7 +8,7 @@
 #include "../../GraphicsServiceLocator.h"
 #include "util/VAOCreator.h"
 
-OpenGLSprite::OpenGLSprite(const Vector2f& location, const Vector2f& dimensions) : Sprite(location, dimensions) {
+OpenGLSprite::OpenGLSprite(const Vector2f& offset, const Vector2f& dimensions) : Sprite(offset, dimensions) {
     VAOCreator::createVertexVAOandVBO(m_graphicsId, m_vertexBufferObject);
 
     updateBuffer();
@@ -23,6 +23,8 @@ void OpenGLSprite::updateBuffer() {
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
 
     Vertex vertices[VERTEX_AMOUNT];
+
+
 
     // top left, top right, bottom left, bottom right
     vertices[0] = Vertex{{m_location.x,  m_location.y, 0.f}, Colors::WHITE, {0, 1}};
