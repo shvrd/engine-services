@@ -19,12 +19,12 @@ void OpenGLSprite::setTexture(const std::shared_ptr<Texture> texture) {
 }
 
 void OpenGLSprite::updateBuffer() {
+    // TODO: Use Model/World transformation matrices
+
     // Bind vertex buffer object
     glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
 
     Vertex vertices[VERTEX_AMOUNT];
-
-
 
     // top left, top right, bottom left, bottom right
     vertices[0] = Vertex{{m_location.x,  m_location.y, 0.f}, Colors::WHITE, {0, 1}};
