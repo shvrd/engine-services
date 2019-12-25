@@ -41,7 +41,6 @@ public:
 
     //TODO: Maybe make a standalone shaderfactory?
     virtual std::shared_ptr<Shader> createShader() = 0;
-    virtual std::shared_ptr<Sprite> createSprite(Vector2f location, Vector2f dimensions) = 0;
 
     std::shared_ptr<Camera> getCamera() { return m_camera; }
 

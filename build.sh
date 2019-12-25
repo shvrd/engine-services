@@ -1,14 +1,16 @@
 #!/bin/bash
 
+cp -r src/library/assets ../out
+
 pushd build
 
 cmake -GNinja ..
 
 ninja
 
-cp src/library/libgeneric_library.a ../out
-cp src/example/library_example ../out
-cp test/library_test ../out
+cp src/library/libshvrd_library.a ../out
+cp src/example/shvrd_example ../out
+cp test/shvrd_test ../out
 
 popd
 

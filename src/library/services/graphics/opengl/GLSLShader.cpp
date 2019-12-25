@@ -194,7 +194,7 @@ void GLSLShader::addAttribute(const std::string &attributeName) {
 }
 
 void GLSLShader::use() {
-    for (GLuint i = 0; i <= 2; ++i)  {
+    for (GLuint i = 0; i <= m_attributes; ++i)  {
         glEnableVertexAttribArray(i);
     }
 }

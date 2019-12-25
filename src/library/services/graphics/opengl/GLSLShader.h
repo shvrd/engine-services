@@ -8,7 +8,6 @@
 #include <GL/glew.h>
 
 #include "../Shader.h"
-#include "OpenGLSprite.h"
 
 class GLSLShader : public Shader {
     GLuint m_shaderProgram;

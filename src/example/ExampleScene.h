@@ -50,7 +50,7 @@ void ExampleScene::onEnter() {
 
     shader->finalize();
 
-    auto sprite = m_graphics->createSprite({-50, -50}, {100, 100});
+    auto sprite = std::make_shared<Sprite>(Sprite({-50, -50}, {100, 100}));
     sprite->setTexture(m_graphics->loadTexture("assets/textures/dev.png"));
 
     player->addComponent<C_Renderable>(shader, sprite);

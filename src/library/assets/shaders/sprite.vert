@@ -8,9 +8,10 @@ out vec4 fragmentColor;
 out vec2 fragmentUV;
 
 uniform mat4 projection;
+uniform mat4 model;
 
 void main() {
-    gl_Position.xy = ( projection * vec4(vertexPosition.x, vertexPosition.y, 0.0, 1.0)).xy;
+    gl_Position.xy = ( projection * model * vec4(vertexPosition.x, vertexPosition.y, 0.0, 1.0)).xy;
     gl_Position.z = 0.0;
     gl_Position.w = 1.0;
 

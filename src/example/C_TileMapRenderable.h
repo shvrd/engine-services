@@ -20,7 +20,7 @@ class C_TileMapRenderable : public Component {
     unsigned int m_gridHeight = 32;
 
 public:
-    C_TileMapRenderable(std::shared_ptr<Shader> shader)
+    explicit C_TileMapRenderable(std::shared_ptr<Shader> shader)
         : m_shader(std::move(shader)) {}
 
     void render() override;

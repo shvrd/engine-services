@@ -21,11 +21,14 @@ public:
         : m_input(std::move(input)) {}
 
     void update() override;
-    void render() override;
 };
 
 void C_PlayerController::update() {
     C_Transform* transform = getParent()->getComponent<C_Transform>();
+
+    if (!transform) {
+        return;
+    }
 
     if (m_input->isKeyPressed(Key::W)) {
         transform->m_location += {0, 1};
@@ -39,10 +42,6 @@ void C_PlayerController::update() {
     if (m_input->isKeyPressed(Key::D)) {
         transform->m_location += {1, 0};
     }
-}
-
-void C_PlayerController::render() {
-
 }
 
 #endif //SHVRD_C_PLAYERCONTROLLER_H

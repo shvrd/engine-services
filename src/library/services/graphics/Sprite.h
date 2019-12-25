@@ -6,14 +6,13 @@
 #define SHVRD_SPRITE_H
 
 #include <memory>
+#include <glm/glm.hpp>
+#include <glm/ext/matrix_transform.hpp>
 
 #include "../../resources/Texture.h"
 #include "../../types/Vector.h"
 
 class Sprite {
-protected:
-    unsigned int m_graphicsId;
-
     Vector2f m_location;
     Vector2f m_dimensions;
     Vector2f m_offset;
@@ -21,40 +20,54 @@ protected:
     float m_rotation;
     float m_scale;
 
+    glm::mat4 m_model;
+
     std::shared_ptr<Texture> m_texture;
 
-    virtual void updateBuffer() = 0;
+    void updateMatrix() {
+        m_model = glm::mat4(1.f);
+
+        // Translate
+        m_model = glm::translate(m_model, glm::vec3(m_location.x, m_location.y, 0.f));
+
+        // Rotate
+        m_model = glm::rotate(m_model, glm::radians(m_rotation), glm::vec3(0.f, 0.f, 1.f));
+
+        // Scale
+        m_model = glm::scale(m_model, glm::vec3(m_dimensions.x * m_scale, m_dimensions.y * m_scale, 0.f));
+    }
+
 public:
     Sprite(const Vector2f& offset, const Vector2f& dimensions)
-        : m_graphicsId(0)
-        , m_location()
+        : m_location(offset)
         , m_dimensions(dimensions)
         , m_offset(offset)
         , m_rotation(0.f)
-        , m_scale(1.f) {
-
+        , m_scale(1.f)
+        , m_model(1.f) {
+        updateMatrix();
     }
 
-    virtual ~Sprite() = default;
+    ~Sprite() = default;
 
-    virtual void setLocation(const Vector2f& location) {
+    void setLocation(const Vector2f& location) {
         m_location = location + m_offset;
-        updateBuffer();
+        updateMatrix();
     }
 
-    virtual void setDimensions(const Vector2f& dimensions) {
+    void setDimensions(const Vector2f& dimensions) {
         m_dimensions = dimensions;
-        updateBuffer();
+        updateMatrix();
     }
 
-    virtual void setRotation(const float rotation) {
+    void setRotation(const float rotation) {
         m_rotation = rotation;
-        updateBuffer();
+        updateMatrix();
     }
 
-    virtual void setScale(const float scale) {
+    void setScale(const float scale) {
         m_scale = scale;
-        updateBuffer();
+        updateMatrix();
     }
 
     Vector2f getLocation() const {
@@ -79,29 +92,25 @@ public:
 
     void translate(const Vector2f &translation) {
         m_location += translation;
-        updateBuffer();
+        updateMatrix();
     }
 
     void rotate(const float rotation) {
         m_rotation += rotation;
-        updateBuffer();
+        updateMatrix();
     }
 
     void scale(const float scaleFactor) {
         m_scale *= scaleFactor;
-        updateBuffer();
+        updateMatrix();
     }
 
-    virtual void setTexture(std::shared_ptr<Texture> texture) {
+    void setTexture(std::shared_ptr<Texture> texture) {
         m_texture = std::move(texture);
     }
 
-    unsigned int getGraphicsIdentifier() {
-        return m_graphicsId;
-    }
-
-    void setGraphicsIdentifier(unsigned int graphicsId) {
-        m_graphicsId = graphicsId;
+    float* getModelMatrix() {
+        return &m_model[0][0];
     }
 };
 

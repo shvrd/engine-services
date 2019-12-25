@@ -8,12 +8,13 @@
 #include "../../../log/Logger.h"
 #include "GLSLShader.h"
 #include "../../../types/Vertex.h"
-#include "OpenGLSprite.h"
 #include "util/ImageLoader.h"
 #include "util/VAOCreator.h"
 
 OpenGLGraphics::OpenGLGraphics()
-    : m_textVertexArrayObject(0)
+    : m_spriteVertexArrayObject(0)
+    , m_spriteVertexBufferObject(0)
+    , m_textVertexArrayObject(0)
     , m_textVertexBufferObject(0)
     , m_rectVertexArrayObject(0)
     , m_rectVertexBufferObject(0) {
@@ -77,6 +78,21 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    VAOCreator::createVertexVAOandVBO(m_spriteVertexArrayObject, m_spriteVertexBufferObject);
+
+    Vertex vertices[4];
+    // top left, top right, bottom left, bottom right
+    vertices[0] = Vertex{{0.f, 1.f, 0.f}, Colors::WHITE, {0, 0}};
+    vertices[1] = Vertex{{1.f, 1.f, 0.f}, Colors::WHITE, {1, 0}};
+    vertices[2] = Vertex{{0.f, 0.f, 0.f}, Colors::WHITE, {0, 1}};
+    vertices[3] = Vertex{{1.f, 0.f, 0.f}, Colors::WHITE, {1, 1}};
+
+    glBindBuffer(GL_ARRAY_BUFFER, m_spriteVertexBufferObject);
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     VAOCreator::createVertexVAOandVBO(m_textVertexArrayObject, m_textVertexBufferObject);
     VAOCreator::createVertexVAOandVBO(m_rectVertexArrayObject, m_rectVertexBufferObject);
 
@@ -120,10 +136,6 @@ std::shared_ptr<Texture> OpenGLGraphics::loadTexture(const std::string &filePath
 
 std::shared_ptr<Shader> OpenGLGraphics::createShader() {
     return std::make_shared<GLSLShader>();
-}
-
-std::shared_ptr<Sprite> OpenGLGraphics::createSprite(Vector2f offset, Vector2f dimensions) {
-    return std::make_shared<OpenGLSprite>(offset, dimensions);
 }
 
 void OpenGLGraphics::setViewport(int width, int height) {
@@ -213,6 +225,8 @@ void OpenGLGraphics::drawToRect(Vector2f location, Vector2f dimensions) {
 
     m_currentShader->use();
 
+    glUniformMatrix4fv(m_currentShader->getUniformLocation("model"), 1, GL_FALSE, &glm::mat4(1.f)[0][0]);
+
     // top left, top right, bottom left, bottom right
     vertices[0] = Vertex{{location.x,  location.y, 0.f}, Colors::WHITE, {0, 1}};
     vertices[1] = Vertex{{location.x + dimensions.x,  location.y, 0.f}, Colors::WHITE, {1, 1}};
@@ -231,15 +245,18 @@ void OpenGLGraphics::drawToRect(Vector2f location, Vector2f dimensions) {
 }
 
 void OpenGLGraphics::drawSprite(const std::shared_ptr<Sprite>& sprite) {
-    glBindVertexArray(sprite->getGraphicsIdentifier());
+    glBindVertexArray(m_spriteVertexArrayObject);
+    glBindBuffer(GL_ARRAY_BUFFER, m_spriteVertexBufferObject);
 
     useTexture(sprite->getTexture());
 
     m_currentShader->use();
 
+    glUniformMatrix4fv(m_currentShader->getUniformLocation("model"), 1, GL_FALSE, sprite->getModelMatrix());
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     m_currentShader->endUse();
 
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }

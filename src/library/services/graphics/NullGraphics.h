@@ -7,7 +7,6 @@
 
 #include "Graphics.h"
 #include "NullShader.h"
-#include "NullSprite.h"
 #include "../../resources/Texture.h"
 
 class NullGraphics : public Graphics {
@@ -27,7 +26,6 @@ public:
     void useTexture(std::shared_ptr<Texture> texture) override {}
 
     std::shared_ptr<Shader> createShader() override { return std::make_shared<NullShader>(); }
-    std::shared_ptr<Sprite> createSprite(Vector2f location, Vector2f dimensions) override { return std::make_shared<NullSprite>(Vector2f{0,0}, Vector2f{0,0}); }
 
     void drawText(const std::string& text, Vector2f location) override {}
 
