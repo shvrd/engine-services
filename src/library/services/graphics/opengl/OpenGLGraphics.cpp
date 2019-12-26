@@ -79,6 +79,8 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     VAOCreator::createVertexVAOandVBO(m_spriteVertexArrayObject, m_spriteVertexBufferObject);
+    VAOCreator::createVertexVAOandVBO(m_textVertexArrayObject, m_textVertexBufferObject);
+    VAOCreator::createVertexVAOandVBO(m_rectVertexArrayObject, m_rectVertexBufferObject);
 
     Vertex vertices[4];
     // top left, top right, bottom left, bottom right
@@ -89,12 +91,9 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
 
     glBindBuffer(GL_ARRAY_BUFFER, m_spriteVertexBufferObject);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    VAOCreator::createVertexVAOandVBO(m_textVertexArrayObject, m_textVertexBufferObject);
-    VAOCreator::createVertexVAOandVBO(m_rectVertexArrayObject, m_rectVertexBufferObject);
 
     m_freeType.initialize();
 
