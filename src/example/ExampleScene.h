@@ -54,7 +54,7 @@ void ExampleScene::onEnter() {
     sprite->setTexture(m_graphics->loadTexture("assets/textures/dev.png"));
 
     player->addComponent<C_Renderable>(shader, sprite);
-    player->addComponent<C_Transform>(Vector2f{0, 0});
+    player->addComponent<C_Transform>(Vector2f{0, 0}, 90.f, 2.f);
     player->addComponent<C_PlayerController>(m_input);
 
     player2->addComponent<C_Renderable>(shader, sprite);
@@ -123,6 +123,8 @@ void ExampleScene::render() {
     for (auto& entity : m_entities) {
         entity->render();
     }
+
+    m_graphics->drawText("Hello, World", {-100, -100});
 }
 
 void ExampleScene::onSuspend() {

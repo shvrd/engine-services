@@ -24,6 +24,8 @@ class Sprite {
 
     std::shared_ptr<Texture> m_texture;
 
+    bool m_dirty;
+
     void updateMatrix() {
         m_model = glm::mat4(1.f);
 
@@ -44,30 +46,30 @@ public:
         , m_offset(offset)
         , m_rotation(0.f)
         , m_scale(1.f)
-        , m_model(1.f) {
-        updateMatrix();
+        , m_model(1.f)
+        , m_dirty(true) {
     }
 
     ~Sprite() = default;
 
     void setLocation(const Vector2f& location) {
         m_location = location + m_offset;
-        updateMatrix();
+        m_dirty = true;
     }
 
     void setDimensions(const Vector2f& dimensions) {
         m_dimensions = dimensions;
-        updateMatrix();
+        m_dirty = true;
     }
 
     void setRotation(const float rotation) {
         m_rotation = rotation;
-        updateMatrix();
+        m_dirty = true;
     }
 
     void setScale(const float scale) {
         m_scale = scale;
-        updateMatrix();
+        m_dirty = true;
     }
 
     Vector2f getLocation() const {
@@ -92,17 +94,17 @@ public:
 
     void translate(const Vector2f &translation) {
         m_location += translation;
-        updateMatrix();
+        m_dirty = true;
     }
 
     void rotate(const float rotation) {
         m_rotation += rotation;
-        updateMatrix();
+        m_dirty = true;
     }
 
     void scale(const float scaleFactor) {
         m_scale *= scaleFactor;
-        updateMatrix();
+        m_dirty = true;
     }
 
     void setTexture(std::shared_ptr<Texture> texture) {
@@ -110,6 +112,11 @@ public:
     }
 
     float* getModelMatrix() {
+        if (m_dirty) {
+            updateMatrix();
+            m_dirty = false;
+        }
+
         return &m_model[0][0];
     }
 };

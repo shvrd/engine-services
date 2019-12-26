@@ -36,7 +36,7 @@ void C_TileMapRenderable::render() {
         for (unsigned int y = 0; y < tileMapComponent->getHeight(); ++y) {
             const Tile& tile = tileMapComponent->getTileAt(x, y);
             graphics->useTexture(std::make_shared<Texture>(Texture{.id = tile.m_textureId, .width = 0, .height = 0}));
-            graphics->drawToRect({(float) x * m_gridWidth, (float) y * m_gridHeight}, { (float) m_gridWidth, (float) m_gridHeight});
+            graphics->drawToRect({(float) x * m_gridWidth, (float) y * m_gridHeight}, { (float) m_gridWidth, (float) m_gridHeight}, 0.f);
         }
     }
 

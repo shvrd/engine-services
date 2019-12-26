@@ -46,17 +46,17 @@ public:
 
     std::shared_ptr<Shader> getCurrentShader() { return m_currentShader; }
 
-    virtual void bindShader(const std::shared_ptr<Shader> shader) {
+    virtual void bindShader(std::shared_ptr<Shader> shader) {
         if (m_currentShader)
             m_currentShader->unbind();
 
-        m_currentShader = shader;
-        shader->bind();
+        m_currentShader = std::move(shader);
+        m_currentShader->bind();
     }
 
     virtual void drawText(const std::string& text, Vector2f location) = 0;
 
-    virtual void drawToRect(Vector2f location, Vector2f dimensions) = 0;
+    virtual void drawToRect(Vector2f location, Vector2f dimensions, float rotation) = 0;
 
     virtual void drawSprite(const std::shared_ptr<Sprite>& sprite) = 0;
 };

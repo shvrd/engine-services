@@ -82,19 +82,6 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     VAOCreator::createVertexVAOandVBO(m_textVertexArrayObject, m_textVertexBufferObject);
     VAOCreator::createVertexVAOandVBO(m_rectVertexArrayObject, m_rectVertexBufferObject);
 
-    Vertex vertices[4];
-    // top left, top right, bottom left, bottom right
-    vertices[0] = Vertex{{0.f, 1.f, 0.f}, Colors::WHITE, {0, 0}};
-    vertices[1] = Vertex{{1.f, 1.f, 0.f}, Colors::WHITE, {1, 0}};
-    vertices[2] = Vertex{{0.f, 0.f, 0.f}, Colors::WHITE, {0, 1}};
-    vertices[3] = Vertex{{1.f, 0.f, 0.f}, Colors::WHITE, {1, 1}};
-
-    glBindBuffer(GL_ARRAY_BUFFER, m_spriteVertexBufferObject);
-
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
     m_freeType.initialize();
 
     auto textShader = createShader();
@@ -191,15 +178,15 @@ void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
 
         Vector2f letterPos = {cursor.x + letter->offset.x, -cursor.y - letter->offset.y};
 
-        Vertex vertices[4];
+        glm::mat4 model = glm::mat4(1.f);
 
-        // top left, top right, bottom left, bottom right
-        vertices[0] = Vertex{{letterPos.x,  -letterPos.y, 0.f}, Colors::WHITE, {0, 0}};
-        vertices[1] = Vertex{{letterPos.x + letter->bitmap.width,  -letterPos.y, 0.f}, Colors::WHITE, {1, 0}};
-        vertices[2] = Vertex{{letterPos.x, -letterPos.y - letter->bitmap.height, 0.f}, Colors::WHITE, {0, 1}};
-        vertices[3] = Vertex{{letterPos.x + letter->bitmap.width, -letterPos.y - letter->bitmap.height, 0.f}, Colors::WHITE, {1, 1}};
+        // Translate
+        model = glm::translate(model, glm::vec3(letterPos.x, -letterPos.y, 0.f));
 
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+        // Scale
+        model = glm::scale(model, glm::vec3(letter->bitmap.width, letter->bitmap.height, 0.f));
+
+        glUniformMatrix4fv(m_currentShader->getUniformLocation("model"), 1, GL_FALSE, &model[0][0]);
 
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
@@ -213,7 +200,7 @@ void OpenGLGraphics::drawText(const std::string &text, Vector2f location) {
     glBindVertexArray(0);
 }
 
-void OpenGLGraphics::drawToRect(Vector2f location, Vector2f dimensions) {
+void OpenGLGraphics::drawToRect(Vector2f location, Vector2f dimensions, float rotation) {
     Vertex vertices[4];
 
     // Bind vertex array object
@@ -224,15 +211,18 @@ void OpenGLGraphics::drawToRect(Vector2f location, Vector2f dimensions) {
 
     m_currentShader->use();
 
-    glUniformMatrix4fv(m_currentShader->getUniformLocation("model"), 1, GL_FALSE, &glm::mat4(1.f)[0][0]);
+    glm::mat4 model = glm::mat4(1.f);
 
-    // top left, top right, bottom left, bottom right
-    vertices[0] = Vertex{{location.x,  location.y, 0.f}, Colors::WHITE, {0, 1}};
-    vertices[1] = Vertex{{location.x + dimensions.x,  location.y, 0.f}, Colors::WHITE, {1, 1}};
-    vertices[2] = Vertex{{location.x, location.y + dimensions.y, 0.f}, Colors::WHITE, {0, 0}};
-    vertices[3] = Vertex{{location.x + dimensions.x, location.y + dimensions.y, 0.f}, Colors::WHITE, {1, 0}};
+    // Translate
+    model = glm::translate(model, glm::vec3(location.x, location.y, 0.f));
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+    // Rotate
+    model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.f, 0.f, 1.f));
+
+    // Scale
+    model = glm::scale(model, glm::vec3(dimensions.x, dimensions.y, 0.f));
+
+    glUniformMatrix4fv(m_currentShader->getUniformLocation("model"), 1, GL_FALSE, &model[0][0]);
 
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 

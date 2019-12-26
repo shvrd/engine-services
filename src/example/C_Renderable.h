@@ -32,6 +32,8 @@ void C_Renderable::render() {
 
     if (transform) {
         m_sprite->setLocation(transform->m_location);
+        m_sprite->setRotation(transform->m_rotation);
+        m_sprite->setScale(transform->m_scale);
     }
 
     graphics->drawSprite(m_sprite);
