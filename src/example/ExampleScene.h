@@ -10,6 +10,7 @@
 #include <services/graphics/Sprite.h>
 #include <services/input/GLFWInput.h>
 #include <components/Entity.h>
+#include <services/WindowServiceLocator.h>
 #include "C_Renderable.h"
 #include "C_Transform.h"
 #include "C_PlayerController.h"
@@ -21,6 +22,9 @@
 
 class ExampleScene : public Scene {
     std::vector<std::unique_ptr<Entity>> m_entities;
+
+    Entity* m_player = nullptr;
+    Entity* m_camera = nullptr;
 public:
     ExampleScene();
     ~ExampleScene() override = default;
@@ -34,7 +38,7 @@ public:
     void onSuspend() override;
     void onLeave() override;
 
-    void onResize() override;
+    void onResize(const Vector2f& windowSize) override;
 };
 
 ExampleScene::ExampleScene() = default;
@@ -62,9 +66,13 @@ void ExampleScene::onEnter() {
     player->addComponent<C_Transform>(Vector2f{0, 0}, 0.f, 1.f);
     player->addComponent<C_PlayerController>(m_input);
 
+    m_player = player.get();
+
     camera->addComponent<C_Transform>();
     camera->addComponent<C_Follow>(player.get(), Vector2f{-800, -450});
     camera->addComponent<C_Camera>();
+
+    m_camera = camera.get();
 
     tileMap->pushComponent(TileMapLoader::loadTileMap("assets/maps/test.map"));
 
@@ -100,8 +108,11 @@ void ExampleScene::onLeave() {
 
 }
 
-void ExampleScene::onResize() {
-    Logger::info("Resized!");
+void ExampleScene::onResize(const Vector2f& windowSize) {
+    Logger::info("Resized to X: " + std::to_string(windowSize.x) + " Y: " + std::to_string(windowSize.y));
+
+    m_camera->removeComponent<C_Follow>();
+    m_camera->addComponent<C_Follow>(m_player, Vector2f{-windowSize.x / 2, -windowSize.y / 2});
 }
 
 #endif //SHVRD_EXAMPLESCENE_H

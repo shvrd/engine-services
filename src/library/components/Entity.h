@@ -23,12 +23,13 @@ public:
     void update();
     void render();
 
-    void finalize();
-
     template<class ComponentType, class... Args>
     void addComponent(Args&&... args);
 
     void pushComponent(std::unique_ptr<Component> component);
+
+    template<class ComponentType>
+    std::unique_ptr<ComponentType> removeComponent();
 
     template<class ComponentType>
     ComponentType* getComponent();
@@ -37,12 +38,6 @@ public:
 
 template<class ComponentType>
 ComponentType* Entity::getComponent() {
-    if (m_finalized) {
-        Logger::warn("Cannot get component from non-finalized entity");
-
-        return nullptr;
-    }
-
     for (auto& component : m_components) {
         // Attempt to cast component to given type
         ComponentType* castedComponent = dynamic_cast<ComponentType*>(component.get());
@@ -56,14 +51,30 @@ ComponentType* Entity::getComponent() {
 
 template<class ComponentType, class... Args>
 void Entity::addComponent(Args&&... args) {
-    if (m_finalized) {
-        Logger::warn("Cannot add component to finalized entity");
-
-        return;
-    }
-
     m_components.emplace_back(std::make_unique<ComponentType>(args...));
     m_components.back()->m_parent = this;
+}
+
+template<class ComponentType>
+std::unique_ptr<ComponentType> Entity::removeComponent() {
+    // TODO: Make component be returned
+    // TODO: This segfaults when deleting something the second time, unique pointer points to 0xbaadf00d
+    std::unique_ptr<ComponentType> removedComponent = nullptr;
+
+    auto componentIterator = m_components.begin();
+
+    while (componentIterator != m_components.end()) {
+        // Attempt to cast component to given type
+        ComponentType* castedComponent = dynamic_cast<ComponentType*>(componentIterator->get());
+
+        if (castedComponent != nullptr) {
+            m_components.erase(componentIterator);
+        }
+
+        componentIterator++;
+    }
+
+    return removedComponent;
 }
 
 #endif //SHVRD_ENTITY_H

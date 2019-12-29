@@ -30,7 +30,7 @@ public:
     virtual void onSuspend() {}
     virtual void onLeave() = 0;
 
-    virtual void onResize() {}
+    virtual void onResize(const Vector2f& windowSize) {}
 };
 
 

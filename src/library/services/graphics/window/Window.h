@@ -7,6 +7,8 @@
 
 #include <string>
 
+#include "../../../types/Vector.h"
+
 class Window {
 protected:
     unsigned int m_windowWidth, m_windowHeight;
@@ -34,6 +36,10 @@ public:
         m_windowHeight = height;
 
         m_resized = true;
+    }
+
+    Vector2f getDimensions() const {
+        return Vector2f{static_cast<float>(m_windowWidth), static_cast<float>(m_windowHeight)};
     }
 
     bool hasResized() {

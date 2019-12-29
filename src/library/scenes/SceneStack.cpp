@@ -67,5 +67,5 @@ bool SceneStack::isEmpty() {
 }
 
 void SceneStack::resize() {
-    m_sceneStack.top()->onResize();
+    m_sceneStack.top()->onResize(WindowServiceLocator::get()->getDimensions());
 }
