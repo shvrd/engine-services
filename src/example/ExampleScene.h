@@ -15,6 +15,7 @@
 #include "C_PlayerController.h"
 #include "C_TileMap.h"
 #include "C_TileMapRenderable.h"
+#include "TileMapLoader.h"
 
 class ExampleScene : public Scene {
     std::vector<std::unique_ptr<Entity>> m_entities;
@@ -60,16 +61,7 @@ void ExampleScene::onEnter() {
     player2->addComponent<C_Renderable>(shader, sprite);
     player2->addComponent<C_Transform>(Vector2f{100, 100});
 
-    // Tilemap stuff
-    tileMap->addComponent<C_TileMap>(80, 40);
-
-    C_TileMap* tileMapComponent = tileMap->getComponent<C_TileMap>();
-
-    for (unsigned int x = 0; x < tileMapComponent->getWidth(); ++x) {
-        for (unsigned int y = 0; y < tileMapComponent->getHeight(); ++y) {
-            tileMapComponent->setTileAt(x, y, {1, nullptr, false});
-        }
-    }
+    tileMap->pushComponent(TileMapLoader::loadTileMap("assets/maps/test.map"));
 
     tileMap->addComponent<C_TileMapRenderable>(shader);
 

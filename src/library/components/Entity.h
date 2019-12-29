@@ -28,6 +28,8 @@ public:
     template<class ComponentType, class... Args>
     void addComponent(Args&&... args);
 
+    void pushComponent(std::unique_ptr<Component> component);
+
     template<class ComponentType>
     ComponentType* getComponent();
 

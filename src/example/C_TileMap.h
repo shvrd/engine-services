@@ -11,6 +11,15 @@
 #include "Tile.h"
 
 class C_TileMap : public Component {
+    enum TileMap : unsigned int {
+        NOTHING = 0, SOMETHING = 1
+    };
+
+    Tile tiles[2] = {
+            {0, nullptr, false},
+            {1, nullptr, false}
+    };
+
     std::unique_ptr<Tile[]> m_tiles;
     unsigned int m_width, m_height;
 public:
@@ -23,9 +32,12 @@ public:
         return m_tiles[x + m_width * y];
     }
 
-    // TODO: Use tile palette
     void setTileAt(unsigned int x, unsigned int y, const Tile& tile) {
         m_tiles[x + m_width * y] = tile;
+    }
+
+    void setTileAt(unsigned int x, unsigned int y, unsigned int paletteId) {
+        m_tiles[x + m_width * y] = tiles[paletteId];
     }
 
     unsigned int getSize() const {

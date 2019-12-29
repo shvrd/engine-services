@@ -25,3 +25,7 @@ void Entity::render() {
         component->render();
     }
 }
+
+void Entity::pushComponent(std::unique_ptr<Component> component) {
+    m_components.push_back(std::move(component));
+}

@@ -39,10 +39,6 @@ MessageCallback(GLenum source,
                 const void *userParam) {
     std::stringstream log;
 
-    if (type == 33361) {
-        return;
-    }
-
     log << message << " | Type: 0x" << type;
 
     if (severity == GL_DEBUG_TYPE_ERROR) {
