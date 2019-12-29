@@ -22,6 +22,8 @@ public:
     void update();
     void render();
 
+    void resize();
+
     void clear();
 
     bool isEmpty();

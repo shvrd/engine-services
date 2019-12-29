@@ -59,6 +59,8 @@ public:
     virtual void drawToRect(Vector2f location, Vector2f dimensions, float rotation) = 0;
 
     virtual void drawSprite(const std::shared_ptr<Sprite>& sprite) = 0;
+
+    FreeType& getFreeType() { return m_freeType; }
 };
 
 #endif //SHVRD_GRAPHICS_H

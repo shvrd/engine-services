@@ -10,7 +10,7 @@
 class NullWindow : public Window {
 public:
     NullWindow() = default;
-    ~NullWindow() = default;
+    ~NullWindow() override = default;
 
     void initialize(unsigned int width, unsigned int height, const std::string& windowTitle) override {}
 

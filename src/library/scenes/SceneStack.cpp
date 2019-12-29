@@ -65,3 +65,7 @@ void SceneStack::clear() {
 bool SceneStack::isEmpty() {
     return m_sceneStack.empty();
 }
+
+void SceneStack::resize() {
+    m_sceneStack.top()->onResize();
+}

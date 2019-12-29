@@ -16,6 +16,7 @@
 
 class C_PlayerController : public Component {
     std::shared_ptr<Input> m_input;
+    float m_speed = 10.f;
 public:
     C_PlayerController(std::shared_ptr<Input> input)
         : m_input(std::move(input)) {}
@@ -31,16 +32,16 @@ void C_PlayerController::update() {
     }
 
     if (m_input->isKeyPressed(Key::W)) {
-        transform->m_location += {0, 1};
+        transform->m_location += {0, m_speed};
     }
     if (m_input->isKeyPressed(Key::S)) {
-        transform->m_location += {0, -1};
+        transform->m_location += {0, -m_speed};
     }
     if (m_input->isKeyPressed(Key::A)) {
-        transform->m_location += {-1, 0};
+        transform->m_location += {-m_speed, 0};
     }
     if (m_input->isKeyPressed(Key::D)) {
-        transform->m_location += {1, 0};
+        transform->m_location += {m_speed, 0};
     }
 }
 

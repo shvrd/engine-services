@@ -29,6 +29,8 @@ public:
 
     virtual void onSuspend() {}
     virtual void onLeave() = 0;
+
+    virtual void onResize() {}
 };
 
 

@@ -9,9 +9,15 @@
 
 class Window {
 protected:
-    int m_windowWidth, m_windowHeight;
+    unsigned int m_windowWidth, m_windowHeight;
+
+    bool m_resized;
 public:
-    Window() = default;
+    Window()
+    : m_windowWidth(0)
+    , m_windowHeight(0)
+    , m_resized(false) {}
+
     virtual ~Window() = default;
 
     virtual void initialize(unsigned int width, unsigned int height, const std::string& windowTitle) = 0;
@@ -26,6 +32,16 @@ public:
     void setDimensions(unsigned int width, unsigned int height) {
         m_windowWidth = width;
         m_windowHeight = height;
+
+        m_resized = true;
+    }
+
+    bool hasResized() {
+        return m_resized;
+    }
+
+    void resetResizeFlag() {
+        m_resized = false;
     }
 };
 

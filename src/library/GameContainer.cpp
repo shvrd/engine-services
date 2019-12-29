@@ -98,6 +98,11 @@ void GameContainer::gameLoop() {
     while(this->isRunning()) {
         m_gameLoopTimer.start();
 
+        if (m_window->hasResized()) {
+            m_sceneStack.resize();
+            m_window->resetResizeFlag();
+        }
+
         this->update();
         this->render();
 

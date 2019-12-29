@@ -33,7 +33,7 @@ void GLFW_Window::initialize(unsigned int width, unsigned int height, const std:
 
     glfwSetWindowSizeCallback(m_window, resizeCallback);
 
-    glfwGetFramebufferSize(m_window, &m_windowWidth, &m_windowHeight);
+    glfwGetFramebufferSize(m_window, (int*) &m_windowWidth, (int*) &m_windowHeight);
     Logger::info("Framebuffer size: " + std::to_string(m_windowWidth) + " x " + std::to_string(m_windowHeight));
 }
 
