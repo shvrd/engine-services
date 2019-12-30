@@ -109,10 +109,7 @@ void ExampleScene::onLeave() {
 }
 
 void ExampleScene::onResize(const Vector2f& windowSize) {
-    Logger::info("Resized to X: " + std::to_string(windowSize.x) + " Y: " + std::to_string(windowSize.y));
-
-    m_camera->removeComponent<C_Follow>();
-    m_camera->addComponent<C_Follow>(m_player, Vector2f{-windowSize.x / 2, -windowSize.y / 2});
+    m_camera->getComponent<C_Follow>()->m_offset = {-windowSize.x / 2, -windowSize.y / 2};
 }
 
 #endif //SHVRD_EXAMPLESCENE_H

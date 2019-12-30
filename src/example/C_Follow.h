@@ -12,13 +12,14 @@
 
 class C_Follow : public Component {
     Entity* m_leader;
-    Vector2f m_offset;
 
 public:
     C_Follow(Entity* leader, const Vector2f &offset);
     ~C_Follow() = default;
 
     void update() override;
+
+    Vector2f m_offset;
 };
 
 C_Follow::C_Follow(Entity* leader, const Vector2f &offset = {})
