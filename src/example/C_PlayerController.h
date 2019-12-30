@@ -16,7 +16,7 @@
 
 class C_PlayerController : public Component {
     std::shared_ptr<Input> m_input;
-    float m_speed = 10.f;
+    float m_speed = 4.f;
 public:
     C_PlayerController(std::shared_ptr<Input> input)
         : m_input(std::move(input)) {}

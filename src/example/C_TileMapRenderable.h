@@ -16,8 +16,6 @@
 
 class C_TileMapRenderable : public Component {
     std::shared_ptr<Shader> m_shader;
-    unsigned int m_gridWidth = 32;
-    unsigned int m_gridHeight = 32;
 
 public:
     explicit C_TileMapRenderable(std::shared_ptr<Shader> shader)
@@ -30,6 +28,9 @@ void C_TileMapRenderable::render() {
     C_TileMap* tileMapComponent = getParent()->getComponent<C_TileMap>();
     std::shared_ptr<Graphics> graphics = GraphicsServiceLocator::get();
 
+    unsigned int tileWidth = tileMapComponent->getTileWidth();
+    unsigned int tileHeight = tileMapComponent->getTileHeight();
+
     graphics->bindShader(m_shader);
 
     for (unsigned int x = 0; x < tileMapComponent->getWidth(); ++x) {
@@ -40,7 +41,7 @@ void C_TileMapRenderable::render() {
                 continue;
 
             graphics->useTexture(std::make_shared<Texture>(Texture{.id = tile.m_textureId, .width = 0, .height = 0}));
-            graphics->drawToRect({(float) x * m_gridWidth, (float) y * m_gridHeight}, { (float) m_gridWidth, (float) m_gridHeight}, 0.f);
+            graphics->drawToRect({(float) x * tileWidth, (float) y * tileHeight}, { (float) tileWidth, (float) tileHeight}, 0.f);
         }
     }
 

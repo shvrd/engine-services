@@ -19,6 +19,7 @@
 #include "TileMapLoader.h"
 #include "C_Camera.h"
 #include "C_Follow.h"
+#include "C_Collidable.h"
 
 class ExampleScene : public Scene {
     std::vector<std::unique_ptr<Entity>> m_entities;
@@ -59,12 +60,13 @@ void ExampleScene::onEnter() {
 
     shader->finalize();
 
-    auto sprite = std::make_shared<Sprite>(Sprite({-50, -50}, {100, 100}));
+    auto sprite = std::make_shared<Sprite>(Sprite({0, 0}, {32, 32}));
     sprite->setTexture(m_graphics->loadTexture("assets/textures/dev.png"));
 
     player->addComponent<C_Renderable>(shader, sprite);
     player->addComponent<C_Transform>(Vector2f{0, 0}, 0.f, 1.f);
     player->addComponent<C_PlayerController>(m_input);
+
 
     m_player = player.get();
 
@@ -74,7 +76,11 @@ void ExampleScene::onEnter() {
 
     m_camera = camera.get();
 
-    tileMap->pushComponent(TileMapLoader::loadTileMap("assets/maps/test.map"));
+    std::unique_ptr<C_TileMap> tileMapComponent = TileMapLoader::loadTileMap("assets/maps/test.map");
+
+    player->addComponent<C_Collidable>(Rectf{{}, {32, 32}}, tileMapComponent.get());
+
+    tileMap->pushComponent(std::move(tileMapComponent));
 
     tileMap->addComponent<C_TileMapRenderable>(shader);
 

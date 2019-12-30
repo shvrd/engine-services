@@ -27,11 +27,9 @@ std::unique_ptr<C_TileMap> TileMapLoader::loadTileMap(const std::string &filePat
     for (unsigned int y = 0; y < tileMap->getHeight(); ++y) {
         std::vector<std::string> tiles = split(lines[y + 1], ' ');
         for (unsigned int x = 0; x < tileMap->getWidth(); ++x) {
-            tileMap->setTileAt(x, y, std::stoi(tiles[x]));
+            tileMap->setTileAt(x, tileMap->getHeight() - y - 1, std::stoi(tiles[x]));
         }
     }
-
-
 
     return tileMap;
 }

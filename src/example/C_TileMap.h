@@ -11,13 +11,16 @@
 #include "Tile.h"
 
 class C_TileMap : public Component {
+    unsigned int m_tileWidth = 32;
+    unsigned int m_tileHeight = 32;
+
     enum TileMap : unsigned int {
         NOTHING = 0, SOMETHING = 1
     };
 
     Tile tiles[2] = {
             {0, nullptr, false},
-            {1, nullptr, false}
+            {1, nullptr, true}
     };
 
     std::unique_ptr<Tile[]> m_tiles;
@@ -50,6 +53,14 @@ public:
 
     unsigned int getHeight() const {
         return m_height;
+    }
+
+    unsigned int getTileWidth() const {
+        return m_tileWidth;
+    }
+
+    unsigned int getTileHeight() const {
+        return m_tileHeight;
     }
 
     // TODO:

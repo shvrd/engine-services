@@ -31,6 +31,8 @@ public:
     template<class ComponentType>
     ComponentType* getComponent();
 
+//    template<class ComponentType>
+//    void removeComponent();
 };
 
 template<class ComponentType>
@@ -51,5 +53,16 @@ void Entity::addComponent(Args&&... args) {
     m_components.emplace_back(std::make_unique<ComponentType>(args...));
     m_components.back()->m_parent = this;
 }
+
+//template<class ComponentType>
+//void Entity::removeComponent() {
+//    for (auto iterator = m_components.begin(); iterator != m_components.end(); ++iterator) {
+//        // Attempt to cast component to given type
+//        ComponentType* castedComponent = dynamic_cast<ComponentType*>(*iterator);
+//
+//        if (castedComponent != nullptr)
+//            m_components.erase(iterator);
+//    }
+//}
 
 #endif //SHVRD_ENTITY_H
