@@ -45,8 +45,8 @@ void GLFW_Window::pollEvents() {
     glfwPollEvents();
 }
 
-bool GLFW_Window::windowShouldClose() {
-    return glfwWindowShouldClose(m_window) != 0;
+bool GLFW_Window::shouldClose() {
+    return m_closeRequested || glfwWindowShouldClose(m_window) != 0;
 }
 
 GLFW_Window::~GLFW_Window() {

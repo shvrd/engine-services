@@ -98,6 +98,10 @@ void ExampleScene::update() {
     for (auto& entity : m_entities) {
         entity->update();
     }
+
+    if (m_input->isKeyPressed(Key::ESCAPE)) {
+        WindowServiceLocator::get()->requestClose();
+    }
 }
 
 void ExampleScene::render() {

@@ -19,7 +19,7 @@ public:
 
     void setTitle(const std::string& title) override {}
 
-    bool windowShouldClose() override { return false; }
+    bool shouldClose() override { return m_closeRequested; }
 };
 
 #endif //SHVRD_NULLWINDOW_H

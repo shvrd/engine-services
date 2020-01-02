@@ -14,11 +14,13 @@ protected:
     unsigned int m_windowWidth, m_windowHeight;
 
     bool m_resized;
+    bool m_closeRequested;
 public:
     Window()
     : m_windowWidth(0)
     , m_windowHeight(0)
-    , m_resized(false) {}
+    , m_resized(false)
+    , m_closeRequested(false) {}
 
     virtual ~Window() = default;
 
@@ -29,7 +31,11 @@ public:
 
     virtual void setTitle(const std::string& title) = 0;
 
-    virtual bool windowShouldClose() = 0;
+    void requestClose() {
+        m_closeRequested = true;
+    }
+
+    virtual bool shouldClose() = 0;
 
     void setDimensions(unsigned int width, unsigned int height) {
         m_windowWidth = width;

@@ -138,7 +138,7 @@ void GameContainer::render() {
 }
 
 bool GameContainer::isRunning() {
-    return !m_window->windowShouldClose();
+    return !m_window->shouldClose();
 }
 
 void GameContainer::setTargetFPS(unsigned int fps) {

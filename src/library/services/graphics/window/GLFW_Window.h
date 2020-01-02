@@ -19,7 +19,7 @@ public:
     void swapBuffers() override;
     void pollEvents() override;
 
-    bool windowShouldClose() override;
+    bool shouldClose() override;
 
     void setTitle(const std::string& title) override;
 
