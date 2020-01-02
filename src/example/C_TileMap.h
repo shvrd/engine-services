@@ -63,12 +63,14 @@ public:
         return m_tileHeight;
     }
 
-    // TODO:
-    /*
-      Tile& safelyGetTileAt(unsigned int x, unsigned int y) {
-          return m_tiles[x + m_width * y];
+    Tile& safelyGetTileAt(unsigned int x, unsigned int y) {
+        if (x > m_width - 1 || y > m_height - 1) {
+            return tiles[TileMap::NOTHING];
+        }
+
+        return m_tiles[x + m_width * y];
     }
-    */
+
 };
 
 #endif //SHVRD_C_TILEMAP_H

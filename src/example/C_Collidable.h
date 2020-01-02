@@ -47,7 +47,7 @@ void C_Collidable::update() {
 
     for (int x = tileMinX; x <= tileMaxX; ++x) {
         for (int y = tileMinY; y <= tileMaxY; ++y) {
-            const Tile& tile = m_tileMap->getTileAt(x, y);
+            const Tile& tile = m_tileMap->safelyGetTileAt(x, y);
 
             if (tile.m_hasCollision) {
                 resolveTileCollision(box, Rectf{Vector2f{(float)x * tileWidth, (float)y * tileHeight}, Vector2f{(float) tileWidth, (float) tileHeight}});
