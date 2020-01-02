@@ -20,6 +20,7 @@
 #include "C_Camera.h"
 #include "C_Follow.h"
 #include "C_Collidable.h"
+#include "C_Health.h"
 
 class ExampleScene : public Scene {
     std::vector<std::unique_ptr<Entity>> m_entities;
@@ -66,6 +67,7 @@ void ExampleScene::onEnter() {
     player->addComponent<C_Renderable>(shader, sprite);
     player->addComponent<C_Transform>(Vector2f{0, 0}, 0.f, 1.f);
     player->addComponent<C_PlayerController>(m_input);
+    player->addComponent<C_Health>(100);
 
 
     m_player = player.get();

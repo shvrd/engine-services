@@ -12,7 +12,9 @@
 #include <services/input/Input.h>
 #include <services/InputServiceLocator.h>
 #include <services/input/GLFWInput.h>
+#include <log/Logger.h>
 #include "C_Transform.h"
+#include "C_Health.h"
 
 class C_PlayerController : public Component {
     std::shared_ptr<Input> m_input;
@@ -26,6 +28,19 @@ public:
 
 void C_PlayerController::update() {
     C_Transform* transform = getParent()->getComponent<C_Transform>();
+    C_Health* health = getParent()->getComponent<C_Health>();
+
+    if (health) {
+        if (m_input->isKeyPressed(Key::ZERO)) {
+            health->applyDamage(1);
+
+            Logger::info("Health: " + std::to_string(health->getHealth()));
+        }
+
+        if (health->isDead()) {
+            return;
+        }
+    }
 
     if (!transform) {
         return;
