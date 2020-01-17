@@ -23,6 +23,19 @@ struct Vector2f {
         return {x - rhs.x, y - rhs.y};
     }
 
+    Vector2f operator-=(const Vector2f& rhs) {
+        return *this = *this - rhs;
+    }
+
+    // Dot product
+    Vector2f operator*(const Vector2f& rhs) const {
+        return {x * rhs.x, y * rhs.y};
+    }
+
+    Vector2f operator*=(const Vector2f& rhs) {
+        return *this = *this * rhs;
+    }
+
     bool operator==(const Vector2f& rhs) const {
         return (x == rhs.x && y == rhs.y);
     }

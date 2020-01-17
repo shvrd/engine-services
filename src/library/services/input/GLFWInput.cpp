@@ -25,12 +25,41 @@ void GLFWInput::update() {
     m_frameScroll = {};
 }
 
-bool GLFWInput::isKeyPressed(Key key) {
+bool GLFWInput::isKeyDown(Key key) {
     return glfwGetKey(m_window, static_cast<int>(key)) == GLFW_PRESS;
 }
 
+// TODO: isKeyPressed and isKeyReleased can not be used simultaneously on one key, only the first function being called will be correct
+bool GLFWInput::isKeyPressed(Key key) {
+    if (isKeyDown(key)) {
+        m_pressedKeys[static_cast<int>(key)] = GLFW_RELEASE;
+
+        return false;
+    }
+
+    if (m_pressedKeys[static_cast<int>(key)] == GLFW_RELEASE) {
+        m_pressedKeys[static_cast<int>(key)] = GLFW_PRESS;
+
+        return true;
+    }
+
+    return false;
+}
+
 bool GLFWInput::isKeyReleased(Key key) {
-    return glfwGetKey(m_window, static_cast<int>(key)) == GLFW_RELEASE;
+    if (isKeyDown(key)) {
+        m_pressedKeys[static_cast<int>(key)] = GLFW_PRESS;
+
+        return false;
+    }
+
+    if (m_pressedKeys[static_cast<int>(key)] == GLFW_PRESS) {
+        m_pressedKeys[static_cast<int>(key)] = GLFW_RELEASE;
+
+        return true;
+    }
+
+    return false;
 }
 
 int GLFWInput::getMouseX() {

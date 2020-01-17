@@ -19,6 +19,9 @@ class GLFWInput : public Input {
     static void scrollCallback(GLFWwindow* window, double x, double y);
 
     bool m_hasPolled, m_hasScrolled;
+
+    // Array the size of all GLFW Keys
+    bool m_pressedKeys[GLFW_KEY_LAST];
 public:
     GLFWInput() = default;
 
@@ -26,20 +29,17 @@ public:
 
     void update() override;
 
+    bool isKeyDown(Key key) override;
     bool isKeyPressed(Key key) override;
-
     bool isKeyReleased(Key key) override;
 
     int getMouseX() override;
-
     int getMouseY() override;
 
     int getDeltaMouseX() override;
-
     int getDeltaMouseY() override;
 
     bool isMousePressed(MouseButton mouseButton) override;
-
     const Vector2f getMouseScroll() override;
 
     void setMouseScroll(Vector2f mouseScroll) override;

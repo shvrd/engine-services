@@ -19,6 +19,11 @@
 class C_PlayerController : public Component {
     std::shared_ptr<Input> m_input;
     float m_speed = 4.f;
+
+    enum Direction {
+        UP, DOWN, LEFT, RIGHT
+    } m_direction;
+
 public:
     C_PlayerController(std::shared_ptr<Input> input)
         : m_input(std::move(input)) {}
@@ -46,17 +51,24 @@ void C_PlayerController::update() {
         return;
     }
 
-    if (m_input->isKeyPressed(Key::W)) {
+    if (m_input->isKeyDown(Key::W)) {
         transform->m_location += {0, m_speed};
+        m_direction = Direction::UP;
     }
-    if (m_input->isKeyPressed(Key::S)) {
+
+    if (m_input->isKeyDown(Key::S)) {
         transform->m_location += {0, -m_speed};
+        m_direction = Direction::DOWN;
     }
-    if (m_input->isKeyPressed(Key::A)) {
+
+    if (m_input->isKeyDown(Key::A)) {
         transform->m_location += {-m_speed, 0};
+        m_direction = Direction::LEFT;
     }
-    if (m_input->isKeyPressed(Key::D)) {
+
+    if (m_input->isKeyDown(Key::D)) {
         transform->m_location += {m_speed, 0};
+        m_direction = Direction::RIGHT;
     }
 }
 

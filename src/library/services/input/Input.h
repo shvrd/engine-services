@@ -18,6 +18,7 @@ public:
     // TODO: Make this inaccessible from outside -> friend class GameContainer
     virtual void update() = 0;
 
+    virtual bool isKeyDown(Key key) = 0;
     virtual bool isKeyPressed(Key key) = 0;
     virtual bool isKeyReleased(Key key) = 0;
 

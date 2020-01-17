@@ -15,6 +15,7 @@ public:
 
     void update() override {}
 
+    bool isKeyDown(Key key) override { return false; }
     bool isKeyPressed(Key key) override { return false; }
     bool isKeyReleased(Key key) override { return true; }
 

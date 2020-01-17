@@ -101,6 +101,14 @@ void ExampleScene::update() {
         entity->update();
     }
 
+    if (m_input->isKeyPressed(Key::B)) {
+        Logger::info("B");
+    }
+
+    if (m_input->isKeyReleased(Key::B)) {
+        Logger::info(":(");
+    }
+
     if (m_input->isKeyPressed(Key::ESCAPE)) {
         WindowServiceLocator::get()->requestClose();
     }
