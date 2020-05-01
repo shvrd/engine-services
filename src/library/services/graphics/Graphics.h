@@ -22,8 +22,6 @@ protected:
     std::shared_ptr<Camera> m_camera;
 
     std::shared_ptr<Shader> m_currentShader;
-
-    FreeType m_freeType;
 public:
     Graphics() = default;
     virtual ~Graphics() = default;
@@ -59,8 +57,6 @@ public:
     virtual void drawToRect(Vector2f location, Vector2f dimensions, float rotation) = 0;
 
     virtual void drawSprite(const std::shared_ptr<Sprite>& sprite) = 0;
-
-    FreeType& getFreeType() { return m_freeType; }
 };
 
 #endif //SHVRD_GRAPHICS_H

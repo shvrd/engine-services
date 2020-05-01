@@ -78,8 +78,6 @@ void OpenGLGraphics::initialize(int windowWidth, int windowHeight) {
     VAOCreator::createVertexVAOandVBO(m_textVertexArrayObject, m_textVertexBufferObject);
     VAOCreator::createVertexVAOandVBO(m_rectVertexArrayObject, m_rectVertexBufferObject);
 
-    m_freeType.initialize();
-
     auto textShader = createShader();
 
     textShader->setVertexShader("assets/shaders/text.vert");

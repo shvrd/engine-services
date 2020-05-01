@@ -11,7 +11,7 @@
 
 #include "../../../log/Logger.h"
 
-void FreeType::initialize() {
+FreeType::FreeType() {
     Logger::info("Initializing FreeType");
 
     if (FT_Init_FreeType(&m_library)) {
@@ -28,6 +28,10 @@ void FreeType::initialize() {
     versionString << "Using FreeType version " << major << "." << minor << "." << patch;
 
     Logger::info(versionString.str());
+}
+
+FreeType::~FreeType() {
+    FT_Done_FreeType(m_library);
 }
 
 void FreeType::useFont(const std::string& fontName, const unsigned int fontSize) {

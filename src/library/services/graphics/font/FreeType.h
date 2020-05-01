@@ -26,7 +26,8 @@ class FreeType {
     std::shared_ptr<Letter> loadLetter(unsigned long letter);
 
 public:
-    void initialize();
+    FreeType();
+    ~FreeType();
 
     void useFont(const std::string& fontName, unsigned int fontSize = 42);
     void setFontSize(unsigned int fontSize);

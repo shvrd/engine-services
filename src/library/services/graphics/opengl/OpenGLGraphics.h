@@ -14,6 +14,8 @@ class OpenGLGraphics : public Graphics {
     GLuint m_textVertexArrayObject, m_textVertexBufferObject;
     GLuint m_rectVertexArrayObject, m_rectVertexBufferObject;
 
+    FreeType m_freeType;
+
 public:
     OpenGLGraphics();
     ~OpenGLGraphics() override = default;
