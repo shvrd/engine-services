@@ -31,7 +31,7 @@ bool GLFWInput::isKeyDown(Key key) {
 
 // TODO: isKeyPressed and isKeyReleased can not be used simultaneously on one key, only the first function being called will be correct
 bool GLFWInput::isKeyPressed(Key key) {
-    if (isKeyDown(key)) {
+    if (!isKeyDown(key)) {
         m_pressedKeys[static_cast<int>(key)] = GLFW_RELEASE;
 
         return false;
