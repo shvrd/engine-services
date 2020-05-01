@@ -9,9 +9,9 @@
 
 #include <components/Component.h>
 #include <components/Entity.h>
+#include <components/generic/C_Transform.h>
 #include <types/Rect.h>
 #include "C_TileMap.h"
-#include "C_Transform.h"
 
 class C_Collidable : public Component {
     Rectf m_box;

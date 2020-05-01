@@ -5,7 +5,7 @@
 #ifndef SHVRD_C_HEALTH_H
 #define SHVRD_C_HEALTH_H
 
-#include <components/Component.h>
+#include "../Component.h"
 
 class C_Health : public Component {
     unsigned int m_health, m_maxHealth;

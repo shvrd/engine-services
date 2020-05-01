@@ -5,9 +5,9 @@
 #ifndef SHVRD_C_FOLLOW_H
 #define SHVRD_C_FOLLOW_H
 
-#include <components/Component.h>
-#include <components/Entity.h>
-#include <types/Vector.h>
+#include "../Component.h"
+#include "../Entity.h"
+#include "../../types/Vector.h"
 #include "C_Transform.h"
 
 class C_Follow : public Component {

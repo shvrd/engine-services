@@ -9,12 +9,11 @@
 
 #include <components/Entity.h>
 #include <components/Component.h>
+#include <components/generic/C_Health.h>
 #include <services/input/Input.h>
 #include <services/InputServiceLocator.h>
 #include <services/input/GLFWInput.h>
 #include <log/Logger.h>
-#include "C_Transform.h"
-#include "C_Health.h"
 
 class C_PlayerController : public Component {
     std::shared_ptr<Input> m_input;

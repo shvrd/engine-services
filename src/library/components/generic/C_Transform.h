@@ -5,8 +5,8 @@
 #ifndef SHVRD_C_TRANSFORM_H
 #define SHVRD_C_TRANSFORM_H
 
-#include <components/Component.h>
-#include <types/Vector.h>
+#include "../Component.h"
+#include "../../types/Vector.h"
 
 class C_Transform : public Component {
 public:

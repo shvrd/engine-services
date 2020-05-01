@@ -11,16 +11,16 @@
 #include <services/input/GLFWInput.h>
 #include <components/Entity.h>
 #include <services/WindowServiceLocator.h>
-#include "C_Renderable.h"
-#include "C_Transform.h"
+#include "components/generic/C_Renderable.h"
+#include "components/generic/C_Transform.h"
 #include "C_PlayerController.h"
 #include "C_TileMap.h"
 #include "C_TileMapRenderable.h"
 #include "TileMapLoader.h"
-#include "C_Camera.h"
-#include "C_Follow.h"
+#include "components/generic/C_Camera.h"
+#include "components/generic/C_Follow.h"
 #include "C_Collidable.h"
-#include "C_Health.h"
+#include "components/generic/C_Health.h"
 
 class ExampleScene : public Scene {
     std::vector<std::unique_ptr<Entity>> m_entities;

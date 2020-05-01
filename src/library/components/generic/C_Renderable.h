@@ -7,10 +7,11 @@
 
 #include <memory>
 
-#include <components/Component.h>
-#include <services/graphics/Shader.h>
-#include <services/graphics/Sprite.h>
-#include <services/GraphicsServiceLocator.h>
+#include "../Component.h"
+#include "../../services/graphics/Shader.h"
+#include "../../services/graphics/Sprite.h"
+#include "../../services/GraphicsServiceLocator.h"
+
 #include "C_Transform.h"
 
 class C_Renderable : public Component {

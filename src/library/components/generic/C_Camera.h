@@ -7,9 +7,9 @@
 
 #include <memory>
 
-#include <components/Component.h>
-#include <components/Entity.h>
-#include <services/GraphicsServiceLocator.h>
+#include "../Component.h"
+#include "../Entity.h"
+#include "../../services/GraphicsServiceLocator.h"
 
 #include "C_Transform.h"
 
