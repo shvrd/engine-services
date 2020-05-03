@@ -27,6 +27,9 @@ class ExampleScene : public Scene {
 
     Entity* m_player = nullptr;
     Entity* m_camera = nullptr;
+
+    std::shared_ptr<Sound> m_testSound;
+
 public:
     ExampleScene();
     ~ExampleScene() override = default;
@@ -90,6 +93,9 @@ void ExampleScene::onEnter() {
     m_entities.push_back(std::move(camera));
 
     m_entities.push_back(std::move(tileMap));
+
+    // Audio stuff
+    m_testSound = m_audio->loadSound("assets/sounds/select.ogg");
 }
 
 void ExampleScene::onContinue() {
@@ -99,6 +105,10 @@ void ExampleScene::onContinue() {
 void ExampleScene::update() {
     for (auto& entity : m_entities) {
         entity->update();
+    }
+
+    if (m_input->isKeyPressed(Key::P)) {
+        m_audio->playSound(m_testSound);
     }
 
     if (m_input->isKeyPressed(Key::B)) {

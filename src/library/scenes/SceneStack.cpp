@@ -3,10 +3,13 @@
 //
 
 #include "SceneStack.h"
+
 #include "../log/Logger.h"
+
 #include "../services/InputServiceLocator.h"
 #include "../services/GraphicsServiceLocator.h"
 #include "../services/WindowServiceLocator.h"
+#include "../services/AudioServiceLocator.h"
 
 SceneStack::SceneStack()
     : m_sceneStack() {
@@ -41,6 +44,7 @@ void SceneStack::push(std::unique_ptr<Scene> scene) {
     // Inject services
     scene->m_input = InputServiceLocator::get();
     scene->m_graphics = GraphicsServiceLocator::get();
+    scene->m_audio = AudioServiceLocator::get();
 
     // Enter new scene
     scene->onEnter();

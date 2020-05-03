@@ -9,6 +9,8 @@
 
 #include "../services/input/Input.h"
 #include "../services/graphics/Graphics.h"
+#include "../services/audio/Audio.h"
+
 #include "SceneStack.h"
 
 class Scene {
@@ -16,6 +18,7 @@ protected:
     friend class SceneStack;
     std::shared_ptr<Input> m_input;
     std::shared_ptr<Graphics> m_graphics;
+    std::shared_ptr<Audio> m_audio;
 
 public:
     Scene() = default;

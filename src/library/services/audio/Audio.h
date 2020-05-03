@@ -15,7 +15,10 @@ protected:
     ResourceManager<Sound> m_sounds;
 public:
     virtual void initialize() = 0;
+
     virtual std::shared_ptr<Sound> loadSound(const std::string& filePath) = 0;
+    virtual void playSound(std::shared_ptr<Sound> sound) = 0;
+
 
 };
 
