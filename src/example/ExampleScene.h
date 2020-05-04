@@ -11,6 +11,7 @@
 #include <services/input/GLFWInput.h>
 #include <components/Entity.h>
 #include <services/WindowServiceLocator.h>
+#include <components/generic/C_SoundSource.h>
 #include "components/generic/C_Renderable.h"
 #include "components/generic/C_Transform.h"
 #include "C_PlayerController.h"
@@ -27,8 +28,6 @@ class ExampleScene : public Scene {
 
     Entity* m_player = nullptr;
     Entity* m_camera = nullptr;
-
-    std::shared_ptr<Sound> m_testSound;
 
 public:
     ExampleScene();
@@ -84,6 +83,7 @@ void ExampleScene::onEnter() {
     std::unique_ptr<C_TileMap> tileMapComponent = TileMapLoader::loadTileMap("assets/maps/test.map");
 
     player->addComponent<C_Collidable>(Rectf{{}, {32, 32}}, tileMapComponent.get());
+    player->addComponent<C_SoundSource>();
 
     tileMap->pushComponent(std::move(tileMapComponent));
 
@@ -93,9 +93,6 @@ void ExampleScene::onEnter() {
     m_entities.push_back(std::move(camera));
 
     m_entities.push_back(std::move(tileMap));
-
-    // Audio stuff
-    m_testSound = m_audio->loadSound("assets/sounds/select.ogg");
 }
 
 void ExampleScene::onContinue() {
@@ -105,18 +102,6 @@ void ExampleScene::onContinue() {
 void ExampleScene::update() {
     for (auto& entity : m_entities) {
         entity->update();
-    }
-
-    if (m_input->isKeyPressed(Key::P)) {
-        m_audio->playSound(m_testSound);
-    }
-
-    if (m_input->isKeyPressed(Key::B)) {
-        Logger::info("B");
-    }
-
-    if (m_input->isKeyReleased(Key::B)) {
-        Logger::info(":(");
     }
 
     if (m_input->isKeyPressed(Key::ESCAPE)) {

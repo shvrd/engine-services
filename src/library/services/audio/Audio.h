@@ -9,6 +9,7 @@
 
 #include "../../resources/ResourceManager.h"
 #include "../../resources/Sound.h"
+#include "SoundSource.h"
 
 class Audio {
 protected:
@@ -16,8 +17,10 @@ protected:
 public:
     virtual void initialize() = 0;
 
+    virtual std::shared_ptr<SoundSource> createSoundSource() = 0;
+
     virtual std::shared_ptr<Sound> loadSound(const std::string& filePath) = 0;
-    virtual void playSound(std::shared_ptr<Sound> sound) = 0;
+    virtual void playSound(std::shared_ptr<Sound> sound, std::shared_ptr<SoundSource> source) = 0;
 
 
 };

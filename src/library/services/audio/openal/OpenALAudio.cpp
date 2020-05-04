@@ -25,13 +25,7 @@ void OpenALAudio::initialize() {
         return;
     }
 
-    alGenSources(1, &m_source);
 
-    alSourcef(m_source, AL_PITCH, 1.f);
-    alSourcef(m_source, AL_GAIN, 1.f);
-    alSource3f(m_source, AL_POSITION, 0, 0, 0);
-    alSource3f(m_source, AL_VELOCITY, 0, 0, 0);
-    alSourcei(m_source, AL_LOOPING, AL_FALSE);
 }
 
 std::shared_ptr<Sound> OpenALAudio::loadSound(const std::string &filePath) {
@@ -66,19 +60,32 @@ std::shared_ptr<Sound> OpenALAudio::loadSound(const std::string &filePath) {
     return sound;
 }
 
-void OpenALAudio::playSound(std::shared_ptr<Sound> sound) {
-    Logger::info("Playing sound " + std::to_string(sound->id));
+void OpenALAudio::playSound(std::shared_ptr<Sound> sound, std::shared_ptr<SoundSource> source) {
+    if (source->isDirty()) {
+        updateSource(source);
+    }
 
-    alSourcei(m_source, AL_BUFFER, sound->id);
-    alSourcePlay(m_source);
+    alSourcei(source->id, AL_BUFFER, sound->id);
+    alSourcePlay(source->id);
 }
 
-//    AudioFile<float> audioFile;
-//    audioFile.load(filePath);
-//
-//    audioFile.printSummary();
-//
-//    int format = 0x1100;
-//
-//    if (audioFile.getBitDepth() == 16) format += 0x0001;
-//    if (audioFile.getNumChannels() == 2) format +=0x0002;
+std::shared_ptr<SoundSource> OpenALAudio::createSoundSource() {
+    std::shared_ptr<SoundSource> source = std::make_shared<SoundSource>();
+
+    alGenSources(1, &source->id);
+
+    updateSource(source);
+
+    return source;
+}
+
+void OpenALAudio::updateSource(std::shared_ptr<SoundSource> source) {
+    alSourcef(source->id, AL_PITCH, source->getPitch());
+    alSourcef(source->id, AL_GAIN, source->getGain());
+
+    Vector3f location = source->getLocation();
+    alSource3f(source->id, AL_POSITION, location.x, location.y, location.z);
+
+    alSource3f(source->id, AL_VELOCITY, 0, 0, 0);
+    alSourcei(source->id, AL_LOOPING, source->isLooping());
+}
