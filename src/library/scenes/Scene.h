@@ -11,7 +11,7 @@
 #include "../services/graphics/Graphics.h"
 #include "../services/audio/Audio.h"
 
-#include "SceneStack.h"
+class SceneStack;
 
 class Scene {
 protected:
@@ -19,6 +19,8 @@ protected:
     std::shared_ptr<Input> m_input;
     std::shared_ptr<Graphics> m_graphics;
     std::shared_ptr<Audio> m_audio;
+
+    std::shared_ptr<SceneStack> m_sceneStack;
 
 public:
     Scene() = default;
@@ -36,5 +38,6 @@ public:
     virtual void onResize(const Vector2f& windowSize) {}
 };
 
+#include "SceneStack.h"
 
 #endif //SHVRD_SCENE_H

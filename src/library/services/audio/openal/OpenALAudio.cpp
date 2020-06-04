@@ -88,4 +88,6 @@ void OpenALAudio::updateSource(std::shared_ptr<SoundSource> source) {
 
     alSource3f(source->id, AL_VELOCITY, 0, 0, 0);
     alSourcei(source->id, AL_LOOPING, source->isLooping());
+
+    source->resetDirtyFlag();
 }

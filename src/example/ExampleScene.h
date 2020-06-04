@@ -22,6 +22,7 @@
 #include "components/generic/C_Follow.h"
 #include "C_Collidable.h"
 #include "components/generic/C_Health.h"
+#include "EmptyScene.h"
 
 class ExampleScene : public Scene {
     std::vector<std::unique_ptr<Entity>> m_entities;
@@ -64,7 +65,7 @@ void ExampleScene::onEnter() {
     shader->finalize();
 
     auto sprite = std::make_shared<Sprite>(Sprite({0, 0}, {32, 32}));
-    sprite->setTexture(m_graphics->loadTexture("assets/textures/dev.png"));
+    sprite->setTexture(m_graphics->loadTexture("assets/textures/globolin.png"));
 
     player->addComponent<C_Renderable>(shader, sprite);
     player->addComponent<C_Transform>(Vector2f{0, 0}, 0.f, 1.f);
@@ -106,6 +107,10 @@ void ExampleScene::update() {
 
     if (m_input->isKeyPressed(Key::ESCAPE)) {
         WindowServiceLocator::get()->requestClose();
+    }
+
+    if (m_input->isKeyPressed(Key::Z)) {
+        m_sceneStack->push(std::make_unique<EmptyScene>());
     }
 }
 

@@ -24,11 +24,15 @@ void SceneStack::pop() {
 
     // Leave current scene
     m_sceneStack.top()->onLeave();
+
+    // TODO: This segfaults, find out why
     m_sceneStack.pop();
 
-    // TODO: GRACEFULLY Quit if scene stack is empty.
+    // Quit if last scene has been popped
     if (isEmpty()) {
-        Logger::critical("Popped last scene off SceneStack, quitting.", 10);
+        WindowServiceLocator::get()->requestClose();
+
+        return;
     }
 
     // Continue previous scene
@@ -45,6 +49,7 @@ void SceneStack::push(std::unique_ptr<Scene> scene) {
     scene->m_input = InputServiceLocator::get();
     scene->m_graphics = GraphicsServiceLocator::get();
     scene->m_audio = AudioServiceLocator::get();
+    scene->m_sceneStack = std::shared_ptr<SceneStack>(this);
 
     // Enter new scene
     scene->onEnter();

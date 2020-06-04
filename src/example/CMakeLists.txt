@@ -1,5 +1,5 @@
 # set example files
-SET(EXAMPLE_SRC main.cpp ExampleScene.h C_PlayerController.h C_TileMapRenderable.h C_TileMap.h Tile.h TileMapLoader.cpp TileMapLoader.h C_Collidable.h)
+SET(EXAMPLE_SRC main.cpp ExampleScene.h C_PlayerController.h C_TileMapRenderable.h C_TileMap.h Tile.h TileMapLoader.cpp TileMapLoader.h C_Collidable.h EmptyScene.h)
 
 # add to executable
 ADD_EXECUTABLE(shvrd_example ${EXAMPLE_SRC})
